@@ -1,0 +1,7 @@
+caption always "%{=b kw} %-w%<%{=b km}%n %t%{=b kw}%+w"
+
+bind q windowlist -b
+bind t title
+
+bindkey "^[[1;5C" next
+bindkey "^[[1;5D" prev
