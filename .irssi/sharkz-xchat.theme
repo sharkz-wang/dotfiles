@@ -227,7 +227,7 @@ formats = {
     pubmsg_hilight_channel = "{pubmsghinick $0 $4 $[-11]1{msgchannel $2}}%W|%W $3";
     #pubmsg_channel = "{pubmsgnick {pubnick $[-11]0}{msgchannel $1}}%W|%W $2";
 
-    pubmsg = "%M<%W$2\00304$[-12]0%M>%W|%W $1";
+    pubmsg = "%M<%W$2\0030$[-12]0%M>%W|%W $1";
     talking_with = "           %w-%m-%M- %W| %WYou are now talking with %W$0";
     refnum_too_low = "           %w-%m-%M- %W| %WWindow: %WWindow number must be greater than 1";
     error_server_sticky = "           %w-%m-%M- %W| %WWindow: %WWindow's server is sticky, use -unsticky option to change";
