@@ -17,7 +17,7 @@ hi Normal ctermfg=252 cterm=bold
 set showtabline=2
 
 hi TabLine      ctermfg=250 ctermbg=236 cterm=bold
-hi TabLineSel   ctermfg=Magenta ctermbg=236 cterm=bold
+hi TabLineSel   ctermfg=201 ctermbg=236 cterm=bold
 hi TabLineFill  ctermfg=236 
 
 set laststatus =2
