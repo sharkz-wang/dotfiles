@@ -1,4 +1,4 @@
-export TERM='xterm'
+export TERM='xterm-256color'
 export PS1='\e[1;32m\u\e[m\e[1;37m@\e[m\e[1;35m\h\e[m\e[1;37m:\e[m\e[1;36m\W\e[m\e[1;37m\$ '
 export PATH="${HOME}/script:${HOME}/bin:${PATH}"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${HOME}/lib"

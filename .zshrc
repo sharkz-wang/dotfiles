@@ -1,4 +1,4 @@
-export TERM='xterm'
+export TERM='xterm-256color'
 export PS1='%{$fg_bold[green]%}%n%{$fg_bold[white]%}@%{$fg_bold[magenta]%}%m%{$fg_bold[white]%}:%{$fg_bold[cyan]%}%~%{$fg_bold[white]%}%(!.#.$) '
 export PATH="${HOME}/script:${HOME}/bin:${PATH}"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${HOME}/lib"
