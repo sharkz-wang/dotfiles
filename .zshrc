@@ -1,3 +1,24 @@
+source ~/script/antigen.zsh
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle git
+antigen bundle heroku
+antigen bundle pip
+antigen bundle lein
+antigen bundle command-not-found
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Load the theme.
+#antigen theme
+
+# Tell antigen that you're done.
+antigen apply
+
 export TERM='xterm-256color'
 export PS1='%{$fg_bold[green]%}%n%{$fg_bold[white]%}@%{$fg_bold[magenta]%}%m%{$fg_bold[white]%}:%{$fg_bold[cyan]%}%~%{$fg_bold[white]%}%(!.#.$) '
 export PATH="${HOME}/script:${HOME}/bin:${PATH}"
@@ -25,8 +46,6 @@ alias irssi='TERM=screen irssi'
 alias ding='/bin/echo -e "\a"'
 
 eval `dircolors ${HOME}/.dircolors`
-
-source "${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 
@@ -71,6 +90,6 @@ ZSH_HIGHLIGHT_STYLES[bracket-level-4]="fg=magenta,bold"
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
 
 # Sudo
-ZSH_HIGHLIGHT_PATTERNS+=('sudo ' 'fg=white,bold,bg=red')
+ZSH_HIGHLIGHT_PATTERNS+=('sudo' 'fg=white,bold,bg=red')
 
 tmuxrc.sh
