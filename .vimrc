@@ -3,7 +3,7 @@ let first_time_install = 0
 let vundle_readme = expand('~/.vim/bundle/vundle/README.md')
 
 if !filereadable(vundle_readme)
-	echo -e "Installing Vundle..\n"
+	echo "Installing Vundle..\n"
 	silent !mkdir -p ~/.vim/bundle
 	silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
 	let first_time_install = 1 
@@ -36,7 +36,7 @@ filetype plugin indent on     " required!
 
 " Automatically install all loaded bundles when vundle is newly installed
 if first_time_install == 1
-	echo -e "Installing Bundles, please ignore key map error messages\n"
+	echo "Installing Bundles, please ignore key map error messages\n"
 	:BundleInstall
 endif
 " End installing bundles
