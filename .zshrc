@@ -35,7 +35,7 @@ unset IGNOREEOF
 alias ..='cd ..'
 alias ...='cd ../..'
 
-alias vim='vim -p'
+alias vim='TERM=screen-256color vim -p'
 
 alias ls='ls --color=auto'
 alias ll='ls -l'
