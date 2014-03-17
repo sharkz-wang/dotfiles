@@ -19,9 +19,24 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 # Tell antigen that you're done.
 antigen apply
 
+# Tab-to-list functionality
+function expand-or-complete-or-list-files() {
+	if [[ $#BUFFER == 0 ]]; then
+		echo -e "\r"
+		ls --color -C | perl -pe 'chomp if eof'
+		zle accept-line
+	else
+		zle expand-or-complete
+	fi
+}
+zle -N expand-or-complete-or-list-files
+# bind to tab
+bindkey '^I' expand-or-complete-or-list-files
+# End tab-to-list functionality
+
 export TERM='xterm-256color'
 export PS1='%{$fg_bold[green]%}%n%{$fg_bold[white]%}@%{$fg_bold[magenta]%}%m%{$fg_bold[white]%}:%{$fg_bold[cyan]%}%~%{$fg_bold[white]%}%(!.#.$) '
-export PATH="${HOME}/script:${HOME}/bin:${PATH}"
+export PATH="${PATH}:${HOME}/script:${HOME}/bin"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${HOME}/lib"
 
 export LANG='en_US.utf8'
