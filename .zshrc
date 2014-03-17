@@ -19,11 +19,11 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 # Tell antigen that you're done.
 antigen apply
 
-# Tab-to-list functionality
+#Tab-to-list functionalit
 function expand-or-complete-or-list-files() {
 	if [[ $#BUFFER == 0 ]]; then
 		echo -e "\r"
-		ls --color -C | perl -pe 'chomp if eof'
+		ls --color -C --width=${COLUMNS} -p | perl -pe 'chomp if eof'
 		zle accept-line
 	else
 		zle expand-or-complete
@@ -32,7 +32,7 @@ function expand-or-complete-or-list-files() {
 zle -N expand-or-complete-or-list-files
 # bind to tab
 bindkey '^I' expand-or-complete-or-list-files
-# End tab-to-list functionality
+#End tab-to-list functionalit
 
 export TERM='xterm-256color'
 export PS1='%{$fg_bold[green]%}%n%{$fg_bold[white]%}@%{$fg_bold[magenta]%}%m%{$fg_bold[white]%}:%{$fg_bold[cyan]%}%~%{$fg_bold[white]%}%(!.#.$) '
@@ -52,7 +52,7 @@ alias ...='cd ../..'
 
 alias vim='TERM=screen-256color vim -p'
 
-alias ls='ls --color=auto'
+alias ls='ls --color=auto -p'
 alias ll='ls -l'
 alias grep='grep --color=auto'
 
