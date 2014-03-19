@@ -22,11 +22,14 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'wolfpython/cscope_map.vim'
+Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
+Bundle 'taglist.vim'
+Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
 Bundle 'Valloric/YouCompleteMe'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'scrooloose/nerdtree'
 
 Bundle 'molokai'
 " End loading bundles
