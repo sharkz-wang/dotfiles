@@ -102,8 +102,46 @@ chatnets = {
 channels = (
   { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
   { name = "silc"; chatnet = "silc"; autojoin = "No"; },
+  { name = "#freenode"; chatnet = "FreeNode"; autojoin = "yes"; },
   { name = "#linux"; chatnet = "FreeNode"; autojoin = "yes"; },
-  { name = "#ubuntu"; chatnet = "FreeNode"; autojoin = "yes"; }
+  { name = "#archlinux"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#ubuntu"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#ubuntu-tw"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#debian"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#android"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#vim"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#emacs"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#zsh"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#bash"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#programming"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#prgmr"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#C"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#C++"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#C++-general"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#python"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#perl"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#R"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#lisp"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#clojure"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#erlang"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#git"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#puppet"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#kernel"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#ubuntu-kernel"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#raspberrypi"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#opensource"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#tossug"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#dot"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#kalug"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#gnu"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#xfce"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#security"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#networking"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#anime"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#movie"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#metal"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#reddit"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#nethack"; chatnet = "FreeNode"; autojoin = "no"; }
 );
 
 aliases = {
@@ -271,6 +309,13 @@ statusbar = {
         barend = { priority = "100"; alignment = "right"; };
       };
     };
+    awl_1 = {
+      items = {
+        barstart = { priority = "100"; };
+        awl_1 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
   };
 };
 settings = {
@@ -280,7 +325,7 @@ settings = {
     nick = "r02922070";
   };
   "fe-text" = { actlist_sort = "refnum"; };
-  "fe-common/core" = { theme = "sharkz-xchat"; };
+  "fe-common/core" = { theme = "sharkz-xchat.theme"; };
   "perl/core/scripts" = {
     awl_display_key = "$Q%K|%n$H$C$S";
     awl_block = "-15";
