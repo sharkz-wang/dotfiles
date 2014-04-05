@@ -77,12 +77,12 @@ set statusline +=%1*/%L%*                                   " total lines
 set statusline +=%1*%4v\ %*                                 " virtual column number
 hi User1 ctermfg=250 ctermbg=236 cterm=bold
 
-nnoremap <C-l> gt<CR>
-nnoremap <C-h> gT<CR>
+nnoremap <C-l> gt
+nnoremap <C-h> gT
 
-nnoremap <silent> <f1> :NERDTreeToggle<CR>
+nnoremap <silent> <f2> :NERDTreeToggle<CR>
 
-nnoremap <silent> <f2> :TlistToggle<CR>
+nnoremap <silent> <f3> :TlistToggle<CR>
 let Tlist_Use_Right_Window = 1
 
 nnoremap <silent> <f5> :w<CR>:make<CR>
