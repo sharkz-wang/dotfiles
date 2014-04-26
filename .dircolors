@@ -1,5 +1,21 @@
-COLOR tty
+# vim: set filetype=bash :
+# Install: `ln -s ~/.bash/dircolors ~/.dircolors`
+# Configuration file for the color ls utility
+# This file goes in the /etc directory, and must be world readable.
+# You can copy this file to .dir_colors in your $HOME directory to override
+# the system defaults.
+
+# COLOR needs one of these arguments: 'tty' colorizes output to ttys, but not
+# pipes. 'all' adds color characters to all output. 'none' shuts colorization
+# off.
+COLOR all
+
+# Extra command line options for ls go here.
+# Basically these ones are:
+#  -F = show '/' for dirs, '*' for executables, etc.
+#  -T 0 = don't trust tab spacing when formatting ls output.
 OPTIONS -F -T 0
+
 # Below, there should be one TERM entry for each termtype that is colorizable
 TERM linux
 TERM console
@@ -13,70 +29,158 @@ TERM con80x30
 TERM con80x43
 TERM con80x50
 TERM con80x60
-TERM cons25
 TERM xterm
-TERM rxvt
-TERM xterm-color
-TERM xterm-256color
-TERM color-xterm
 TERM vt100
-TERM dtterm
-TERM color_xterm
-TERM ansi
+TERM urxvt
+TERM rxvt-unicode
+TERM rxvt-unicode-256color
 TERM screen
+TERM screen-256color
+TERM screen-256color-bce
+TERM screen-bce
 TERM screen.linux
-TERM kon
-TERM kterm
-TERM gnome
-TERM konsole
+TERM screen-w
+TERM xterm-16color
+TERM xterm-256color
+TERM xterm-88color
+TERM xterm-color
+TERM xterm-debian
 
-EIGHTBIT 1
+# EIGHTBIT, followed by '1' for on, '0' for off. (8-bit output)
+#EIGHTBIT 1
 
+# Below are the color init strings for the basic file types. A color init
+# string consists of one or more of the following numeric codes:
+# Attribute codes: 
+# 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
 # Text color codes:
 # 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
 # Background color codes:
 # 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
-NORMAL 01   # global default, although everything should be something.
-FILE 01     # normal file
-DIR 01;36   # directory
-LINK 01;35  # symbolic link
-FIFO 40;33  # pipe
-SOCK 01;35  # socket
-BLK 40;32;01    # block device driver
-CHR 40;32;01    # character device driver
-ORPHAN 01;05;37;41  # orphaned syminks
-MISSING 01;05;37;41 # ... and the files they point to
+
+NORMAL 01;38;5;252 # no color code at all
+#FILE 00 # regular file: use no color at all
+RESET 0 # reset to "normal" color
+DIR 01;38;5;81 # directory
+LINK 01;38;5;81 # symbolic link. (If you set this to 'target' instead of a
+ # numerical value, the color is as for the file pointed to.)
+MULTIHARDLINK 00 # regular file with more than one link
+FIFO 48;5;230;38;5;136;01 # pipe
+SOCK 48;5;230;38;5;136;01 # socket
+DOOR 48;5;230;38;5;136;01 # door
+BLK 48;5;230;38;5;244;01 # block device driver
+CHR 48;5;230;38;5;244;01 # character device driver
+ORPHAN 48;5;235;38;5;160 # symlink to nonexistent file, or non-stat'able file
+SETUID 48;5;160;38;5;230 # file that is setuid (u+s)
+SETGID 48;5;136;38;5;230 # file that is setgid (g+s)
+CAPABILITY 30;41 # file with capability
+STICKY_OTHER_WRITABLE 48;5;64;38;5;230 # dir that is sticky and other-writable (+t,o+w)
+OTHER_WRITABLE 48;5;235;38;5;33 # dir that is other-writable (o+w) and not sticky
+STICKY 48;5;33;38;5;230 # dir with the sticky bit set (+t) and not other-writable
 # This is for files with execute permission:
-EXEC 01;33
+
+# This is for files with execute permission:
 
 # List any file extensions like '.gz' or '.tar' that you would like ls
 # to colorize below. Put the extension, a space, and the color init string.
 # (and any comments you want to add after a '#')
-.cmd 01;32 # executables (bright green)
-.exe 01;32
-.com 01;32
-.btm 01;32
-.bat 01;32
-.sh  01;32
-.csh 01;32
-.tar 01;31 # archives or compressed (bright red)
-.tgz 01;31
-.arj 01;31
-.taz 01;31
-.lzh 01;31
-.zip 01;31
-.z   01;31
-.Z   01;31
-.gz  01;31
-.bz2 01;31
-.bz  01;31
-.tz  01;31
-.rpm 01;31
-.cpio 01;31
-.jpg 01;35 # image formats
-.gif 01;35
-.bmp 01;35
-.xbm 01;35
-.xpm 01;35
-.png 01;35
-.tif 01;35
+# Archives or Compressed (Purple: 135)
+.tar 01;38;5;135
+.tgz 01;38;5;135
+.arj 01;38;5;135
+.taz 01;38;5;135
+.lzh 01;38;5;135
+.zip 01;38;5;135
+.z   01;38;5;135
+.Z   01;38;5;135
+.gz  01;38;5;135
+
+# Executables (Bright Green: 118)
+EXEC 01;38;5;118 # Files with exec flag
+.cmd 01;38;5;118
+.exe 01;38;5;118
+.com 01;38;5;118
+.btm 01;38;5;118
+.bat 01;38;5;118
+
+# Image formats (Red: 161)
+.jpg 01;38;5;161
+.jpeg 01;38;5;161
+.png 01;38;5;161
+.gif 01;38;5;161
+.bmp 01;38;5;161
+.xbm 01;38;5;161
+.xpm 01;38;5;161
+.tif 01;38;5;161
+.tiff 01;38;5;161
+
+# Document formats
+.pdf 01;38;5;144
+.odf 01;38;5;144
+.doc 01;38;5;144
+.ppt 01;38;5;144
+.pptx 01;38;5;144
+.db 01;38;5;144
+
+# Audio formats (Molokai Orange: 208)
+.aac    01;38;5;208
+.au     01;38;5;208
+.flac   01;38;5;208
+.mid    01;38;5;208
+.midi   01;38;5;208
+.mka    01;38;5;208
+.mp3    01;38;5;208
+.mpc    01;38;5;208
+.ogg    01;38;5;208
+.ra     01;38;5;208
+.wav    01;38;5;208
+.m4a    01;38;5;208
+# http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
+.axa    01;38;5;208
+.oga    01;38;5;208
+.spx    01;38;5;208
+.xspf   01;38;5;208
+
+# Video formats (as audio + bold) (Molokai Orange: 208)
+.mov    01;38;5;208
+.mpg    01;38;5;208
+.mpeg   01;38;5;208
+.3gp	01;38;5;208
+.m2v    01;38;5;208
+.mkv    01;38;5;208
+.ogm    01;38;5;208
+.mp4    01;38;5;208
+.m4v    01;38;5;208
+.mp4v   01;38;5;208
+.vob    01;38;5;208
+.qt     01;38;5;208
+.nuv    01;38;5;208
+.wmv    01;38;5;208
+.asf    01;38;5;208
+.rm     01;38;5;208
+.rmvb   01;38;5;208
+.flc    01;38;5;208
+.avi    01;38;5;208
+.fli    01;38;5;208
+.flv    01;38;5;208
+.gl     01;38;5;208
+.m2ts   01;38;5;208
+.divx   01;38;5;208
+
+# "unimportant" files as logs and backups (base01)
+.log        01;38;5;240
+.bak        01;38;5;240
+.aux        01;38;5;240
+.bbl        01;38;5;240
+.blg        01;38;5;240
+*~          01;38;5;240
+*#          01;38;5;240
+.part       01;38;5;240
+.incomplete 01;38;5;240
+.swp        01;38;5;240
+.tmp        01;38;5;240
+.temp       01;38;5;240
+.o          01;38;5;240
+.pyc        01;38;5;240
+.class      01;38;5;240
+.cache      01;38;5;240
