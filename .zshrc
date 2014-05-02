@@ -14,12 +14,15 @@ antigen bundle command-not-found
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Load the theme.
-#antigen theme
+# Antigen theme
 
 # Tell antigen that you're done.
 antigen apply
 
-#Tab-to-list functionalit
+# Tab-to-list
+# Bind to tab
+bindkey '^I' expand-or-complete-or-list-files
+
 function expand-or-complete-or-list-files() {
 	if [[ $#BUFFER == 0 ]]; then
 		echo -e "\r"
@@ -29,10 +32,21 @@ function expand-or-complete-or-list-files() {
 		zle expand-or-complete
 	fi
 }
+
 zle -N expand-or-complete-or-list-files
-# bind to tab
-bindkey '^I' expand-or-complete-or-list-files
-#End tab-to-list functionalit
+# End tab-to-list
+
+# Go up one level by ctrl + backslash
+# Bind to ctrl + backslash
+bindkey '^\\' up-one-level
+
+function up-one-level() {
+	cd ..
+	zle accept-line
+}
+
+zle -N up-one-level
+# End 
 
 export TERM='xterm-256color'
 export PS1='%B%F{252}[%f%F{208}%*%f%F{252}]%f %F{118}%n%f%F{252}@%f%F{135}%m%f%F{252}:%f%F{81}%~%f$(BRANCH=$(git branch 2>/dev/null | grep "^*" | colrm 1 2); echo ${BRANCH:+"%F{252}-(%f%F{161}${BRANCH}%f%F{252})%f"};)%F{252}%(!.#.$)%f %b'
