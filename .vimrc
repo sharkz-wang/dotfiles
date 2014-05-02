@@ -23,13 +23,23 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 Bundle 'Lokaltog/vim-easymotion'
+
 Bundle 'wolfpython/cscope_map.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'taglist.vim'
+
+Bundle 'c9s/gsession.vim'
+
 Bundle 'tpope/vim-surround'
+Bundle 'jiangmiao/auto-pairs'
+Bundle 'michaeljsmith/vim-indent-object'
+
 Bundle 'tpope/vim-fugitive'
+
 Bundle 'Valloric/YouCompleteMe'
+
+Bundle 'ap/vim-css-color'
 
 Bundle 'molokai'
 " End loading bundles
@@ -80,7 +90,7 @@ hi User1 ctermfg=250 ctermbg=236 cterm=bold
 nnoremap <C-l> gt
 nnoremap <C-h> gT
 
-nnoremap <silent> <f2> :NERDTreeToggle<CR>
+nnoremap <silent> <f2> :NERDTreeTabsToggle<CR>
 
 nnoremap <silent> <f3> :TlistToggle<CR>
 let Tlist_Use_Right_Window = 1
