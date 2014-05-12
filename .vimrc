@@ -24,15 +24,15 @@ Bundle 'gmarik/vundle'
 
 Bundle 'Lokaltog/vim-easymotion'
 
-Bundle 'wolfpython/cscope_map.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'taglist.vim'
+Bundle 'wolfpython/cscope_map.vim'
+Bundle 'SingleCompile'
 
 Bundle 'c9s/gsession.vim'
 
 Bundle 'tpope/vim-surround'
-Bundle 'jiangmiao/auto-pairs'
 Bundle 'michaeljsmith/vim-indent-object'
 
 Bundle 'tpope/vim-fugitive'
@@ -91,13 +91,19 @@ nnoremap <C-l> gt
 nnoremap <C-h> gT
 
 nnoremap <silent> <f2> :NERDTreeTabsToggle<CR>
-
 nnoremap <silent> <f3> :TlistToggle<CR>
 let Tlist_Use_Right_Window = 1
 
 nnoremap <silent> <f5> :w<CR>:make<CR>
-nnoremap <silent> <f6> :w<CR>:sh<CR>
-nnoremap <silent> <f10> :copen<CR>
+
+nmap <silent> <F9> :SCCompile<cr>
+nmap <silent> <F10> :SCCompileRun<cr>
+nnoremap <silent> <f11> :cw<CR>
+
+map cn <esc>:cn<cr>
+map cp <esc>:cp<cr>
+
+map <expr> tb ':tabe %<CR>'.line(".").'G'.(col(".") - 1 == 0 ? '' : (col(".") - 1).'l')
 
 nnoremap <C-s> :w<CR>
 nnoremap <C-q> :q<CR>
