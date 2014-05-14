@@ -91,7 +91,7 @@ nnoremap <C-l> gt
 nnoremap <C-h> gT
 
 nnoremap <silent> <f2> :NERDTreeTabsToggle<CR>
-nnoremap <silent> <f3> :TlistToggle<CR>
+nnoremap <silent> <f3> :TlistToggle<CR><C-w>b
 let Tlist_Use_Right_Window = 1
 
 nnoremap <silent> <f5> :w<CR>:make<CR>
