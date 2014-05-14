@@ -23,6 +23,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'kshenoy/vim-signature'
 
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
@@ -90,23 +91,23 @@ hi User1 ctermfg=250 ctermbg=236 cterm=bold
 nnoremap <C-l> gt
 nnoremap <C-h> gT
 
-nnoremap <silent> <f2> :NERDTreeTabsToggle<CR>
-nnoremap <silent> <f3> :TlistToggle<CR><C-w>b
+nnoremap <silent> <f2> :NERDTreeTabsToggle<cr>
+nnoremap <silent> <f3> :TlistToggle<cr><C-w>b
 let Tlist_Use_Right_Window = 1
 
-nnoremap <silent> <f5> :w<CR>:make<CR>
+nnoremap <silent> <f5> :w<cr>:make<cr>
 
 nmap <silent> <F9> :SCCompile<cr>
 nmap <silent> <F10> :SCCompileRun<cr>
-nnoremap <silent> <f11> :cw<CR>
+nnoremap <silent> <f11> :cw<cr>
 
 map cn <esc>:cn<cr>
 map cp <esc>:cp<cr>
 
-map <expr> tb ':tabe %<CR>'.line(".").'G'.(col(".") - 1 == 0 ? '' : (col(".") - 1).'l')
+map <expr> tb ':tabe %<cr>:cal cursor('.line(".").', '.col(".").')<cr>'
 
-nnoremap <C-s> :w<CR>
-nnoremap <C-q> :q<CR>
+nnoremap <C-s> :w<cr>
+nnoremap <C-q> :q<cr>
 
 if filereadable("./.vimrclocal")
     source .vimrclocal
