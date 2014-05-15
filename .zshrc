@@ -147,4 +147,15 @@ bindkey '^B' backward
 zle -N backward
 # End previous / next page functionality
 
+# Tmux pane fetched auto-completion
+tmux_pane_autocomplete() {
+	list=($(tmux capture-pane \; show-buffer \; delete-buffer 2>/dev/null | perl -pe 's/[^a-zA-Z0-9:\.\/\-\+\_]+/ /g; s/(\B[:]|[:]\B)/ /g;'))
+	_wanted values null '' compadd -a list
+}
+
+bindkey '^E' tmux-pane-autocomplete
+zle -C tmux-pane-autocomplete complete-word _generic
+zstyle ':completion:tmux-pane-autocomplete:*' completer tmux_pane_autocomplete
+# End tmux pane fetched auto-completion
+
 tmuxrc.sh
