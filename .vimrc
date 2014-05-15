@@ -81,11 +81,16 @@ hi TabLineFill  ctermfg=236
 
 set laststatus =2
 set statusline =
-set statusline +=%1*\ [%{&ff}]%*                            " file format
-set statusline +=%1*\ [%{''.(&fenc!=''?&fenc:&enc).''}]     " encoding
-set statusline +=%1*%=%5l%*                                 " current line
-set statusline +=%1*/%L%*                                   " total lines
-set statusline +=%1*%4v\ %*                                 " virtual column number
+set statusline +=%1*\ %t%*								" file basename
+set statusline +=%1*\ \ %y%*							" file type
+set statusline +=%1*[%{&ff},							" file format
+set statusline +=%1*%{strlen(&fenc)?&fenc:'none'}]%*	" file encoding
+set statusline +=%1*%m%*								" dirty flag
+set statusline +=%1*%r%*								" read-only flag
+set statusline +=%1*%=									" separator
+set statusline +=%1*(%c,%*								" cursor column
+set statusline +=%1*%l)/%L%*							" cursor row/total rows
+set statusline +=%1*\ \ \ %P%*							" current row/total rows percentage
 hi User1 ctermfg=250 ctermbg=236 cterm=bold
 
 nnoremap <C-l> gt
