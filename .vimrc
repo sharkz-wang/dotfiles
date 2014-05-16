@@ -59,6 +59,8 @@ set nu
 set ai
 set ignorecase
 set hlsearch
+set splitright
+set splitbelow
 "set expandtab
 set tabstop=4
 set shiftwidth=4
@@ -95,6 +97,14 @@ hi User1 ctermfg=250 ctermbg=236 cterm=bold
 
 nnoremap <C-l> gt
 nnoremap <C-h> gT
+
+map <expr> vs ':vs %<cr>'
+map <expr> sp ':sp %<cr>'
+
+map <expr> sh '<C-w>h'
+map <expr> sl '<C-w>l'
+map <expr> sk '<C-w>k'
+map <expr> sj '<C-w>j'
 
 nnoremap <silent> <f2> :NERDTreeTabsToggle<cr>
 nnoremap <silent> <f3> :TlistToggle<cr><C-w>b
