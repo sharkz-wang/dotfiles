@@ -98,8 +98,8 @@ hi User1 ctermfg=250 ctermbg=236 cterm=bold
 nnoremap <C-l> gt
 nnoremap <C-h> gT
 
-map <expr> vs ':vs %<cr>'
-map <expr> sp ':sp %<cr>'
+map <expr> vs ':vs %<cr>:cal cursor('.line(".").', '.col(".").')<cr>'
+map <expr> sp ':sp %<cr>:cal cursor('.line(".").', '.col(".").')<cr>'
 
 map <expr> sh '<C-w>h'
 map <expr> sl '<C-w>l'
