@@ -28,6 +28,7 @@ Bundle 'kshenoy/vim-signature'
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'taglist.vim'
+Bundle 'zhaocai/GoldenView.Vim'
 Bundle 'wolfpython/cscope_map.vim'
 Bundle 'SingleCompile'
 
@@ -98,6 +99,10 @@ hi User1 ctermfg=250 ctermbg=236 cterm=bold
 nnoremap <C-l> gt
 nnoremap <C-h> gT
 
+let g:goldenview__enable_default_mapping = 0
+nmap <silent> <C-N>  <Plug>GoldenViewNext
+nmap <silent> <C-P>  <Plug>GoldenViewPrevious
+
 map <expr> vs 'z.:vs %<cr>:cal cursor('.line(".").', '.col(".").')<cr>z.'
 map <expr> sp 'z.:sp %<cr>:cal cursor('.line(".").', '.col(".").')<cr>z.'
 
@@ -107,8 +112,8 @@ map <expr> sk '<C-w>k'
 map <expr> sj '<C-w>j'
 
 nnoremap <silent> <f2> :NERDTreeTabsToggle<cr>
-nnoremap <silent> <f3> :TlistToggle<cr><C-w>b
 let Tlist_Use_Right_Window = 1
+nnoremap <silent> <f3> :TlistToggle<cr><C-w>b
 
 nnoremap <silent> <f5> :w<cr>:make<cr>
 
