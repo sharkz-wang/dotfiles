@@ -20,7 +20,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen apply
 
 export TERM='xterm-256color'
-export PS1='%B%F{252}[%f%F{208}%*%f%F{252}]%f %F{118}%n%f%F{252}@%f%F{135}%m%f%F{252}:%f%F{81}%~%f$(BRANCH=$(git branch 2>/dev/null | \grep "^*" | colrm 1 2); echo ${BRANCH:+"%F{252}-(%f%F{161}${BRANCH}%f%F{252})%f"};)%F{252}%(!.#.$)%f %b'
+export PS1='%B%F{252}[%f%F{208}%D{%H:%M:%S}%f%F{252}]%f %F{118}%n%f%F{252}@%f%F{135}%m%f%F{252}:%f%F{81}%~%f$(BRANCH=$(git branch 2>/dev/null | \grep "^*" | colrm 1 2); echo ${BRANCH:+"%F{252}-(%f%F{161}${BRANCH}%f%F{252})%f"};)%F{252}%(!.#.$)%f %b'
 export PATH="${HOME}/script:${HOME}/bin:${PATH}"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${HOME}/lib"
 
