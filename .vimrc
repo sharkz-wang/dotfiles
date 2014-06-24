@@ -39,7 +39,8 @@ Bundle 'michaeljsmith/vim-indent-object'
 
 Bundle 'tpope/vim-fugitive'
 
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
+Bundle 'Shougo/neocomplete.vim'
 
 Bundle 'ap/vim-css-color'
 
@@ -56,15 +57,25 @@ if first_time_install == 1
 endif
 " End installing bundles
 
-set nu
-set ai
+set number
+set wildmenu
+
+set autoindent
+set smartindent
+
 set ignorecase
 set hlsearch
+set incsearch
+
 set splitright
 set splitbelow
-"set expandtab
+
+set backspace=2
+
 set tabstop=4
 set shiftwidth=4
+"set expandtab
+
 set background=dark
 set t_Co=256
 
@@ -98,6 +109,9 @@ hi User1 ctermfg=250 ctermbg=236 cterm=bold
 
 nnoremap <C-l> gt
 nnoremap <C-h> gT
+
+nnoremap k gk
+nnoremap j gj
 
 let g:goldenview__enable_default_mapping = 0
 nmap <silent> <C-N>  <Plug>GoldenViewNext
