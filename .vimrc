@@ -95,15 +95,16 @@ hi TabLineFill  ctermfg=236
 
 set laststatus =2
 set statusline =
-set statusline +=%1*\ %t%*								" file basename
+"set statusline +=%1*\ %t%*								" file basename
+set statusline +=%1*\ %f%*								" file relative path
 set statusline +=%1*\ \ %y%*							" file type
 set statusline +=%1*[%{&ff},							" file format
 set statusline +=%1*%{strlen(&fenc)?&fenc:'none'}]%*	" file encoding
 set statusline +=%1*%m%*								" dirty flag
 set statusline +=%1*%r%*								" read-only flag
 set statusline +=%1*%=									" separator
-set statusline +=%1*(%c,%*								" cursor column
-set statusline +=%1*%l)/%L%*							" cursor row/total rows
+set statusline +=%1*(%l,%*								" cursor row
+set statusline +=%1*%c)/%L%*							" cursor column/total rows
 set statusline +=%1*\ \ \ %P%*							" current row/total rows percentage
 hi User1 ctermfg=250 ctermbg=236 cterm=bold
 
