@@ -43,7 +43,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'Shougo/neocomplete.vim'
 Bundle 'Shougo/neosnippet'
 
-Bundle 'SirVer/ultisnips'
+"Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
 
 Bundle 'ap/vim-css-color'
@@ -255,6 +255,7 @@ let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 " End Shougo/neocomplete.vim setting
 
 " Shougo/neosnippet setting
+let g:neosnippet#enable_snipmate_compatibility = 1
 " SuperTab like snippets behavior.
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
