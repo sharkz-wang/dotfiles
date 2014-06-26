@@ -87,12 +87,6 @@ let g:ycm_global_ycm_extra_conf = expand('~/.vim/bundle/YouCompleteMe/cpp/ycm/.y
 colorscheme molokai
 hi Normal ctermfg=252 cterm=bold
 
-set showtabline=2
-
-hi TabLine      ctermfg=250 ctermbg=236 cterm=bold
-hi TabLineSel   ctermfg=201 ctermbg=236 cterm=bold
-hi TabLineFill  ctermfg=236 
-
 set laststatus =2
 set statusline =
 "set statusline +=%1*\ %t%*								" file basename
@@ -147,3 +141,43 @@ nnoremap <C-q> :q<cr>
 if filereadable("./.vimrclocal")
     source .vimrclocal
 endif
+
+set showtabline =2
+set tabline =%!GenTabLine()
+
+hi TabLine      ctermfg=250 ctermbg=236 cterm=bold
+hi TabLineSel   ctermfg=201 ctermbg=236 cterm=bold
+hi TabLineFill  ctermfg=236 
+
+function GenTabLine()
+	let result = '   '
+	let curr_page = tabpagenr()
+
+	let i = 1
+	while i <= tabpagenr('$')
+		let buflist = tabpagebuflist(i)
+		let winnr = tabpagewinnr(i)
+
+		let result .= ' %*'
+		let result .= (i == curr_page ? '%#TabLineSel#' : '%#TabLine#')
+
+		let file = bufname(buflist[winnr - 1])
+		let file = fnamemodify(file, ':t')
+
+		let is_mod = getbufvar(file, "&modified")
+		if is_mod > 0
+			let result .= '+ '
+		endif
+
+		if file == ''
+			let file = '[No Name]'
+		endif
+		let result .= file . ' '
+
+		let i = i + 1
+	endwhile
+
+	let result .= '%T%#TabLineFill#%='
+	"let result .= (tabpagenr('$') > 1 ? '%999XX' : 'X')
+	return result
+endfunction
