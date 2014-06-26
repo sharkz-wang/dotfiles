@@ -85,6 +85,9 @@ set t_Co=256
 
 syntax on
 
+" Disable auto commenting
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 let g:ycm_collect_identifiers_from_tag_files = 1
 let g:ycm_global_ycm_extra_conf = expand('~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py')
 
