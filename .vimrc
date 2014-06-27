@@ -27,12 +27,16 @@ Bundle 'kshenoy/vim-signature'
 
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'taglist.vim'
 Bundle 'zhaocai/GoldenView.Vim'
+Bundle 'viewdoc'
+
 Bundle 'wolfpython/cscope_map.vim'
-Bundle 'SingleCompile'
+Bundle 'taglist.vim'
+Bundle 'a.vim'
 
 Bundle 'c9s/gsession.vim'
+
+Bundle 'SingleCompile'
 
 Bundle 'tpope/vim-surround'
 Bundle 'michaeljsmith/vim-indent-object'
