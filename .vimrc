@@ -14,47 +14,49 @@ endif
 set nocompatible              " be improved
 filetype off                  " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/vundle
+call vundle#begin()
 
 " Start loading bundles
 " let Vundle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'kshenoy/vim-signature'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'kshenoy/vim-signature'
 
-Bundle 'scrooloose/nerdtree'
-Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'zhaocai/GoldenView.Vim'
-Bundle 'viewdoc'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'zhaocai/GoldenView.Vim'
+Plugin 'viewdoc'
 
-Bundle 'wolfpython/cscope_map.vim'
-Bundle 'taglist.vim'
-Bundle 'a.vim'
+Plugin 'wolfpython/cscope_map.vim'
+Plugin 'taglist.vim'
+Plugin 'a.vim'
 
-Bundle 'c9s/gsession.vim'
+Plugin 'c9s/gsession.vim'
 
-Bundle 'SingleCompile'
+Plugin 'SingleCompile'
 
-Bundle 'tpope/vim-surround'
-Bundle 'michaeljsmith/vim-indent-object'
+Plugin 'tpope/vim-surround'
+Plugin 'michaeljsmith/vim-indent-object'
 
-Bundle 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 
-"Bundle 'Valloric/YouCompleteMe'
-Bundle 'Shougo/neocomplete.vim'
-Bundle 'Shougo/neosnippet'
-Bundle 'Rip-Rip/clang_complete'
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'Shougo/neosnippet'
+Plugin 'Rip-Rip/clang_complete'
 
-"Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
+"Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
-Bundle 'ap/vim-css-color'
+Plugin 'ap/vim-css-color'
 
-Bundle 'molokai'
+Plugin 'molokai'
 " End loading bundles
+
+call vundle#end()
 
 filetype plugin indent on     " required!
 "End vundle configurations
