@@ -134,6 +134,15 @@ map <expr> sl '<C-w>l'
 map <expr> sk '<C-w>k'
 map <expr> sj '<C-w>j'
 
+inoremap <M-h> <C-o>h
+inoremap <M-l> <C-o>l
+inoremap <M-k> <C-o>k
+inoremap <M-j> <C-o>j
+
+inoremap <M-w> <C-o>w
+inoremap <M-b> <C-o>b
+inoremap <M-e> <C-o>e
+
 nnoremap <silent> <f2> :NERDTreeTabsToggle<cr>
 let Tlist_Use_Right_Window = 1
 nnoremap <silent> <f3> :TlistToggle<cr><C-w>b
