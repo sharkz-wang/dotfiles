@@ -163,6 +163,10 @@ map <expr> tb ':tabe %<cr>:cal cursor('.line(".").', '.col(".").')<cr>'
 nnoremap <C-s> :w<cr>
 nnoremap <C-q> :q<cr>
 
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
 if filereadable("./.vimrclocal")
     source .vimrclocal
 endif
