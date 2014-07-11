@@ -55,6 +55,12 @@ alias ding='/bin/echo -e "\a"'
 bindkey "^R" history-incremental-pattern-search-backward
 bindkey "^S" history-incremental-pattern-search-forward
 
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
+
+bindkey '^U' backward-kill-line
+bindkey '^K' kill-line
+
 eval `dircolors ${HOME}/.dircolors`
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
@@ -155,9 +161,9 @@ tmux_pane_autocomplete() {
 	_wanted values null '' compadd -a list
 }
 
-bindkey '^E' tmux-pane-autocomplete
-zle -C tmux-pane-autocomplete complete-word _generic
-zstyle ':completion:tmux-pane-autocomplete:*' completer tmux_pane_autocomplete
+#bindkey '^E' tmux-pane-autocomplete
+#zle -C tmux-pane-autocomplete complete-word _generic
+#zstyle ':completion:tmux-pane-autocomplete:*' completer tmux_pane_autocomplete
 # End tmux pane fetched auto-completion
 
 tmuxrc.sh
