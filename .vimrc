@@ -39,6 +39,7 @@ Plugin 'c9s/gsession.vim'
 Plugin 'SingleCompile'
 
 Plugin 'tpope/vim-surround'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'michaeljsmith/vim-indent-object'
 
 Plugin 'tpope/vim-fugitive'
