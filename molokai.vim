@@ -164,7 +164,7 @@ if &t_Co > 255
    hi Directory       ctermfg=118               cterm=bold
    hi Error           ctermfg=219 ctermbg=89 cterm=bold
    hi ErrorMsg        ctermfg=199 ctermbg=16    cterm=bold
-   hi Exception       ctermfg=118               cterm=bold
+   hi Exception       ctermfg=118 ctermbg=236   cterm=bold
    hi Float           ctermfg=135 cterm=bold
    hi FoldColumn      ctermfg=67  ctermbg=16 cterm=bold
    hi Folded          ctermfg=67  ctermbg=16 cterm=bold
@@ -196,7 +196,7 @@ if &t_Co > 255
    hi Search          ctermfg=253 ctermbg=66 cterm=bold
 
    " marks column
-   hi SignColumn      ctermfg=118 ctermbg=235 cterm=bold
+   hi SignColumn      ctermfg=118 ctermbg=236 cterm=bold
    hi SpecialChar     ctermfg=161               cterm=bold
    hi SpecialComment  ctermfg=245               cterm=bold
    hi Special         ctermfg=81 cterm=bold
@@ -221,7 +221,7 @@ if &t_Co > 255
 
    hi VertSplit       ctermfg=244 ctermbg=232   cterm=bold
    hi VisualNOS                   ctermbg=238 cterm=bold
-   hi Visual                      ctermbg=235 cterm=bold
+   hi Visual                      ctermbg=236 cterm=bold
    hi WarningMsg      ctermfg=231 ctermbg=238   cterm=bold
    hi WildMenu        ctermfg=81  ctermbg=16 cterm=bold
 
