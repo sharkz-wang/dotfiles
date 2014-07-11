@@ -46,6 +46,8 @@ alias less='less -R'
 alias ls='ls --color=always -p'
 alias ll='ls -l'
 
+alias today='date +%Y%m%d'
+
 alias irssi='TERM=screen irssi'
 
 alias ding='/bin/echo -e "\a"'
