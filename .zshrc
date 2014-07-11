@@ -33,10 +33,11 @@ export EDITOR='vim'
 stty -ixon
 unset IGNOREEOF
 
+alias vim='TERM=screen-256color vim -p'
+alias irssi='TERM=screen irssi'
+
 alias ..='cd ..'
 alias ...='cd ../..'
-
-alias vim='TERM=screen-256color vim -p'
 
 alias egrep='egrep --color=always'
 alias grep='grep --color=always'
@@ -46,9 +47,9 @@ alias less='less -R'
 alias ls='ls --color=always -p'
 alias ll='ls -l'
 
-alias today='date +%Y%m%d'
+alias builddb='ctags -R && cscope -Rkbq && (find . -name "*.h" -exec echo "-include {}" \; > .clang_complete)'
 
-alias irssi='TERM=screen irssi'
+alias today='date +%Y%m%d'
 
 alias ding='/bin/echo -e "\a"'
 

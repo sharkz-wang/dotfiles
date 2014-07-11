@@ -126,7 +126,8 @@ let g:goldenview__enable_default_mapping = 0
 nmap <silent> <C-N>  <Plug>GoldenViewNext
 nmap <silent> <C-P>  <Plug>GoldenViewPrevious
 
-command BuildDB execute 'call system(''ctags -R && cscope -Rkbq && (find . -name "*.h" -exec echo "-include {}" \; > .clang_complete)'')'
+"command BuildDB execute 'call system(''ctags -R && cscope -Rkbq && (find . -name "*.h" -exec echo "-include {}" \; > .clang_complete)'')'
+command BuildDB execute 'builddb'
 
 map <expr> vs 'z.:vs %<cr>:cal cursor('.line(".").', '.col(".").')<cr>z.'
 map <expr> sp 'z.:sp %<cr>:cal cursor('.line(".").', '.col(".").')<cr>z.'
