@@ -27,7 +27,6 @@ Plugin 'kshenoy/vim-signature'
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'zhaocai/GoldenView.Vim'
 Plugin 'viewdoc'
 
 Plugin 'wolfpython/cscope_map.vim'
@@ -125,15 +124,11 @@ set statusline +=%1*%c)/%L%*							" cursor column/total rows
 set statusline +=%1*\ \ \ %P%*							" current row/total rows percentage
 hi User1 ctermfg=250 ctermbg=236 cterm=bold
 
-nnoremap <C-l> gt
-nnoremap <C-h> gT
+nnoremap <C-n> gt
+nnoremap <C-p> gT
 
 nnoremap k gk
 nnoremap j gj
-
-let g:goldenview__enable_default_mapping = 0
-nmap <silent> <C-N>  <Plug>GoldenViewNext
-nmap <silent> <C-P>  <Plug>GoldenViewPrevious
 
 command BuildDB execute 'call system(''ctags -R && cscope -Rkbq && (find . -name "*.h" -exec echo "-include {}" \; > .clang_complete)'')'
 
