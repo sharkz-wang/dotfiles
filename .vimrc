@@ -307,3 +307,17 @@ if has('conceal')
 	set conceallevel=2 concealcursor=i
 endif
 " End Shougo/neosnippet setting
+
+" Highlight Class and Function names
+au FileType * syn match Paren    "(" contains=cParen,cCppParen
+au FileType * syn match cFunction     "\w\+\s*(" contains=Paren
+au FileType * syn match cClassScopeFunction    "\w\+\s*::\w\+\s*(" contains=Paren
+
+hi def link cFunction  Function
+hi def link cClassScopeFunction Function
+
+"au FileType * syn match cFunctionDef    "\w\+\s*(" contains=Paren
+"au FileType * syn match cFunctionMemberDef    "\w\+\s*::\w\+\s*(" contains=Paren
+
+"hi cFunctionDef ctermfg=208 cterm=bold
+"hi cFunctionMemberDef ctermfg=208 cterm=bold
