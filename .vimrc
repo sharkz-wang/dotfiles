@@ -102,6 +102,14 @@ let g:ycm_global_ycm_extra_conf = expand('~/.vim/bundle/YouCompleteMe/cpp/ycm/.y
 colorscheme molokai
 hi Normal ctermfg=252 cterm=bold
 
+hi Type ctermfg=118 cterm=bold
+hi Structure ctermfg=118 cterm=bold
+hi Macro ctermfg=161 cterm=bold
+hi PreCondit ctermfg=161 cterm=bold
+hi Function ctermfg=81 cterm=bold
+
+set cursorline
+
 set laststatus =2
 set statusline =
 "set statusline +=%1*\ %t%*								" file basename
@@ -127,8 +135,7 @@ let g:goldenview__enable_default_mapping = 0
 nmap <silent> <C-N>  <Plug>GoldenViewNext
 nmap <silent> <C-P>  <Plug>GoldenViewPrevious
 
-"command BuildDB execute 'call system(''ctags -R && cscope -Rkbq && (find . -name "*.h" -exec echo "-include {}" \; > .clang_complete)'')'
-command BuildDB execute 'builddb'
+command BuildDB execute 'call system(''ctags -R && cscope -Rkbq && (find . -name "*.h" -exec echo "-include {}" \; > .clang_complete)'')'
 
 map <expr> vs 'z.:vs %<cr>:cal cursor('.line(".").', '.col(".").')<cr>z.'
 map <expr> sp 'z.:sp %<cr>:cal cursor('.line(".").', '.col(".").')<cr>z.'
