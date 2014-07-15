@@ -316,8 +316,10 @@ au FileType * syn match cClassScopeFunction    "\w\+\s*::\w\+\s*(" contains=Pare
 hi def link cFunction  Function
 hi def link cClassScopeFunction Function
 
-"au FileType * syn match cFunctionDef    "\w\+\s*(" contains=Paren
-"au FileType * syn match cFunctionMemberDef    "\w\+\s*::\w\+\s*(" contains=Paren
+" For function header highlighting, not well configured
+"au FileType * syn match cFunctionDef "\v\w+\s*\("
+"au FileType * syn match cClassScopeFunctionDef "\v\w+\s+\w+\s*::\w+\s*\("
+"au FileType * syn keyword Type unsigned singned char bool short int long float double containedin=cClassScopeFunctionDef
 
 "hi cFunctionDef ctermfg=208 cterm=bold
-"hi cFunctionMemberDef ctermfg=208 cterm=bold
+"hi cClassScopeFunctionDef ctermfg=208 cterm=bold
