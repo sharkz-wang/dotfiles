@@ -24,6 +24,7 @@ Plugin 'gmarik/vundle'
 
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'kshenoy/vim-signature'
+Plugin 'nathanaelkane/vim-indent-guides'
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -139,6 +140,9 @@ map <expr> sh '<C-w>h'
 map <expr> sl '<C-w>l'
 map <expr> sk '<C-w>k'
 map <expr> sj '<C-w>j'
+
+inoremap jk <esc>
+inoremap kj <esc>
 
 inoremap <M-h> <C-o>h
 inoremap <M-l> <C-o>l
