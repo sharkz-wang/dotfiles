@@ -128,6 +128,7 @@
 
 (global-hl-line-mode)			; highlight current line
 (global-linum-mode 1)			; add line numbers on the left
+(setq linum-format "%d ")
 
 ;; avoid compiz manager rendering bugs
 (add-to-list 'default-frame-alist '(alpha . 100))
