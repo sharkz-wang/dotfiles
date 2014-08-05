@@ -39,13 +39,15 @@ alias irssi='TERM=screen irssi'
 alias ..='cd ..'
 alias ...='cd ../..'
 
-alias egrep='egrep --color=always'
-alias grep='grep --color=always'
+alias ls='ls --color=always -p'
+alias ll='ls -l'
 
 alias less='less -R'
 
-alias ls='ls --color=always -p'
-alias ll='ls -l'
+alias egrep='egrep --color=always'
+alias grep='grep --color=always'
+
+alias cp='rsync -avh -P'
 
 alias builddb='ctags -R && cscope -Rkbq && (find . -name "*.h" -exec echo "-include {}" \; > .clang_complete)'
 
@@ -166,5 +168,3 @@ tmux_pane_autocomplete() {
 #zle -C tmux-pane-autocomplete complete-word _generic
 #zstyle ':completion:tmux-pane-autocomplete:*' completer tmux_pane_autocomplete
 # End tmux pane fetched auto-completion
-
-tmuxrc.sh
