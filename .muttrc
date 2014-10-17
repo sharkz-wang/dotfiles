@@ -1,0 +1,61 @@
+set from = "sharkz.wang@gmail.com"
+set realname = "Sharkz Wang"
+
+set imap_user = "sharkz.wang@gmail.com"
+
+set folder = "imaps://imap.gmail.com:993"
+
+set spoolfile = "+INBOX"
+set postponed ="+[Gmail]/Drafts"
+
+set sort=threads
+set sort_browser=date
+set sort_aux=reverse-last-date-received
+
+set header_cache =~/.mutt/cache/headers
+set message_cachedir =~/.mutt/cache/bodies
+set certificate_file =~/.mutt/certificates
+
+set smtp_url = "smtp://sharkz.wang@smtp.gmail.com:587/"
+
+set move = no
+set imap_keepalive = 900
+
+# mutt color scheme
+color	normal		brightcolor252 default             # default colours
+color   index       brightcolor161 default ~N              # new messages
+color   index       brightcolor118 default ~F            # flagged messages
+color   index       brightcolor135 default ~T             # tagged messages
+color   index       brightcolor81 default ~D             # deleted messages
+color	body		brightcolor208 default    (https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+
+color	body		brightcolor118 default     [\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+
+color	attachment	brightcolor135 default             # attachments
+color	signature	brightcolor252 default         # sigs
+color   search      brightcolor161 color240             # highlight results
+
+color	indicator	brightcolor208 default        # currently highlighted message
+color	error		brightcolor161 default                 # error messages
+color	status		brightcolor252 color236                  # status line
+color	tree		brightcolor240 default         # thread tree
+color   tilde       brightcolor81 default                # blank line padding
+
+color	hdrdefault	brightcolor252 color236                  # default headers
+color   header      brightcolor252 color236 "^From:"
+color   header      brightcolor252 color236 "^Subject:"
+
+color	quoted		brightcolor81 default                # quote colours
+color   quoted1     brightcolor81 default
+color   quoted2     brightcolor135 default
+color   quoted3     brightcolor118 default
+color   quoted4     brightcolor208 default
+color   quoted5     brightcolor161 default
+
+color	body	    brightcolor118 default           "^gpg: Good signature from"
+color	body	    brightcolor161 default		"^gpg: Bad signature from"
+color	body	    brightcolor161 default		"^gpg: BAD signature from"
+color	body	    brightcolor161 default		"^gpg: Note: This key has expired!"
+color	body	    brightcolor208 default	"^gpg: WARNING: This key is not certified with a trusted signature!"
+color	body	    brightcolor208 default	"^gpg:          There is no indication that the signature belongs to the owner."
+color	body	    brightcolor208 default	"^gpg: can't handle these multiple signatures"
+color	body	    brightcolor208 default	"^gpg: signature verification suppressed"
+color	body	    brightcolor208 default	"^gpg: invalid node with packet of type"
