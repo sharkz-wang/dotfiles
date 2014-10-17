@@ -33,8 +33,10 @@ export EDITOR='vim'
 stty -ixon
 unset IGNOREEOF
 
+alias e='emacs'
 alias vim='TERM=screen-256color vim -p'
 alias irssi='TERM=screen irssi'
+alias mutt='TERM=screen-256color mutt'
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -53,7 +55,7 @@ alias builddb='ctags -R && cscope -Rkbq && (find . -name "*.h" -exec echo "-incl
 
 alias today='date +%Y%m%d'
 
-alias ding='/bin/echo -e "\a"'
+alias beep='/bin/echo -e "\a"'
 
 bindkey "^R" history-incremental-pattern-search-backward
 bindkey "^S" history-incremental-pattern-search-forward
