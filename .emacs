@@ -47,6 +47,12 @@
 	  :after (progn
 		   (global-set-key (kbd "C-c t") 'org-todo)))
 
+   (:name ascope)
+
+   (:name org-pomodoro
+      :type git
+      :url "https://github.com/lolownia/org-pomodoro")
+
    (:name el-get
       :type git
       :url "https://github.com/emacsmirror/evil")
@@ -63,6 +69,10 @@
       :type git
       :url "https://github.com/hbin/molokai-theme")
 
+   (:name xcscope
+      :type git
+      :url "https://github.com/dkogan/xcscope.el")
+   
    (:name goto-last-change		; move pointer back to last change
 	  :after (progn
 		   ;; when using AZERTY keyboard, consider C-x C-_
@@ -204,17 +214,42 @@
 		       (if (frame-parameter nil 'fullscreen) nil 'fullboth)))
 (global-set-key [f11] 'fullscreen)
 
+(require 'package)
+; marmalade repo
+(add-to-list 'package-archives
+	'("marmalade" . "http://marmalade-repo.org/packages/") t)
+
+; MELPA repo
+(add-to-list 'package-archives
+	'("melpa" . "http://melpa.milkbox.net/packages/") t)
+
 (require 'evil)
 (evil-mode t)
 
-(setcdr evil-insert-state-map [escape])
-(define-key evil-insert-state-map
-	(read-kbd-macro evil-toggle-key) 'evil-emacs-state)
-(define-key evil-insert-state-map [escape] 'evil-normal-state)
+(require 'evil-surround)
+(require 'evil-nerd-commenter)
 
-(define-key evil-insert-state-map "k" #'cofi/maybe-exit)
+(require 'evil-leader)
+(global-evil-leader-mode)
+(evil-leader/set-leader "\\")
 
-(evil-define-command cofi/maybe-exit ()
+;; (setcdr evil-insert-state-map [escape])
+;; (define-key evil-insert-state-map
+;; 	(read-kbd-macro evil-toggle-key) 'evil-emacs-state)
+;; (define-key evil-insert-state-map [escape] 'evil-normal-state)
+
+(defadvice evil-insert-state (around emacs-state-instead-of-insert-state activate)
+  (evil-emacs-state))
+
+(define-key evil-emacs-state-map (kbd "C-r") 'evil-paste-from-register)
+
+(define-key evil-emacs-state-map (kbd "C-o") 'evil-normal-state)
+
+(define-key evil-emacs-state-map [escape] 'evil-normal-state)
+(define-key evil-emacs-state-map "k" #'cofi/maybe-exit-kj)
+(define-key evil-emacs-state-map "j" #'cofi/maybe-exit-jk)
+
+(evil-define-command cofi/maybe-exit-kj ()
   :repeat change
   (interactive)
   (let ((modified (buffer-modified-p)))
@@ -230,17 +265,55 @@
        (t (setq unread-command-events (append unread-command-events
                           (list evt))))))))
 
+(evil-define-command cofi/maybe-exit-jk ()
+  :repeat change
+  (interactive)
+  (let ((modified (buffer-modified-p)))
+    (insert "j")
+    (let ((evt (read-event (format "Insert %c to exit insert state" ?k)
+               nil 0.5)))
+      (cond
+       ((null evt) (message ""))
+       ((and (integerp evt) (char-equal evt ?k))
+    (delete-char -1)
+    (set-buffer-modified-p modified)
+    (push 'escape unread-command-events))
+       (t (setq unread-command-events (append unread-command-events
+                          (list evt))))))))
+
 (require 'evernote-mode)
 (defvar enh-enclient-command "/usr/bin/enclient.rb" "Name of the enclient.rb command")
 
 (require 'molokai-theme)
 
-(require 'tabbar)
+;(require 'tabbar)
 ; (setq tabbar-buffer-groups-function nil)
-(tabbar-mode t)
+;(tabbar-mode t)
 
 (require 'org)
 (setq org-startup-indented 1)
+(setq org-clock-sound t)
+(setq org-timer-default-timer 25)
+;(global-set-key (kbd "C-c C-x ;") 'org-timer-set-timer)
+
+;(require 'xcscope)
+;(cscope-setup)
+(require 'ascope)
+;(ascope-init)
+;(ascope-init (getenv "PWD" ))
+(setq pwd (getenv "PWD"))
+(cond ((file-exists-p (expand-file-name "cscope.out" pwd))
+      (ascope-init (concat pwd "/"))))
+
+(global-set-key (kbd "C-c s g") 'ascope-find-global-definition)
+(global-set-key (kbd "C-c s s") 'ascope-find-this-symbol)
+(global-set-key (kbd "C-c s t") 'ascope-find-this-text-string)
+(global-set-key (kbd "C-c s c") 'ascope-find-functions-calling-this-function)
+(global-set-key (kbd "C-c s d") 'ascope-find-called-functions)
+(global-set-key (kbd "C-c s f") 'ascope-find-files-including-file)
+;(global-set-key (kbd "C-c s ") 'ascope-all-symbol-assignments)
+;(global-set-key (kbd "C-c s ") 'ascope-clear-overlay-arrow)
+;(global-set-key (kbd "C-c s ") 'ascope-pop-mark)
 
 (defun nolinum ()
   (interactive)
@@ -263,3 +336,8 @@ scroll-down-aggressively 0.01)
 
 (require 'ace-jump-mode)
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+(define-key evil-normal-state-map " " 'ace-jump-mode)
+
+; Set vertical split as default
+;(setq split-height-threshold nil)
+;(setq split-width-threshold 0)
