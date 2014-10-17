@@ -141,6 +141,8 @@ map <expr> sl '<C-w>l'
 map <expr> sk '<C-w>k'
 map <expr> sj '<C-w>j'
 
+map <expr> <Space> '<Leader><Leader>s'
+
 inoremap jk <esc>
 inoremap kj <esc>
 
