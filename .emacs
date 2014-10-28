@@ -35,9 +35,18 @@
 
    (:name smex				; a better (ido like) M-x
 	  :after (progn
-		   (setq smex-save-file "~/.emacs.d/.smex-items")
-		   (global-set-key (kbd "M-x") 'smex)
-		   (global-set-key (kbd "M-X") 'smex-major-mode-commands)))
+		(setq smex-save-file "~/.emacs.d/.smex-items")
+		(add-hook 'ido-setup-hook
+		    (lambda ()
+			(define-key ido-completion-map (kbd "C-h") 'delete-backward-char)
+			
+			(define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+			(define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
+
+			(define-key ido-completion-map (kbd "C-? f") 'smex-describe-function)
+			(define-key ido-completion-map (kbd "C-? w") 'smex-where-is)))
+			(global-set-key (kbd "M-x") 'smex)
+			(global-set-key (kbd "M-X") 'smex-major-mode-commands)))
 
    (:name magit				; git meet emacs, and a binding
 	  :after (progn
@@ -47,32 +56,24 @@
 	  :after (progn
 		   (global-set-key (kbd "C-c t") 'org-todo)))
 
-   (:name ascope)
-
-   (:name org-pomodoro
+   (:name xscope
       :type git
-      :url "https://github.com/lolownia/org-pomodoro")
+      :url "https://github.com/dkogan/xcscope.el")
 
    (:name el-get
       :type git
       :url "https://github.com/emacsmirror/evil")
 
+   (:name yasnippet)
+
    (:name evil-matchit
       :type git
       :url "https://github.com/redguardtoo/evil-matchit")
-
-   (:name evernote-mode
-      :type git
-      :url "https://github.com/pymander/evernote-mode")
 
    (:name molokai-theme
       :type git
       :url "https://github.com/hbin/molokai-theme")
 
-   (:name xcscope
-      :type git
-      :url "https://github.com/dkogan/xcscope.el")
-   
    (:name goto-last-change		; move pointer back to last change
 	  :after (progn
 		   ;; when using AZERTY keyboard, consider C-x C-_
@@ -87,16 +88,14 @@
    evil-surround
    evil-numbers
    evil-leader
-   evil-rails
    evil-nerd-commenter
    smooth-scroll
    ace-jump-mode
-   tabbar
+   ;; evil-rails
    ;; evil-extra-operator
    ;; evil-args
    ;; yasnippet 				; powerful snippet mode
    ;; switch-window			; takes over C-x o
-   ;; escreen            			; screen for emacs, C-\ C-h
    ))
 
 ;;
@@ -142,9 +141,6 @@
 
 ;; avoid compiz manager rendering bugs
 (add-to-list 'default-frame-alist '(alpha . 100))
-
-;; copy/paste with C-c and C-v and C-x, check out C-RET too
-(cua-mode)
 
 ;; under mac, have Command as Meta and keep Option for localized input
 (when (string-match "apple-darwin" system-configuration)
@@ -281,8 +277,8 @@
        (t (setq unread-command-events (append unread-command-events
                           (list evt))))))))
 
-(require 'evernote-mode)
-(defvar enh-enclient-command "/usr/bin/enclient.rb" "Name of the enclient.rb command")
+;(require 'evernote-mode)
+;(defvar enh-enclient-command "/usr/bin/enclient.rb" "Name of the enclient.rb command")
 
 (require 'molokai-theme)
 
@@ -296,24 +292,14 @@
 (setq org-timer-default-timer 25)
 ;(global-set-key (kbd "C-c C-x ;") 'org-timer-set-timer)
 
-;(require 'xcscope)
-;(cscope-setup)
-(require 'ascope)
+(require 'xcscope)
+(cscope-setup)
+;; (require 'ascope)
 ;(ascope-init)
-;(ascope-init (getenv "PWD" ))
-(setq pwd (getenv "PWD"))
-(cond ((file-exists-p (expand-file-name "cscope.out" pwd))
-      (ascope-init (concat pwd "/"))))
-
-(global-set-key (kbd "C-c s g") 'ascope-find-global-definition)
-(global-set-key (kbd "C-c s s") 'ascope-find-this-symbol)
-(global-set-key (kbd "C-c s t") 'ascope-find-this-text-string)
-(global-set-key (kbd "C-c s c") 'ascope-find-functions-calling-this-function)
-(global-set-key (kbd "C-c s d") 'ascope-find-called-functions)
-(global-set-key (kbd "C-c s f") 'ascope-find-files-including-file)
-;(global-set-key (kbd "C-c s ") 'ascope-all-symbol-assignments)
-;(global-set-key (kbd "C-c s ") 'ascope-clear-overlay-arrow)
-;(global-set-key (kbd "C-c s ") 'ascope-pop-mark)
+;; (ascope-init (getenv "PWD" ))
+;; (setq pwd (getenv "PWD"))
+;; (cond ((file-exists-p (expand-file-name "cscope.out" pwd))
+;;       (ascope-init (concat pwd "/"))))
 
 (defun nolinum ()
   (interactive)
@@ -325,8 +311,10 @@
 (global-set-key (kbd "C-x C-h") 'tabbar-backward)
 (global-set-key (kbd "C-x C-l") 'tabbar-forward)
 
-(global-set-key [(control h)] 'delete-backward-char)
-; (global-set-key [(M-h)] 'help-command)
+(global-set-key (kbd "C-?") 'help-command)
+(global-set-key (kbd "M-?") 'mark-paragraph)
+(global-set-key (kbd "C-h") 'delete-backward-char)
+(global-set-key (kbd "M-h") 'backward-kill-word)
 
 (setq scroll-step 1)
 (setq scroll-margin 0
@@ -341,3 +329,81 @@ scroll-down-aggressively 0.01)
 ; Set vertical split as default
 ;(setq split-height-threshold nil)
 ;(setq split-width-threshold 0)
+
+(require 'compile)
+;; (add-hook 'c-mode-hook
+;; 	  (lambda ()
+;; 		 (unless (file-exists-p "Makefile")
+;; 			  (set (make-local-variable 'compile-command)
+;; 		   ;; emulate make's .c.o implicit pattern rule, but with
+;; 		   ;; different defaults for the CC, CPPFLAGS, and CFLAGS
+;; 		   ;; variables:
+;; 		   ;; $(CC) -c -o $@ $(CPPFLAGS) $(CFLAGS) $<
+;; 				   (let ((file (file-name-nondirectory buffer-file-name)))
+;; 		     (format "%s -c -o %s.o %s %s %s"
+;; 			     (or (getenv "CC") "gcc")
+;; 			     (file-name-sans-extension file)
+;; 			     (or (getenv "CPPFLAGS") "-DDEBUG=9")
+;; 			     (or (getenv "CFLAGS") "-ansi -pedantic -Wall -g")
+;; 			       file))))))
+ (add-hook 'c-mode-hook
+           (lambda ()
+	          (unless (file-exists-p "Makefile")
+		           (set (make-local-variable 'compile-command)
+                    ;; emulate make's .c.o implicit pattern rule, but with
+                    ;; different defaults for the CC, CPPFLAGS, and CFLAGS
+                    ;; variables:
+                    ;; $(CC) -c -o $@ $(CPPFLAGS) $(CFLAGS) $<
+				    (let ((file (file-name-nondirectory buffer-file-name)))
+                      (format "%s -o %s %s %s %s %s"
+                              (or (getenv "CC") "gcc")
+                              (file-name-sans-extension file)
+                              (or (getenv "CPPFLAGS") "-DDEBUG=9")
+                              (or (getenv "CFLAGS") "-ansi -pedantic -Wall -g")
+			      file (format "%s%s" "&& ./" (file-name-sans-extension file))))))))
+
+(require 'yasnippet)
+(yas-global-mode 1)
+
+;;; use popup menu for yas-choose-value
+(require 'popup)
+
+;; add some shotcuts in popup menu mode
+(define-key popup-menu-keymap (kbd "M-n") 'popup-next)
+(define-key popup-menu-keymap (kbd "TAB") 'popup-next)
+(define-key popup-menu-keymap (kbd "<tab>") 'popup-next)
+(define-key popup-menu-keymap (kbd "<backtab>") 'popup-previous)
+(define-key popup-menu-keymap (kbd "M-p") 'popup-previous)
+
+(defun yas-popup-isearch-prompt (prompt choices &optional display-fn)
+  (when (featurep 'popup)
+    (popup-menu*
+     (mapcar
+      (lambda (choice)
+        (popup-make-item
+         (or (and display-fn (funcall display-fn choice))
+             choice)
+         :value choice))
+      choices)
+     :prompt prompt
+     ;; start isearch mode immediately
+     :isearch t
+     )))
+
+(setq yas-prompt-functions '(yas-popup-isearch-prompt yas-ido-prompt yas-no-prompt))
+
+(add-hook 'org-timer-start-hook
+    (lambda ()
+      ;;(delete-file "~/.pomodoro")
+      (find-file "~/.pomodoro")
+      (insert (number-to-string org-timer-current-timer))
+      ;;(write-file "~/.pomodoro")
+      ;;(kill-buffer)
+    ))
+
+(add-hook 'org-timer-stop-hook
+    (lambda ()
+    ))
+
+(require 'saveplace)
+(setq-default save-place t)
