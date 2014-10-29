@@ -9,8 +9,6 @@
 ;;
 ;; This file is NOT part of GNU Emacs.
 
-(require 'cl)				; common lisp goodies, loop
-
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
 (unless (require 'el-get nil t)
@@ -97,19 +95,6 @@
    ;; yasnippet 				; powerful snippet mode
    ;; switch-window			; takes over C-x o
    ))
-
-;;
-;; Some recipes require extra tools to be installed
-;;
-;; Note: el-get-install requires git, so we know we have at least that.
-;;
-(when (el-get-executable-find "cvs")
-  (add-to-list 'my:el-get-packages 'emacs-goodies-el)) ; the debian addons for emacs
-
-(when (el-get-executable-find "svn")
-  (loop for p in '(psvn    		; M-x svn-status
-		   )
-	do (add-to-list 'my:el-get-packages p)))
 
 (setq my:el-get-packages
       (append
