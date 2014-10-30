@@ -9,6 +9,8 @@
 ;;
 ;; This file is NOT part of GNU Emacs.
 
+(require 'cl)				; common lisp goodies, loop
+
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
 (unless (require 'el-get nil t)
@@ -47,10 +49,14 @@
 			(global-set-key (kbd "M-X") 'smex-major-mode-commands)))
 
    (:name magit				; git meet emacs, and a binding
+      :type git
+      :url "https://github.com/magit/magit"
 	  :after (progn
 		   (global-set-key (kbd "C-x C-z") 'magit-status)))
 
    (:name org-mode
+      :type git
+      :url "https://github.com/jwiegley/org-mode"
 	  :after (progn
 		   (global-set-key (kbd "C-c t") 'org-todo)))
 
@@ -58,7 +64,7 @@
       :type git
       :url "https://github.com/dkogan/xcscope.el")
 
-   (:name el-get
+   (:name evil
       :type git
       :url "https://github.com/emacsmirror/evil")
 
@@ -95,6 +101,19 @@
    ;; yasnippet 				; powerful snippet mode
    ;; switch-window			; takes over C-x o
    ))
+
+;;
+;; Some recipes require extra tools to be installed
+;;
+;; Note: el-get-install requires git, so we know we have at least that.
+;;
+(when (el-get-executable-find "cvs")
+  (add-to-list 'my:el-get-packages 'emacs-goodies-el)) ; the debian addons for emacs
+
+(when (el-get-executable-find "svn")
+  (loop for p in '(psvn    		; M-x svn-status
+		   )
+	do (add-to-list 'my:el-get-packages p)))
 
 (setq my:el-get-packages
       (append
