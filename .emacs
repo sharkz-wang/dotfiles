@@ -88,6 +88,7 @@
  my:el-get-packages
  '(el-get				; el-get is self-hosting
    evil
+   undo-tree
    auto-complete			; complete as you type with overlays
    evil-surround
    evil-numbers
@@ -411,3 +412,6 @@ scroll-down-aggressively 0.01)
 
 (require 'saveplace)
 (setq-default save-place t)
+
+(require 'undo-tree)
+(global-undo-tree-mode 1)
