@@ -55,9 +55,10 @@
 	  :after (progn
 		   (global-set-key (kbd "C-c t") 'org-todo)))
 
-   (:name yasnippet)
+   (:name ggtags)
    (:name helm)
    (:name helm-gtags)
+   (:name yasnippet)
 
    (:name cedet)
    (:name function-args)
@@ -97,6 +98,9 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq-default tab-width 8)
 (global-set-key (kbd "C-h") 'delete-backward-char)
+
+(define-key global-map (kbd "C-x .") 'next-buffer)
+(define-key global-map (kbd "C-x ,") 'previous-buffer)
 
 ;; under mac, have Command as Meta and keep Option for localized input
 (when (string-match "apple-darwin" system-configuration)
@@ -144,6 +148,17 @@
 
 (require 'evil)
 (evil-mode t)
+
+(add-hook 'org-mode-hook
+    (lambda () (modify-syntax-entry ?_ "w")))
+(add-hook 'c-mode-hook
+    (lambda () (modify-syntax-entry ?_ "w")))
+(add-hook 'c++-mode-hook
+    (lambda () (modify-syntax-entry ?_ "w")))
+(add-hook 'python-mode-hook
+    (lambda () (modify-syntax-entry ?_ "w")))
+(add-hook 'emacs-lisp-mode-hook
+    (lambda () (modify-syntax-entry ?_ "w")))
 
 (require 'evil-surround)
 (require 'evil-nerd-commenter)
@@ -258,6 +273,10 @@ scroll-down-aggressively 0.01)
 (require 'yasnippet)
 (yas-global-mode 1)
 
+(global-set-key (kbd "C-;") 'company-yasnippet)
+
+(global-set-key [tab] 'tab-indent-or-complete)
+
 (require 'saveplace)
 (setq-default save-place t)
 
@@ -274,22 +293,28 @@ scroll-down-aggressively 0.01)
 (define-key helm-map (kbd "C-h") 'delete-backward-char)
 
 (require 'helm-gtags)
-(helm-gtags-mode 1)
+(add-hook 'dired-mode-hook 'helm-gtags-mode)
+(add-hook 'eshell-mode-hook 'helm-gtags-mode)
+(add-hook 'c-mode-hook 'helm-gtags-mode)
+(add-hook 'c++-mode-hook 'helm-gtags-mode)
+(add-hook 'asm-mode-hook 'helm-gtags-mode)
+
 (setq
     helm-gtags-ignore-case t
     helm-gtags-auto-update t
     helm-gtags-use-input-at-cursor t
     helm-gtags-pulse-at-cursor t
-    helm-gtags-prefix-key "\C-cg"
+    helm-gtags-prefix-key "\C-c g"
     helm-gtags-suggested-key-mapping t
 )
 
-(define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
-(define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-select)
-(define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
-(define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
-(define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
-(define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
+(define-key helm-gtags-mode-map (kbd "C-c g S") 'helm-gtags-select)
+(define-key helm-gtags-mode-map (kbd "C-c g d") 'helm-gtags-dwim)
+(define-key helm-gtags-mode-map (kbd "C-c g p") 'helm-gtags-find-pattern)
+(define-key helm-gtags-mode-map (kbd "C-c g f") 'helm-gtags-find-files)
+(define-key helm-gtags-mode-map (kbd "C-c g r") 'helm-gtags-find-rtag)
+(define-key helm-gtags-mode-map (kbd "C-c g s") 'helm-gtags-find-symbol)
+(define-key helm-gtags-mode-map (kbd "C-c g t") 'helm-gtags-find-tag)
 
 (require 'sr-speedbar)
 (setq sr-speedbar-right-side nil)
@@ -358,3 +383,17 @@ scroll-down-aggressively 0.01)
 (add-hook 'org-timer-stop-hook
     (lambda ()
     ))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(yas-prompt-functions
+   (quote
+    (company-yasnippet yas-dropdown-prompt yas-completing-prompt yas-ido-prompt yas-no-prompt))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
