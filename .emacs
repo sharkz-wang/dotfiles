@@ -273,7 +273,7 @@ scroll-down-aggressively 0.01)
 (require 'yasnippet)
 (yas-global-mode 1)
 
-(global-set-key (kbd "C-;") 'company-yasnippet)
+(global-set-key (kbd "C-\\") 'company-yasnippet)
 
 (global-set-key [tab] 'tab-indent-or-complete)
 
