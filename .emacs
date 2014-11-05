@@ -271,6 +271,7 @@ scroll-down-aggressively 0.01)
 ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
 (global-set-key (kbd "C-c h") 'helm-command-prefix)
 (global-unset-key (kbd "C-x c"))
+(define-key helm-map (kbd "C-h") 'delete-backward-char)
 
 (require 'helm-gtags)
 (helm-gtags-mode 1)
@@ -318,7 +319,7 @@ scroll-down-aggressively 0.01)
      (define-key company-active-map (kbd "C-h") 'delete-backward-char)
      (define-key company-active-map (kbd "C-n") 'company-select-next)
      (define-key company-active-map (kbd "C-p") 'company-select-previous)
-     (define-key company-active-map (kbd "<tab>") 'company-select-next)
+     (define-key company-active-map (kbd "TAB") 'company-select-next)
      (define-key company-active-map (kbd "C-\\") 'company-show-doc-buffer)
      (define-key company-active-map [tab] 'company-select-next)))
 
