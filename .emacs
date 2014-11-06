@@ -65,9 +65,10 @@
 
    (:name company-mode)
    ;; (:name helm-company)
+
+   (:name ess)
    
    (:name projectile)
-   (:name smartparens)
 
    (:name sr-speedbar)
    (:name dtrt-indent)
@@ -355,10 +356,6 @@ scroll-down-aggressively 0.01)
 (require 'dtrt-indent)
 (dtrt-indent-mode 1)
 (setq dtrt-indent-verbosity 0)
-
-(require 'smartparens-config)
-(show-smartparens-global-mode +1)
-(smartparens-global-mode 1)
 
 (setq gdb-many-windows t)
 (setq gdb-show-main t)
