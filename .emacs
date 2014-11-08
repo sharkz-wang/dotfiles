@@ -271,13 +271,6 @@ scroll-down-aggressively 0.01)
                               (or (getenv "CFLAGS") "-ansi -pedantic -Wall -g")
 			      file (format "%s%s" "&& ./" (file-name-sans-extension file))))))))
 
-(require 'yasnippet)
-(yas-global-mode 1)
-
-(global-set-key (kbd "C-\\") 'company-yasnippet)
-
-(global-set-key [tab] 'tab-indent-or-complete)
-
 (require 'saveplace)
 (setq-default save-place t)
 
@@ -320,34 +313,40 @@ scroll-down-aggressively 0.01)
 (require 'sr-speedbar)
 (setq sr-speedbar-right-side nil)
 
-(require 'cc-mode)
-(require 'semantic)
-
-(global-semanticdb-minor-mode 1)
-(global-semantic-idle-scheduler-mode 1)
-(semantic-mode 1)
-(global-semantic-idle-summary-mode 1)
-(global-semantic-stickyfunc-mode 1)
-
 ;(semantic-add-system-include "/usr/include/boost" 'c++-mode)
 ;(semantic-add-system-include "~/linux/kernel")
 ;(semantic-add-system-include "~/linux/include")
 
-(require 'company)
-(add-hook 'after-init-hook 'global-company-mode)
-(company-semantic 1)
+(add-hook 'c-mode-hook 'load-company-semantic)
+(add-hook 'c++-mode-hook 'load-company-semantic)
+(defun load-company-semantic ()
+	(require 'company)
+	(global-company-mode)
+	(company-semantic 1)
+	(eval-after-load 'company
+	  '(progn
+		 (setq company-minimum-prefix-length 1)
+		 (setq company-idle-delay 0.2)
+		 (setq company-selection-wrap-around t)
+		 (define-key company-active-map (kbd "C-h") 'delete-backward-char)
+		 (define-key company-active-map (kbd "C-n") 'company-select-next)
+		 (define-key company-active-map (kbd "C-p") 'company-select-previous)
+		 (define-key company-active-map (kbd "TAB") 'company-select-next)
+		 (define-key company-active-map (kbd "C-\\") 'company-show-doc-buffer)
+		 (define-key company-active-map [tab] 'company-select-next)))
 
-(eval-after-load 'company
-  '(progn
-     (setq company-minimum-prefix-length 1)
-     (setq company-idle-delay 0.2)
-     (setq company-selection-wrap-around t)
-     (define-key company-active-map (kbd "C-h") 'delete-backward-char)
-     (define-key company-active-map (kbd "C-n") 'company-select-next)
-     (define-key company-active-map (kbd "C-p") 'company-select-previous)
-     (define-key company-active-map (kbd "TAB") 'company-select-next)
-     (define-key company-active-map (kbd "C-\\") 'company-show-doc-buffer)
-     (define-key company-active-map [tab] 'company-select-next)))
+		 (require 'cc-mode)
+		 (require 'semantic)
+		 (global-semanticdb-minor-mode 1)
+		 (global-semantic-idle-scheduler-mode 1)
+		 (semantic-mode 1)
+		 (global-semantic-idle-summary-mode 1)
+		 (global-semantic-stickyfunc-mode 1)
+		 (require 'yasnippet)
+		 (yas-global-mode 1)
+		 (global-set-key (kbd "C-\\") 'company-yasnippet)
+		 (global-set-key [tab] 'tab-indent-or-complete)
+)
 
 (require 'projectile)
 (projectile-global-mode 1)
