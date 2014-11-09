@@ -66,6 +66,7 @@
    (:name company-mode)
    ;; (:name helm-company)
 
+   (:name auto-complete)
    (:name ess)
    
    (:name projectile)
@@ -320,6 +321,9 @@ scroll-down-aggressively 0.01)
 (add-hook 'c-mode-hook 'load-company-semantic)
 (add-hook 'c++-mode-hook 'load-company-semantic)
 (defun load-company-semantic ()
+	(define-key c-mode-map (kbd "C-c C-c") 'compile)
+	(define-key c++-mode-map (kbd "C-c C-c") 'compile)
+
 	(require 'company)
 	(global-company-mode)
 	(company-semantic 1)
@@ -343,9 +347,46 @@ scroll-down-aggressively 0.01)
 		 (global-semantic-idle-summary-mode 1)
 		 (global-semantic-stickyfunc-mode 1)
 		 (require 'yasnippet)
-		 (yas-global-mode 1)
+	 (yas-global-mode 1)
 		 (global-set-key (kbd "C-\\") 'company-yasnippet)
 		 (global-set-key [tab] 'tab-indent-or-complete)
+)
+
+(add-to-list 'auto-mode-alist '("\\.R\\'" . R-mode))
+(add-hook 'R-mode-hook 'load-autocomplete-ess)
+(defun load-autocomplete-ess ()
+
+	(require 'auto-complete)
+	(setq ess-use-auto-complete t)
+
+	(require 'yasnippet)
+	(yas-global-mode 1)
+
+	;;; use popup menu for yas-choose-value
+	(require 'popup)
+
+	;; add some shotcuts in popup menu mode
+	(define-key popup-menu-keymap (kbd "M-n") 'popup-next)
+	(define-key popup-menu-keymap (kbd "TAB") 'popup-next)
+	(define-key popup-menu-keymap (kbd "<tab>") 'popup-next)
+	(define-key popup-menu-keymap (kbd "<backtab>") 'popup-previous)
+	(define-key popup-menu-keymap (kbd "M-p") 'popup-previous)
+
+	(defun yas-popup-isearch-prompt (prompt choices &optional display-fn)
+	  (when (featurep 'popup)
+		(popup-menu*
+		 (mapcar
+		  (lambda (choice)
+			(popup-make-item
+			 (or (and display-fn (funcall display-fn choice))
+				 choice)
+			 :value choice))
+		  choices)
+		 :prompt prompt
+		 ;; start isearch mode immediately
+		 :isearch t
+		 )))
+	(setq yas-prompt-functions '(yas-popup-isearch-prompt yas-ido-prompt yas-no-prompt))
 )
 
 (require 'projectile)
