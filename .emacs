@@ -69,6 +69,13 @@
    (:name auto-complete)
    (:name ess)
    
+   (:name clojure-mode)
+   ;(:name clojure-test-mode)
+   (:name cider)
+   (:name ac-cider
+		:type git
+		:url "https://github.com/clojure-emacs/ac-cider")
+
    (:name projectile)
 
    (:name sr-speedbar)
