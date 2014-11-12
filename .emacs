@@ -46,12 +46,10 @@
 			(global-set-key (kbd "M-X") 'smex-major-mode-commands)))
 
    (:name magit				; git meet emacs, and a binding
-      :type git
 	  :after (progn
 		   (global-set-key (kbd "C-x C-z") 'magit-status)))
 
    (:name org-mode
-      :type git
 	  :after (progn
 		   (global-set-key (kbd "C-c t") 'org-todo)))
 
