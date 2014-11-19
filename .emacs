@@ -46,10 +46,12 @@
 			(global-set-key (kbd "M-X") 'smex-major-mode-commands)))
 
    (:name magit				; git meet emacs, and a binding
+      :type git
 	  :after (progn
 		   (global-set-key (kbd "C-x C-z") 'magit-status)))
 
    (:name org-mode
+      :type git
 	  :after (progn
 		   (global-set-key (kbd "C-c t") 'org-todo)))
 
@@ -108,6 +110,8 @@
 
 (define-key global-map (kbd "C-x .") 'next-buffer)
 (define-key global-map (kbd "C-x ,") 'previous-buffer)
+
+(define-key global-map (kbd "C-w") 'evil-delete-backward-word)
 
 ;; under mac, have Command as Meta and keep Option for localized input
 (when (string-match "apple-darwin" system-configuration)
@@ -425,17 +429,3 @@ scroll-down-aggressively 0.01)
 (add-hook 'org-timer-stop-hook
     (lambda ()
     ))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(yas-prompt-functions
-   (quote
-    (company-yasnippet yas-dropdown-prompt yas-completing-prompt yas-ido-prompt yas-no-prompt))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
