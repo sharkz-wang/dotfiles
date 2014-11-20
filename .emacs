@@ -113,6 +113,10 @@
 
 (define-key global-map (kbd "C-w") 'evil-delete-backward-word)
 
+(setq-default indent-tabs-mode  nil)
+(setq tab-width 4 c-basic-offset 4)
+(define-key global-map (kbd "RET") 'newline-and-indent)
+
 ;; under mac, have Command as Meta and keep Option for localized input
 (when (string-match "apple-darwin" system-configuration)
   (setq mac-allow-anti-aliasing t)
@@ -327,39 +331,45 @@ scroll-down-aggressively 0.01)
 ;(semantic-add-system-include "~/linux/kernel")
 ;(semantic-add-system-include "~/linux/include")
 
-(add-hook 'c-mode-hook 'load-company-semantic)
-(add-hook 'c++-mode-hook 'load-company-semantic)
 (defun load-company-semantic ()
 	(define-key c-mode-map (kbd "C-c C-c") 'compile)
 	(define-key c++-mode-map (kbd "C-c C-c") 'compile)
 
-	(require 'company)
-	(global-company-mode)
-	(company-semantic 1)
-	(eval-after-load 'company
-	  '(progn
-		 (setq company-minimum-prefix-length 1)
-		 (setq company-idle-delay 0.2)
-		 (setq company-selection-wrap-around t)
-		 (define-key company-active-map (kbd "C-h") 'delete-backward-char)
-		 (define-key company-active-map (kbd "C-n") 'company-select-next)
-		 (define-key company-active-map (kbd "C-p") 'company-select-previous)
-		 (define-key company-active-map (kbd "TAB") 'company-select-next)
-		 (define-key company-active-map (kbd "C-\\") 'company-show-doc-buffer)
-		 (define-key company-active-map [tab] 'company-select-next)))
+	(require 'yasnippet)
+	(yas-global-mode 1)
 
-		 (require 'cc-mode)
-		 (require 'semantic)
-		 (global-semanticdb-minor-mode 1)
-		 (global-semantic-idle-scheduler-mode 1)
-		 (semantic-mode 1)
-		 (global-semantic-idle-summary-mode 1)
-		 (global-semantic-stickyfunc-mode 1)
-		 (require 'yasnippet)
-	 (yas-global-mode 1)
-		 (global-set-key (kbd "C-\\") 'company-yasnippet)
-		 (global-set-key [tab] 'tab-indent-or-complete)
+	(require 'cc-mode)
+	(require 'semantic)
+	(global-semanticdb-minor-mode 1)
+	(global-semantic-idle-scheduler-mode 1)
+	(semantic-mode 1)
+	(global-semantic-idle-summary-mode 1)
+	(global-semantic-stickyfunc-mode 1)
+
+	(setq ac-sources
+		'(ac-source-filename
+		  ac-source-functions
+		  ac-source-yasnippet
+		  ac-source-variables
+		  ac-source-symbols
+		  ;ac-source-features
+		  ;ac-source-abbrev
+		  ac-source-words-in-same-mode-buffers
+		  ;ac-source-dictionary
+		  ac-source-semantic))
+
+	(require 'auto-complete)
+	(require 'auto-complete-config)
+	(ac-config-default)
+
+	(setq ac-auto-start 1)
+	(setq ac-auto-show-menu t)
+
+	(define-key ac-mode-map (kbd "C-n") 'ac-next)
+	(define-key ac-mode-map (kbd "C-p") 'ac-previous)
 )
+(add-hook 'c-mode-hook 'load-company-semantic)
+(add-hook 'c++-mode-hook 'load-company-semantic)
 
 (add-to-list 'auto-mode-alist '("\\.R\\'" . R-mode))
 (add-hook 'R-mode-hook 'load-autocomplete-ess)
