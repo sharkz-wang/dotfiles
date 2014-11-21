@@ -327,86 +327,54 @@ scroll-down-aggressively 0.01)
 (require 'sr-speedbar)
 (setq sr-speedbar-right-side nil)
 
+(require 'yasnippet)
+(yas-global-mode 1)
+
+(require 'semantic)
+(global-semanticdb-minor-mode 1)
+(global-semantic-idle-scheduler-mode 1)
+(semantic-mode 1)
+(global-semantic-idle-summary-mode 1)
+(global-semantic-stickyfunc-mode 1)
+
 ;(semantic-add-system-include "/usr/include/boost" 'c++-mode)
 ;(semantic-add-system-include "~/linux/kernel")
 ;(semantic-add-system-include "~/linux/include")
 
-(defun load-company-semantic ()
-	(define-key c-mode-map (kbd "C-c C-c") 'compile)
-	(define-key c++-mode-map (kbd "C-c C-c") 'compile)
+(require 'auto-complete)
+(require 'auto-complete-config)
+(ac-config-default)
+(setq ac-auto-start 1)
+(setq ac-auto-show-menu t)
 
-	(require 'yasnippet)
-	(yas-global-mode 1)
+(define-key ac-mode-map (kbd "C-n") 'ac-next)
+(define-key ac-mode-map (kbd "C-p") 'ac-previous)
 
-	(require 'cc-mode)
-	(require 'semantic)
-	(global-semanticdb-minor-mode 1)
-	(global-semantic-idle-scheduler-mode 1)
-	(semantic-mode 1)
-	(global-semantic-idle-summary-mode 1)
-	(global-semantic-stickyfunc-mode 1)
-
-	(setq ac-sources
-		'(ac-source-filename
-		  ac-source-functions
-		  ac-source-yasnippet
-		  ac-source-variables
-		  ac-source-symbols
-		  ;ac-source-features
-		  ;ac-source-abbrev
-		  ac-source-words-in-same-mode-buffers
-		  ;ac-source-dictionary
-		  ac-source-semantic))
-
-	(require 'auto-complete)
-	(require 'auto-complete-config)
-	(ac-config-default)
-
-	(setq ac-auto-start 1)
-	(setq ac-auto-show-menu t)
-
-	(define-key ac-mode-map (kbd "C-n") 'ac-next)
-	(define-key ac-mode-map (kbd "C-p") 'ac-previous)
+(require 'cc-mode)
+(defun private-c-c++-mode-hook ()
+    (setq ac-sources
+            '(ac-source-filename
+              ac-source-functions
+              ac-source-yasnippet
+              ac-source-variables
+              ac-source-symbols
+              ;ac-source-features
+              ;ac-source-abbrev
+              ac-source-words-in-same-mode-buffers
+              ;ac-source-dictionary
+              ac-source-semantic-raw
+              ac-source-semantic))
 )
-(add-hook 'c-mode-hook 'load-company-semantic)
-(add-hook 'c++-mode-hook 'load-company-semantic)
+(define-key c-mode-map (kbd "C-c C-c") 'compile)
+(add-hook 'c-mode-hook 'private-c-c++-mode-hook)
+(define-key c++-mode-map (kbd "C-c C-c") 'compile)
+(add-hook 'c++-mode-hook 'private-c-c++-mode-hook)
 
 (add-to-list 'auto-mode-alist '("\\.R\\'" . R-mode))
-(add-hook 'R-mode-hook 'load-autocomplete-ess)
 (defun load-autocomplete-ess ()
-
-	(require 'auto-complete)
-	(setq ess-use-auto-complete t)
-
-	(require 'yasnippet)
-	(yas-global-mode 1)
-
-	;;; use popup menu for yas-choose-value
-	(require 'popup)
-
-	;; add some shotcuts in popup menu mode
-	(define-key popup-menu-keymap (kbd "M-n") 'popup-next)
-	(define-key popup-menu-keymap (kbd "TAB") 'popup-next)
-	(define-key popup-menu-keymap (kbd "<tab>") 'popup-next)
-	(define-key popup-menu-keymap (kbd "<backtab>") 'popup-previous)
-	(define-key popup-menu-keymap (kbd "M-p") 'popup-previous)
-
-	(defun yas-popup-isearch-prompt (prompt choices &optional display-fn)
-	  (when (featurep 'popup)
-		(popup-menu*
-		 (mapcar
-		  (lambda (choice)
-			(popup-make-item
-			 (or (and display-fn (funcall display-fn choice))
-				 choice)
-			 :value choice))
-		  choices)
-		 :prompt prompt
-		 ;; start isearch mode immediately
-		 :isearch t
-		 )))
-	(setq yas-prompt-functions '(yas-popup-isearch-prompt yas-ido-prompt yas-no-prompt))
+    (setq ess-use-auto-complete t)
 )
+(add-hook 'R-mode-hook 'load-autocomplete-ess)
 
 (require 'projectile)
 (projectile-global-mode 1)
