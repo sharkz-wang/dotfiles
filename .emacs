@@ -18,6 +18,7 @@
  '(
    (:name el-get)
 
+   ;; Vim-emulation
    (:name evil)
    (:name evil-matchit)
    (:name evil-surround)
@@ -26,6 +27,7 @@
    (:name evil-nerd-commenter)
 
    (:name undo-tree)
+
    (:name ace-jump-mode)
    (:name smooth-scroll)
 
@@ -46,40 +48,36 @@
 			(global-set-key (kbd "M-X") 'smex-major-mode-commands)))
 
    (:name magit				; git meet emacs, and a binding
-      :type git
 	  :after (progn
 		   (global-set-key (kbd "C-x C-z") 'magit-status)))
 
-   (:name org-mode
-      :type git
-	  :after (progn
-		   (global-set-key (kbd "C-c t") 'org-todo)))
+   (:name cedet)
+   (:name auto-complete)
+   (:name yasnippet)
+
+   (:name function-args)
 
    (:name ggtags)
    (:name helm)
    (:name helm-gtags)
-   (:name yasnippet)
 
-   (:name cedet)
-   (:name function-args)
-
-   (:name company-mode)
-   ;; (:name helm-company)
-
-   (:name auto-complete)
-   (:name ess)
-   
-   (:name clojure-mode)
-   ;(:name clojure-test-mode)
-   (:name cider)
-   (:name ac-cider
-		:type git
-		:url "https://github.com/clojure-emacs/ac-cider")
-
+   (:name f)
    (:name projectile)
 
    (:name sr-speedbar)
    (:name dtrt-indent)
+
+   ;(:name ess)
+   
+   ;(:name clojure-mode)
+   ;(:name cider)
+   ;(:name ac-cider
+		;:type git
+		;:url "https://github.com/clojure-emacs/ac-cider")
+
+   (:name org-mode
+	  :after (progn
+		   (global-set-key (kbd "C-c t") 'org-todo)))
 
    (:name molokai-theme
       :type git
