@@ -362,6 +362,19 @@ scroll-down-aggressively 0.01)
               ;ac-source-dictionary
               ac-source-semantic-raw
               ac-source-semantic))
+
+	;; Auto indenting and pairing curly brace
+    (defun c-mode-insert-lcurly ()
+      (interactive)
+      (insert "{")
+      (let ((pps (syntax-ppss)))
+        (when (and (eolp) (not (or (nth 3 pps) (nth 4 pps)))) ;; EOL and not in string or comment
+          (c-indent-line)
+          (insert "\n\n}")
+          (c-indent-line)
+          (forward-line -1)
+          (c-indent-line))))
+    (define-key c-mode-base-map "{" 'c-mode-insert-lcurly )
 )
 (define-key c-mode-map (kbd "C-c C-c") 'compile)
 (add-hook 'c-mode-hook 'private-c-c++-mode-hook)
