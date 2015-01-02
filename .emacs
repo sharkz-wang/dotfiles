@@ -105,6 +105,7 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq-default tab-width 8)
 (global-set-key (kbd "C-h") 'delete-backward-char)
+(define-key isearch-mode-map (kbd "C-h") 'isearch-del-char)
 
 (define-key global-map (kbd "C-x .") 'next-buffer)
 (define-key global-map (kbd "C-x ,") 'previous-buffer)
