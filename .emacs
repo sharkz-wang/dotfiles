@@ -390,6 +390,7 @@ scroll-down-aggressively 0.01)
 
 (require 'projectile)
 (projectile-global-mode 1)
+(setq projectile-enable-caching t)
 (setq projectile-completion-system 'helm)
 
 (require 'dtrt-indent)
