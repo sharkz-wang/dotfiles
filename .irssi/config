@@ -30,6 +30,14 @@ servers = (
     use_ssl = "no";
     ssl_verify = "no";
     autoconnect = "yes";
+  },
+  {
+    address = "irc.mozilla.org";
+    chatnet = "Mozilla";
+    port = "6697";
+    use_ssl = "yes";
+    ssl_verify = "yes";
+    autoconnect = "yes";
   }
 );
 
@@ -97,12 +105,14 @@ chatnets = {
   };
   SILC = { type = "SILC"; };
   FreeNode = { type = "IRC"; nick = "sharkz"; };
+  Mozilla = { type = "IRC"; nick = "sharkz"; };
 };
 
 channels = (
   { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
   { name = "silc"; chatnet = "silc"; autojoin = "No"; },
   { name = "#freenode"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#mozilla-taiwan"; chatnet = "Mozilla"; autojoin = "yes"; },
   { name = "#linux"; chatnet = "FreeNode"; autojoin = "yes"; },
   { name = "#archlinux"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#ubuntu"; chatnet = "FreeNode"; autojoin = "yes"; },
@@ -141,7 +151,8 @@ channels = (
   { name = "#movie"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#metal"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#reddit"; chatnet = "FreeNode"; autojoin = "yes"; },
-  { name = "#nethack"; chatnet = "FreeNode"; autojoin = "no"; }
+  { name = "#nethack"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#g0v.tw"; chatnet = "FreeNode"; autojoin = "yes"; }
 );
 
 aliases = {
