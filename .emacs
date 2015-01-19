@@ -412,19 +412,6 @@ scroll-down-aggressively 0.01)
 					  ; paths here
                       ;:system-include-path '("~/linux"))
 
-(add-hook 'org-timer-start-hook
-    (lambda ()
-      ;;(delete-file "~/.pomodoro")
-      (find-file "~/.pomodoro")
-      (insert (number-to-string org-timer-current-timer))
-      ;;(write-file "~/.pomodoro")
-      ;;(kill-buffer)
-    ))
-
-(add-hook 'org-timer-stop-hook
-    (lambda ()
-    ))
-
 ;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/\\1" t)))
 (setq backup-directory-alist '((".*" . "~/.emacs.d/backups/")))
