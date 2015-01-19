@@ -79,6 +79,8 @@
 	  :after (progn
 		   (global-set-key (kbd "C-c t") 'org-todo)))
 
+   (:name markdown-mode)
+
    (:name molokai-theme
       :type git
       :url "https://github.com/hbin/molokai-theme")
@@ -106,6 +108,8 @@
 (setq-default tab-width 8)
 (global-set-key (kbd "C-h") 'delete-backward-char)
 (define-key isearch-mode-map (kbd "C-h") 'isearch-del-char)
+
+(setq browse-url-browser-function (quote browse-url-firefox))
 
 (define-key global-map (kbd "C-x .") 'next-buffer)
 (define-key global-map (kbd "C-x ,") 'previous-buffer)
@@ -420,3 +424,11 @@ scroll-down-aggressively 0.01)
 (add-hook 'org-timer-stop-hook
     (lambda ()
     ))
+
+;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
+(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/\\1" t)))
+(setq backup-directory-alist '((".*" . "~/.emacs.d/backups/")))
+
+;; create the autosave dir if necessary, since emacs won't.
+(make-directory "~/.emacs.d/autosaves/" t)
+(make-directory "~/.emacs.d/backups/" t)
