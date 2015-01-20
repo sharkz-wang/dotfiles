@@ -493,4 +493,4 @@ scroll-down-aggressively 0.01)
    (car endless/margin-overlays) 'before-string
    (propertize " "  'display endless/margin-display)))
 
-(add-hook 'linum-before-numbering-hook #'endless/setup-margin-overlays)
+; (add-hook 'linum-before-numbering-hook #'endless/setup-margin-overlays)
