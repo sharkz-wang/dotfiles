@@ -81,6 +81,12 @@
 
    (:name markdown-mode)
 
+   (:name indent-guide)
+
+   (:name Fill-Column-Indicator
+      :type git
+      :url "https://github.com/alpaker/Fill-Column-Indicator")
+
    (:name molokai-theme
       :type git
       :url "https://github.com/hbin/molokai-theme")
@@ -355,6 +361,9 @@ scroll-down-aggressively 0.01)
 
 (require 'cc-mode)
 (defun private-c-c++-mode-hook ()
+
+	(fci-mode 1)
+
     (setq ac-sources
             '(ac-source-filename
               ac-source-functions
@@ -368,7 +377,7 @@ scroll-down-aggressively 0.01)
               ac-source-semantic-raw
               ac-source-semantic))
 
-	;; Auto indenting and pairing curly brace
+                ;; Auto indenting and pairing curly brace
     (defun c-mode-insert-lcurly ()
       (interactive)
       (insert "{")
@@ -419,3 +428,34 @@ scroll-down-aggressively 0.01)
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/autosaves/" t)
 (make-directory "~/.emacs.d/backups/" t)
+
+;(defun my-emacs-lisp-mode-hook ()
+  ;(highlight-indentation)
+  ;(set-face-background 'highlight-indentation-face "#303030"))
+;(add-hook 'emacs-lisp-mode-hook 'my-emacs-lisp-mode-hook)
+
+;; (add-hook 'window-scroll-functions 'update-linum-format nil t)
+;; (defun update-linum-format (window start)
+;;     (interactive)
+;;     (setq linum-format "%9d "))
+
+(unless window-system
+  (add-hook 'linum-before-numbering-hook
+            (lambda ()
+            (setq-local linum-format-fmt
+                        (let ((w (length (number-to-string
+                                            (count-lines (point-min) (point-max))))))
+                            (concat "%" (number-to-string w) "d "))))))
+
+(defun linum-format-func (line)
+  (concat
+   (propertize (format linum-format-fmt line) 'face 'linum)
+   (propertize " " 'face 'mode-line)))
+
+(unless window-system
+  (setq linum-format 'linum-format-func))
+
+(require 'indent-guide)
+(indent-guide-global-mode 1)
+(setq indent-guide-recursive t)
+;; (setq indent-guide-char ":")
