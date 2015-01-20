@@ -362,8 +362,7 @@ scroll-down-aggressively 0.01)
 (require 'cc-mode)
 (defun private-c-c++-mode-hook ()
 
-	(fci-mode 1)
-
+	; (fci-mode 1)
     (setq ac-sources
             '(ac-source-filename
               ac-source-functions
