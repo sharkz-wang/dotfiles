@@ -26,6 +26,8 @@
    (:name evil-leader)
    (:name evil-nerd-commenter)
 
+   (:name golden-ratio)
+
    (:name undo-tree)
 
    (:name ace-jump-mode)
@@ -493,3 +495,19 @@ scroll-down-aggressively 0.01)
    (propertize " "  'display endless/margin-display)))
 
 ; (add-hook 'linum-before-numbering-hook #'endless/setup-margin-overlays)
+
+;; Set default splitting approach to vertical split
+(setq split-height-threshold nil)
+(setq split-width-threshold 80)
+
+(require 'golden-ratio)
+(golden-ratio-mode 1)
+
+;; Line wrapping settings
+(setq-default truncate-lines t)
+(defun line-wrapping-off ()
+  (interactive)
+  (setq-default truncate-lines t))
+(defun line-wrapping-on ()
+  (interactive)
+  (setq-default truncate-lines nil))
