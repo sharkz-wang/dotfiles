@@ -112,7 +112,6 @@ channels = (
   { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
   { name = "silc"; chatnet = "silc"; autojoin = "No"; },
   { name = "#freenode"; chatnet = "FreeNode"; autojoin = "yes"; },
-  { name = "#mozilla-taiwan"; chatnet = "Mozilla"; autojoin = "yes"; },
   { name = "#linux"; chatnet = "FreeNode"; autojoin = "yes"; },
   { name = "#archlinux"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#ubuntu"; chatnet = "FreeNode"; autojoin = "yes"; },
@@ -120,7 +119,7 @@ channels = (
   { name = "#debian"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#android"; chatnet = "FreeNode"; autojoin = "yes"; },
   { name = "#vim"; chatnet = "FreeNode"; autojoin = "yes"; },
-  { name = "#emacs"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#emacs"; chatnet = "FreeNode"; autojoin = "yes"; },
   { name = "#zsh"; chatnet = "FreeNode"; autojoin = "yes"; },
   { name = "#bash"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#programming"; chatnet = "FreeNode"; autojoin = "yes"; },
@@ -132,8 +131,8 @@ channels = (
   { name = "#perl"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#R"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#lisp"; chatnet = "FreeNode"; autojoin = "no"; },
-  { name = "#clojure"; chatnet = "FreeNode"; autojoin = "no"; },
-  { name = "#erlang"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#clojure"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#erlang"; chatnet = "FreeNode"; autojoin = "yes"; },
   { name = "#git"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#puppet"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#kernel"; chatnet = "FreeNode"; autojoin = "yes"; },
@@ -152,7 +151,29 @@ channels = (
   { name = "#metal"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#reddit"; chatnet = "FreeNode"; autojoin = "yes"; },
   { name = "#nethack"; chatnet = "FreeNode"; autojoin = "no"; },
-  { name = "#g0v.tw"; chatnet = "FreeNode"; autojoin = "yes"; }
+  { name = "#g0v.tw"; chatnet = "FreeNode"; autojoin = "yes"; },
+
+  { name = "#introduction"; chatnet = "Mozilla"; autojoin = "yes"; },
+  { name = "#firefox"; chatnet = "Mozilla"; autojoin = "yes"; },
+  { name = "#bugzilla"; chatnet = "Mozilla"; autojoin = "yes"; },
+  { name = "#mdn"; chatnet = "Mozilla"; autojoin = "no"; },
+  { name = "#mozwebqa"; chatnet = "Mozilla"; autojoin = "no"; },
+  { name = "#qa"; chatnet = "Mozilla"; autojoin = "yes"; },
+  { name = "#sumo"; chatnet = "Mozilla"; autojoin = "no"; },
+  { name = "#contributors"; chatnet = "Mozilla"; autojoin = "yes"; },
+  { name = "#developers"; chatnet = "Mozilla"; autojoin = "yes"; },
+  { name = "#planning"; chatnet = "Mozilla"; autojoin = "no"; },
+  { name = "#build"; chatnet = "Mozilla"; autojoin = "yes"; },
+  { name = "#devtools"; chatnet = "Mozilla"; autojoin = "yes"; },
+  { name = "#fx-team"; chatnet = "Mozilla"; autojoin = "yes"; },
+  { name = "#fxos"; chatnet = "Mozilla"; autojoin = "yes"; },
+  { name = "#mobile"; chatnet = "Mozilla"; autojoin = "no"; },
+  { name = "#necko"; chatnet = "Mozilla"; autojoin = "no"; },
+  { name = "#webdev"; chatnet = "Mozilla"; autojoin = "no"; },
+  { name = "#webmaker"; chatnet = "Mozilla"; autojoin = "no"; },
+  { name = "#www"; chatnet = "Mozilla"; autojoin = "no"; },
+  { name = "#mozilla-taiwan"; chatnet = "Mozilla"; autojoin = "yes"; },
+  { name = "#taipei-platform"; chatnet = "Mozilla"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -324,6 +345,13 @@ statusbar = {
       items = {
         barstart = { priority = "100"; };
         awl_1 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
+    awl_2 = {
+      items = {
+        barstart = { priority = "100"; };
+        awl_2 = { };
         barend = { priority = "100"; alignment = "right"; };
       };
     };
