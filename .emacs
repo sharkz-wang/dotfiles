@@ -71,11 +71,11 @@
 
    ;(:name ess)
    
-   ;(:name clojure-mode)
-   ;(:name cider)
-   ;(:name ac-cider
-		;:type git
-		;:url "https://github.com/clojure-emacs/ac-cider")
+   (:name clojure-mode)
+   (:name cider)
+   (:name ac-cider
+		:type git
+		:url "https://github.com/clojure-emacs/ac-cider")
 
    (:name org-mode
 	  :after (progn
@@ -196,6 +196,10 @@
 ;; (define-key evil-insert-state-map
 ;; 	(read-kbd-macro evil-toggle-key) 'evil-emacs-state)
 ;; (define-key evil-insert-state-map [escape] 'evil-normal-state)
+
+;; Cursor motion in wrapped lines
+(define-key evil-normal-state-map "j" 'evil-next-visual-line)
+(define-key evil-normal-state-map "k" 'evil-previous-visual-line)
 
 (defadvice evil-insert-state (around emacs-state-instead-of-insert-state activate)
   (evil-emacs-state))
@@ -497,8 +501,8 @@ scroll-down-aggressively 0.01)
 ; (add-hook 'linum-before-numbering-hook #'endless/setup-margin-overlays)
 
 ;; Set default splitting approach to vertical split
-(setq split-height-threshold nil)
-(setq split-width-threshold 80)
+;(setq split-height-threshold nil)
+;(setq split-width-threshold 80)
 
 (require 'golden-ratio)
 (golden-ratio-mode 1)
