@@ -31,6 +31,9 @@
    (:name undo-tree)
 
    (:name ace-jump-mode)
+   (:name history
+		:type git
+		:url "https://github.com/boyw165/history")
    (:name smooth-scroll)
 
    (:name smex				; a better (ido like) M-x
@@ -118,9 +121,6 @@
 (define-key isearch-mode-map (kbd "C-h") 'isearch-del-char)
 
 (setq browse-url-browser-function (quote browse-url-firefox))
-
-(define-key global-map (kbd "C-x .") 'next-buffer)
-(define-key global-map (kbd "C-x ,") 'previous-buffer)
 
 (define-key global-map (kbd "C-w") 'evil-delete-backward-word)
 
@@ -515,3 +515,9 @@ scroll-down-aggressively 0.01)
 (defun line-wrapping-on ()
   (interactive)
   (setq-default truncate-lines nil))
+
+(require 'history)
+(history-mode 1)
+(define-key global-map (kbd "C-x .") 'history-next-history)
+(define-key global-map (kbd "C-x ,") 'history-prev-history)
+(define-key global-map (kbd "C-x /") 'history-add-history)
