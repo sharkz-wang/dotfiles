@@ -52,6 +52,7 @@ ZSH_HIGHLIGHT_STYLES[bracket-error]="fg=208,bold,bg=161"
 # PATTERNS
 # rm -rf
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=252,bold,bg=161')
+ZSH_HIGHLIGHT_PATTERNS+=('rm * -rf' 'fg=252,bold,bg=161')
 
 # Sudo
 ZSH_HIGHLIGHT_PATTERNS+=('sudo' 'fg=252,bold,bg=161')
