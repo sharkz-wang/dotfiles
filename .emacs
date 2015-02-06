@@ -340,7 +340,14 @@ scroll-down-aggressively 0.01)
 (define-key helm-gtags-mode-map (kbd "C-c g t") 'helm-gtags-find-tag)
 
 (require 'sr-speedbar)
+(setq sr-speedbar-width 25)
+(setq sr-speedbar-auto-refresh t)
 (setq sr-speedbar-right-side nil)
+
+(global-set-key (kbd "C-x p") 'sr-speedbar-toggle)
+
+(add-hook 'emacs-startup-hook (lambda () (sr-speedbar-open) (other-window 1)))
+(add-hook 'speedbar-mode-hook '(lambda () (linum-mode 0)))
 
 (require 'yasnippet)
 (yas-global-mode 1)
