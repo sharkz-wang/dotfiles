@@ -29,6 +29,8 @@
    (:name golden-ratio)
 
    (:name undo-tree)
+   (:name paredit)
+   (:name highlight-parentheses)
 
    (:name ace-jump-mode)
    (:name history
@@ -512,8 +514,8 @@ scroll-down-aggressively 0.01)
 ;(setq split-height-threshold nil)
 ;(setq split-width-threshold 80)
 
-(require 'golden-ratio)
-(golden-ratio-mode 1)
+;(require 'golden-ratio)
+;(golden-ratio-mode 1)
 
 ;; Line wrapping settings
 (setq-default truncate-lines t)
@@ -529,3 +531,14 @@ scroll-down-aggressively 0.01)
 (define-key global-map (kbd "C-x .") 'history-next-history)
 (define-key global-map (kbd "C-x ,") 'history-prev-history)
 (define-key global-map (kbd "C-x /") 'history-add-history)
+
+(paredit-mode 1)
+(define-key global-map (kbd "M-)") 'paredit-forward-slurp-sexp)
+(define-key global-map (kbd "M-(") 'paredit-backward-slurp-sexp)
+(define-key global-map (kbd "M-}") 'paredit-forward-barf-sexp)
+(define-key global-map (kbd "M-{") 'paredit-backward-barf-sexp)
+
+(show-paren-mode 1)
+
+(require 'highlight-parentheses)
+(global-highlight-parentheses-mode 1)
