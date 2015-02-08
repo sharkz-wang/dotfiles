@@ -71,6 +71,10 @@
    (:name f)
    (:name projectile)
 
+   (:name uncrustify-mode
+		:type git
+		:url "https://github.com/koko1000ban/emacs-uncrustify-mode")
+
    (:name sr-speedbar)
    (:name dtrt-indent)
 
@@ -97,7 +101,6 @@
    (:name molokai-theme
       :type git
       :url "https://github.com/hbin/molokai-theme")
-
    ))
 
 ;; install new packages and init already installed packages
@@ -403,6 +406,10 @@ scroll-down-aggressively 0.01)
           (forward-line -1)
           (c-indent-line))))
     (define-key c-mode-base-map "{" 'c-mode-insert-lcurly )
+
+	(require 'uncrustify-mode)
+	(uncrustify-mode 1)
+	(setq uncrustify-config-path "~/.uncrustify/linux-kernel.cfg")
 )
 (define-key c-mode-map (kbd "C-c C-c") 'compile)
 (add-hook 'c-mode-hook 'private-c-c++-mode-hook)
@@ -525,6 +532,9 @@ scroll-down-aggressively 0.01)
 (defun line-wrapping-on ()
   (interactive)
   (setq-default truncate-lines nil))
+(defun line-wrapping-toggle ()
+  (interactive)
+  (setq-default truncate-lines (not truncate-lines)))
 
 (require 'history)
 (history-mode 1)
@@ -551,9 +561,9 @@ scroll-down-aggressively 0.01)
 	(global-set-key (kbd "C-c c") 'evilnc-copy-and-comment-lines)
 	(global-set-key (kbd "C-c p") 'evilnc-comment-or-uncomment-paragraphs)
 
-	(define-key evil-normal-state-map ",ci" 'evilnc-comment-or-uncomment-lines)
-	(define-key evil-normal-state-map ",cl" 'evilnc-comment-or-uncomment-to-the-line)
-	(define-key evil-normal-state-map ",cc" 'evilnc-copy-and-comment-lines)
-	(define-key evil-normal-state-map ",cp" 'evilnc-comment-or-uncomment-paragraphs)
-	(define-key evil-normal-state-map ",cr" 'comment-or-uncomment-region))
+	(define-key evil-normal-state-map "\\ci" 'evilnc-comment-or-uncomment-lines)
+	(define-key evil-normal-state-map "\\cl" 'evilnc-comment-or-uncomment-to-the-line)
+	(define-key evil-normal-state-map "\\cc" 'evilnc-copy-and-comment-lines)
+	(define-key evil-normal-state-map "\\cp" 'evilnc-comment-or-uncomment-paragraphs)
+	(define-key evil-normal-state-map "\\cr" 'comment-or-uncomment-region))
 (evilnc-default-hotkeys)
