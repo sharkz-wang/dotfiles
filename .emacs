@@ -408,7 +408,7 @@ scroll-down-aggressively 0.01)
     (define-key c-mode-base-map "{" 'c-mode-insert-lcurly )
 
 	(require 'uncrustify-mode)
-	(uncrustify-mode 1)
+	;(uncrustify-mode 1)
 	(setq uncrustify-config-path "~/.uncrustify/linux-kernel.cfg")
 )
 (define-key c-mode-map (kbd "C-c C-c") 'compile)
