@@ -61,7 +61,7 @@
    (:name cedet)
    (:name auto-complete)
    (:name yasnippet)
-
+   (:name helm-dash)
    (:name emacs-w3m)
 
    (:name function-args)
@@ -623,3 +623,5 @@ scroll-down-aggressively 0.01)
    (list (read-string "Enter website address(default: w3m-home):" nil nil w3m-home-page nil )))
   (w3m-goto-url-new-session
    (concat "http://" site))) 
+ 
+(setq helm-dash-common-docsets '("C" "C++" "Perl" "Python_2" "Python_3" "Clojure" "R"))
