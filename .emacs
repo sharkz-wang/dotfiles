@@ -62,6 +62,8 @@
    (:name auto-complete)
    (:name yasnippet)
 
+   (:name emacs-w3m)
+
    (:name function-args)
 
    (:name ggtags)
@@ -125,7 +127,8 @@
 (global-set-key (kbd "C-h") 'delete-backward-char)
 (define-key isearch-mode-map (kbd "C-h") 'isearch-del-char)
 
-(setq browse-url-browser-function (quote browse-url-firefox))
+;(setq browse-url-browser-function (quote browse-url-firefox))
+(setq browse-url-browser-function 'w3m-goto-url-new-session)
 
 (define-key global-map (kbd "C-w") 'evil-delete-backward-word)
 
@@ -577,3 +580,46 @@ scroll-down-aggressively 0.01)
     (when (eq pt (point))
       (beginning-of-line))))
 (global-set-key (kbd "C-a") 'beginning-of-indentation-or-line)
+
+(add-hook 'w3m-mode-hook (lambda () (linum-mode 0) (indent-guide-mode 0)))
+;;change w3m user-agent to android
+(setq w3m-user-agent "Mozilla/5.0 (Linux; U; Android 2.3.3; zh-tw; HTC_Pyramid Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.")
+
+;;quick access hacker news
+(defun hn ()
+  (interactive)
+  (browse-url "http://news.ycombinator.com"))
+
+;;quick access reddit
+(defun reddit (reddit)
+  "Opens the REDDIT in w3m-new-session"
+  (interactive (list
+                (read-string "Enter the reddit (default: Linux): " nil nil "Linux" nil)))
+  (browse-url (format "http://m.reddit.com/r/%s" reddit))
+  )
+
+;;i need this often
+(defun wikipedia-search (search-term)
+  "Search for SEARCH-TERM on wikipedia"
+  (interactive
+   (let ((term (if mark-active
+                   (buffer-substring (region-beginning) (region-end))
+                 (word-at-point))))
+     (list
+      (read-string
+       (format "Wikipedia (%s):" term) nil nil term)))
+   )
+  (browse-url
+   (concat
+    "http://en.m.wikipedia.org/w/index.php?search="
+    search-term
+    ))
+  )
+
+;;when I want to enter the web address all by hand
+(defun w3m-open-site (site)
+  "Opens site in new w3m session with 'http://' appended"
+  (interactive
+   (list (read-string "Enter website address(default: w3m-home):" nil nil w3m-home-page nil )))
+  (w3m-goto-url-new-session
+   (concat "http://" site))) 
