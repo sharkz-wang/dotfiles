@@ -88,6 +88,9 @@ set tabstop=4
 set shiftwidth=4
 "set expandtab
 
+set nowrap
+set virtualedit=all
+
 set tabpagemax=255
 
 set background=dark
