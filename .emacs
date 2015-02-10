@@ -27,6 +27,7 @@
    (:name evil-nerd-commenter)
 
    (:name golden-ratio)
+   (:name adaptive-wrap)
 
    (:name undo-tree)
    (:name paredit)
@@ -528,16 +529,10 @@ scroll-down-aggressively 0.01)
 ;(golden-ratio-mode 1)
 
 ;; Line wrapping settings
-(setq-default truncate-lines t)
-(defun line-wrapping-off ()
-  (interactive)
-  (setq-default truncate-lines t))
-(defun line-wrapping-on ()
-  (interactive)
-  (setq-default truncate-lines nil))
-(defun line-wrapping-toggle ()
-  (interactive)
-  (setq-default truncate-lines (not truncate-lines)))
+(setq-default truncate-lines nil)
+(require 'adaptive-wrap)
+(add-hook 'visual-line-mode-hook 'adaptive-wrap-prefix-mode)
+(global-visual-line-mode 1)
 
 (require 'history)
 (history-mode 1)
