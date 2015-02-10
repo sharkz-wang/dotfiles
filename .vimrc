@@ -88,6 +88,8 @@ set tabstop=4
 set shiftwidth=4
 "set expandtab
 
+set tabpagemax=255
+
 set background=dark
 set t_Co=256
 
@@ -159,12 +161,14 @@ nnoremap <silent> <f2> :NERDTreeTabsToggle<cr>
 let Tlist_Use_Right_Window = 1
 nnoremap <silent> <f3> :TlistToggle<cr><C-w>b
 
-nnoremap <silent> <f5> :w<cr>:make<cr>
+nnoremap <silent> <f5> :w<cr>:Make<cr>
 
 nmap <silent> <F9> :SCCompile<cr>
 nmap <silent> <F10> :SCCompileRun<cr>
 nnoremap <silent> <f11> :cw<cr>
 
+set switchbuf+=usetab,newtab
+command Make execute 'make | copen'
 map cn <esc>:cn<cr>
 map cp <esc>:cp<cr>
 
