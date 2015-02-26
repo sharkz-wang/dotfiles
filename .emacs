@@ -25,6 +25,9 @@
    (:name evil-numbers)
    (:name evil-leader)
    (:name evil-nerd-commenter)
+   (:name evil-org-mode
+		:type git
+		:url "https://github.com/edwtjo/evil-org-mode")
 
    (:name golden-ratio)
    (:name adaptive-wrap)
@@ -200,6 +203,7 @@
 (require 'evil-leader)
 (global-evil-leader-mode)
 (evil-leader/set-leader "\\")
+(require 'evil-org)
 
 ;; (setcdr evil-insert-state-map [escape])
 ;; (define-key evil-insert-state-map
