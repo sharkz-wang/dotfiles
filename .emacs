@@ -214,7 +214,7 @@
   (evil-emacs-state))
 
 (define-key evil-emacs-state-map (kbd "C-r") 'evil-paste-from-register)
-(define-key evil-emacs-state-map (kbd "C-o") 'evil-normal-state)
+(define-key evil-emacs-state-map (kbd "C-o") 'evil-execute-in-normal-state)
 
 (define-key evil-emacs-state-map [escape] 'evil-normal-state)
 (define-key evil-emacs-state-map "k" #'cofi/maybe-exit-kj)
