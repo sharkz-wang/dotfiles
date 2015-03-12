@@ -68,6 +68,10 @@
    (:name helm-dash)
    (:name emacs-w3m)
 
+   (:name semantic-refactor
+		:type git
+		:url "https://github.com/tuhdo/semantic-refactor")
+
    (:name function-args)
 
    (:name ggtags)
@@ -375,6 +379,10 @@ scroll-down-aggressively 0.01)
 ;(semantic-add-system-include "/usr/include/boost" 'c++-mode)
 ;(semantic-add-system-include "~/linux/kernel")
 ;(semantic-add-system-include "~/linux/include")
+
+(require 'srefactor)
+(define-key c-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
+(define-key c++-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
 
 (require 'auto-complete)
 (require 'auto-complete-config)
