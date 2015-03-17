@@ -139,6 +139,7 @@
 (setq browse-url-browser-function 'w3m-goto-url-new-session)
 
 (define-key global-map (kbd "C-w") 'evil-delete-backward-word)
+(define-key global-map (kbd "C-x C-o") 'ff-find-other-file)
 
 (setq-default indent-tabs-mode  nil)
 (setq tab-width 4 c-basic-offset 4)
