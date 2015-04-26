@@ -635,4 +635,5 @@ scroll-down-aggressively 0.01)
   (w3m-goto-url-new-session
    (concat "http://" site))) 
  
+(setq helm-dash-docsets-path (expand-file-name "~/.emacs.d/docsets"))
 (setq helm-dash-common-docsets '("C" "C++" "Perl" "Python_2" "Python_3" "Clojure" "R"))
