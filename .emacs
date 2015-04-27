@@ -89,6 +89,8 @@
    (:name dtrt-indent)
 
    ;(:name ess)
+
+   (:name cperl-mode)
    
    (:name clojure-mode)
    (:name cider)
@@ -425,7 +427,7 @@ scroll-down-aggressively 0.01)
           (c-indent-line)
           (forward-line -1)
           (c-indent-line))))
-    (define-key c-mode-base-map "{" 'c-mode-insert-lcurly )
+    (define-key c-mode-base-map "{" 'c-mode-insert-lcurly)
 
 	(require 'uncrustify-mode)
 	;(uncrustify-mode 1)
@@ -433,8 +435,25 @@ scroll-down-aggressively 0.01)
 )
 (define-key c-mode-map (kbd "C-c C-c") 'compile)
 (add-hook 'c-mode-hook 'private-c-c++-mode-hook)
+
 (define-key c++-mode-map (kbd "C-c C-c") 'compile)
 (add-hook 'c++-mode-hook 'private-c-c++-mode-hook)
+
+(defun private-cperl-mode-hook ()
+	;; (defun cperl-mode-insert-lcurly ()
+	;;   (interactive)
+	;;   (insert "{")
+	;;   (let ((pps (syntax-ppss)))
+	;; 	(when (and (eolp) (not (or (nth 3 pps) (nth 4 pps)))) ;; EOL and not in string or comment
+	;; 	  (c-indent-line)
+	;; 	  (insert "\n\n}")
+	;; 	  (c-indent-line)
+	;; 	  (forward-line -1)
+	;; 	  (c-indent-line))))
+	;; (define-key global-map "{" 'cperl-mode-insert-lcurly)
+	(define-key global-map (kbd "C-c C-c") 'compile)
+)
+(add-hook 'cperl-mode-hook 'private-cperl-mode-hook)
 
 (add-to-list 'auto-mode-alist '("\\.R\\'" . R-mode))
 (defun load-autocomplete-ess ()
