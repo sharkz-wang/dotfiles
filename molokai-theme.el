@@ -2,7 +2,7 @@
 
 ;; Copyright (C) 2013 Huang Bin
 
-;; Author: Huang Bin <embrace.hbin@gmail.com>
+;; Author: Huang Bin <huangbin88@foxmail.com>
 ;; URL: https://github.com/hbin/molokai-theme
 ;; Version: 0.8
 
@@ -33,53 +33,50 @@
 
 (let ((class '((class color) (min-colors 89)))
       ;; molokai palette
-      (molokai-white          "#d0d0d0")
-      (molokai-red            "#d7005f")
-      (molokai-darkwine       "#d7005f")
-      (molokai-wine           "#d7005f")
-      (molokai-maroon         "#d7005f")
-      (molokai-pink           "#d7005f")
-      (molokai-orange         "#ff8700")
-      (molokai-orange+5       "#ff8700")
-      (molokai-darkgoldenrod  "#ff8700")
-      (molokai-wheat          "#afaf87")
-      (molokai-yellow         "#afaf87")
-      (molokai-green          "#87ff00")
-      (molokai-chartreuse     "#87ff00")
-      (molokai-lime           "#87ff00")
-      (molokai-olive          "#87ff00")
-      (molokai-aqua           "#5fd7ff")
-      (molokai-teal           "#5fd7ff")
-      (molokai-blue           "#5fd7ff")
-      (molokai-slateblue      "#5fd7ff")
-      (molokai-dodgerblue     "#5fd7ff")
-      (molokai-purple         "#af5fff")
-      (molokai-palevioletred  "#af5fff")
+      (molokai-white          "#ffffff")
+      (molokai-fg             "#f8f8f0")
+      (molokai-red            "#ff0000")
+      (molokai-pink           "#f92672")
+      (molokai-orange+5       "#ef5939")
+      (molokai-orange         "#fd971f")
+      (molokai-yellow         "#ffff00")
+      (molokai-darkgoldenrod  "#e6db74")
+      (molokai-wheat          "#c4be89")
+      (molokai-olive          "#808000")
+      (molokai-chartreuse     "#a6e22e")
+      (molokai-lime           "#00ff00")
+      (molokai-green          "#008000")
+      (molokai-darkwine       "#1e0010")
+      (molokai-maroon         "#800000")
+      (molokai-wine           "#960050")
+      (molokai-teal           "#008080")
+      (molokai-aqua           "#00ffff")
+      (molokai-blue           "#66d9ef")
+      (molokai-slateblue      "#7070f0")
+      (molokai-purple         "#ae81ff")
+      (molokai-palevioletred  "#d33682")
       (molokai-grey-2         "#bcbcbc")
       (molokai-grey-1         "#8f8f8f")
       (molokai-grey           "#808080")
       (molokai-grey+2         "#403d3d")
       (molokai-grey+3         "#4c4745")
       (molokai-grey+5         "#232526")
-      (molokai-grey+10        "#585858")
-      (molokai-dark           "#000000")
-
-      ;; Not configured yet
-      (molokai-fg             "#f8f8f0")
       (molokai-bg             "#1b1d1e")
-
+      (molokai-grey+10        "#080808")
+      (molokai-dark           "#000000")
       (molokai-base01         "#465457")
       (molokai-base02         "#455354")
-      (molokai-base03         "#293739"))
+      (molokai-base03         "#293739")
+      (molokai-dodgerblue     "#13354a"))
   (custom-theme-set-faces
    'molokai
 
    ;; base
    `(default ((t (:background ,molokai-bg :foreground ,molokai-fg :weight bold))))
    `(cursor ((t (:background ,molokai-fg :foreground ,molokai-bg :weight bold))))
-   `(fringe ((t (:foreground ,molokai-base02 :weight bold :background ,molokai-bg))))
-   `(highlight ((t (:background ,molokai-grey))))
-   `(region ((t (:background  ,molokai-grey+2))
+   `(fringe ((t (:foreground ,molokai-base02 :background ,molokai-bg :weight bold))))
+   `(highlight ((t (:background ,molokai-grey :weight bold))))
+   `(region ((t (:background  ,molokai-grey+2 :weight bold))
              (t :inverse-video t)))
    `(warning ((t (:foreground ,molokai-palevioletred :weight bold))))
 
@@ -92,7 +89,7 @@
    `(font-lock-function-name-face ((t (:foreground ,molokai-chartreuse :weight bold))))
    `(font-lock-keyword-face ((t (:foreground ,molokai-pink :weight bold))))
    `(font-lock-negation-char-face ((t (:foreground ,molokai-wine :weight bold))))
-   `(font-lock-preprocessor-face ((t (:inherit (font-lock-builtin-face)))))
+   `(font-lock-preprocessor-face ((t (:inherit (font-lock-builtin-face :weight bold)))))
    `(font-lock-regexp-grouping-backslash ((t (:inherit (bold)))))
    `(font-lock-regexp-grouping-construct ((t (:inherit (bold)))))
    `(font-lock-string-face ((t (:foreground ,molokai-darkgoldenrod :weight bold))))
@@ -101,20 +98,22 @@
    `(font-lock-warning-face ((t (:foreground ,molokai-palevioletred :weight bold))))
 
    ;; mode line
-   `(mode-line ((t (:foreground ,molokai-fg :weight bold
+   `(mode-line ((t (:foreground ,molokai-fg
                                 :background ,molokai-base03
+								:weight bold
                                 :box nil))))
    `(mode-line-buffer-id ((t (:weight bold))))
-   `(mode-line-inactive ((t (:foreground ,molokai-fg :weight bold
+   `(mode-line-inactive ((t (:foreground ,molokai-fg
                                          :background ,molokai-base02
+										 :weight bold
                                          :box nil))))
 
    ;; search
-   `(isearch ((t (:foreground ,molokai-dark :weight bold :background ,molokai-wheat :weight bold))))
-   `(isearch-fail ((t (:foreground ,molokai-wine :weight bold :background ,molokai-darkwine))))
+   `(isearch ((t (:foreground ,molokai-dark :background ,molokai-wheat :weight bold))))
+   `(isearch-fail ((t (:foreground ,molokai-wine :background ,molokai-darkwine :weight bold))))
 
    ;; linum-mode
-   `(linum ((t (:foreground ,molokai-grey-2 :weight bold :background ,molokai-grey+5))))
+   `(linum ((t (:foreground ,molokai-grey-2 :background ,molokai-grey+5 :weight bold))))
 
    ;; hl-line-mode
    `(hl-line-face ((,class (:background ,molokai-grey+5)) (t :weight bold)))
@@ -126,6 +125,13 @@
    ;; show-paren
    ;; rainbow-delimiters
    ;; highlight-symbols
+
+   ;; neotree
+   `(neo-banner-face ((t (:foreground ,molokai-darkgoldenrod :weight bold))))
+   `(neo-header-face ((t (:foreground ,molokai-chartreuse :weight bold))))
+   `(neo-root-dir-face ((t (:foreground ,molokai-pink :weight bold))))
+   `(neo-dir-link-face ((t (:foreground ,molokai-chartreuse :weight bold))))
+   `(neo-expand-btn-face ((t (:foreground ,molokai-orange+5 :weight bold))))
    ))
 
 (defcustom molokai-theme-kit nil
