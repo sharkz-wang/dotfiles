@@ -171,3 +171,10 @@ tmux_pane_autocomplete() {
 #zle -C tmux-pane-autocomplete complete-word _generic
 #zstyle ':completion:tmux-pane-autocomplete:*' completer tmux_pane_autocomplete
 # End tmux pane fetched auto-completion
+
+alias fuck='eval $(thefuck $(fc -ln -1))'
+
+export THEFUCK_RULES='DEFAULT_RULES'
+export THEFUCK_REQUIRE_CONFIRMATION='true'
+export THEFUCK_WAIT_COMMAND=10
+export THEFUCK_NO_COLORS='false'
