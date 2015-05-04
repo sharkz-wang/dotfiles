@@ -21,9 +21,9 @@ antigen apply
 
 export TERM='xterm-256color'
 export PS1='%B%F{252}[%f%F{208}%D{%H:%M:%S}%f%F{252}]%f %F{118}%n%f%F{252}@%f%F{135}%m%f%F{252}:%f%F{81}%~%f$(BRANCH=$(git branch 2>/dev/null | \grep "^*" | colrm 1 2); echo ${BRANCH:+"%F{252}-(%f%F{161}${BRANCH}%f%F{252})%f"};)%(?.%F{252}.%F{161})%(!.#.$)%f %b'
-export PATH="${HOME}/script:${HOME}/local/bin:${PATH}:${HOME}/.gem/ruby/2.1.0/bin"
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${HOME}/lib"
-export PYTHONPATH=${HOME}/local/lib/python2.7/site-packages
+export PATH="${HOME}/script:${HOME}/local/tmp/bin:${HOME}/local/bin:${PATH}:${HOME}/.gem/ruby/2.1.0/bin"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${HOME}/local/tmp/lib:${HOME}/local/lib"
+export PYTHONPATH="${PYTHONPATH}:${HOME}/local/lib/python2.7/site-packages"
 
 export LANG='en_US.utf8'
 export LANGUAGE='en_US.utf8'
@@ -34,7 +34,7 @@ export EDITOR='vim'
 stty -ixon
 unset IGNOREEOF
 
-alias e='emacs'
+alias e='emacs -nw'
 alias vim='TERM=screen-256color vim -p'
 alias irssi='TERM=screen irssi'
 alias mutt='TERM=screen-256color mutt'
