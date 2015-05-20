@@ -43,7 +43,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 
 alias ls='ls --color=always -p'
-alias ll='ls -l'
+alias ll='ls -lh'
 
 alias less='less -R'
 
