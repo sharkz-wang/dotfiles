@@ -25,6 +25,8 @@ export PATH="${HOME}/script:${HOME}/local/tmp/bin:${HOME}/local/bin:${PATH}:${HO
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${HOME}/local/tmp/lib:${HOME}/local/lib"
 export PYTHONPATH="${PYTHONPATH}:${HOME}/local/lib/python2.7/site-packages"
 
+export HISTCONTROL=ignorespace
+
 export LANG='en_US.utf8'
 export LANGUAGE='en_US.utf8'
 export LC_ALL='en_US.utf8'
