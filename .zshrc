@@ -19,6 +19,8 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 # Tell antigen that you're done.
 antigen apply
 
+autoload -U zmv
+
 export TERM='xterm-256color'
 export PS1='%B%F{252}[%f%F{208}%D{%H:%M:%S}%f%F{252}]%f %F{118}%n%f%F{252}@%f%F{135}%m%f%F{252}:%f%F{81}%~%f$(BRANCH=$(git branch 2>/dev/null | \grep "^*" | colrm 1 2); echo ${BRANCH:+"%F{252}-(%f%F{161}${BRANCH}%f%F{252})%f"};)%(?.%F{252}.%F{161})%(!.#.$)%f %b'
 export PATH="${HOME}/script:${HOME}/local/tmp/bin:${HOME}/local/bin:${PATH}:${HOME}/.gem/ruby/2.1.0/bin"
@@ -162,6 +164,12 @@ zle -N forward
 bindkey '^B' backward
 zle -N backward
 # End previous / next page functionality
+
+foreground-vim() {
+	fg %'TERM=screen-256color vim -p'
+}
+zle -N foreground-vim
+bindkey '^Z' foreground-vim
 
 # Tmux pane fetched auto-completion
 tmux_pane_autocomplete() {
