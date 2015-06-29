@@ -90,6 +90,10 @@
 
    ;(:name ess)
 
+   (:name auctex
+		:type git
+		:url "https://github.com/jwiegley/auctex")
+
    (:name cperl-mode)
    
    (:name clojure-mode)
@@ -516,9 +520,9 @@ scroll-down-aggressively 0.01)
 (unless window-system
   (setq linum-format 'linum-format-func))
 
-(require 'indent-guide)
-(indent-guide-global-mode 1)
-(setq indent-guide-recursive t)
+;(require 'indent-guide)
+;(indent-guide-global-mode 1)
+;(setq indent-guide-recursive t)
 ;; (setq indent-guide-char ":")
 
 (defvar endless/margin-display
