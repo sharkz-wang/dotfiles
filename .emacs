@@ -126,7 +126,7 @@
 (line-number-mode 1)			; have line numbers and
 (column-number-mode 1)			; column numbers in the mode line
 
-(set-default-font "Deja Vu Sans Mono-16")
+(set-default-font "Deja Vu Sans Mono-14")
 ;(set-face-attribute 'default nil :height 140)
 
 (tool-bar-mode -1)			; no tool bar with icons
@@ -668,8 +668,8 @@ scroll-down-aggressively 0.01)
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (setq-default TeX-master nil)
-;(add-hook 'LaTeX-mode-hook 'visual-line-mode)
-;(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+(add-hook 'LaTeX-mode-hook 'visual-line-mode)
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
