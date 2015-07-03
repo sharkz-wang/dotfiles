@@ -93,6 +93,7 @@
    (:name auctex
 		:type git
 		:url "https://github.com/jwiegley/auctex")
+   (:name langtool)
 
    (:name cperl-mode)
    
@@ -672,6 +673,8 @@ scroll-down-aggressively 0.01)
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(require 'langtool)
+(setq langtool-language-tool-jar "~/LanguageTool-3.0/languagetool-commandline.jar")
 (setq reftex-plug-into-AUCTeX t)
 (setq TeX-PDF-mode t)
  
