@@ -62,10 +62,18 @@
 	  :after (progn
 		   (global-set-key (kbd "C-x C-z") 'magit-status)))
 
+   (:name deferred)
+   (:name popup)
+
+   (:name company-mode)
+   (:name emacs-ycmd
+		:type git
+		:url "https://github.com/abingham/emacs-ycmd")
    (:name cedet)
-   (:name auto-complete)
    (:name yasnippet)
+
    (:name helm-dash)
+
    (:name emacs-w3m)
 
    (:name semantic-refactor
@@ -395,34 +403,38 @@ scroll-down-aggressively 0.01)
 (define-key c-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
 (define-key c++-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
 
-(require 'auto-complete)
-(require 'auto-complete-config)
-(ac-config-default)
-(setq ac-auto-start 1)
-(setq ac-use-fuzzy t)
-(setq ac-use-comphist t)
-(setq ac-comphist-file "~/.emacs.d/cache/auto-complete.dat")
-(setq ac-auto-show-menu t)
+(require 'company)
+(add-hook 'after-init-hook #'global-company-mode)
+(setq company-idle-delay 0)
+(setq company-minimum-prefix-length 1)
+(setq company-show-numbers t)
+(define-key company-active-map (kbd "C-n") 'company-select-next)
+(define-key company-active-map (kbd "C-p") 'company-select-previous)
+(define-key company-active-map (kbd "TAB") 'company-select-next)
+(define-key company-active-map (kbd "C-h") 'delete-backward-char)
+(define-key company-active-map (kbd "C-w") 'evil-delete-backward-word)
 
-(define-key ac-mode-map (kbd "C-n") 'ac-next)
-(define-key ac-mode-map (kbd "C-p") 'ac-previous)
+(define-key company-active-map (kbd "SPC") (lambda () (interactive) (company-complete-selection) (insert " ")))
+(define-key company-active-map (kbd ".") (lambda () (interactive) (company-complete-selection) (insert ".")))
+(define-key company-active-map (kbd "-") (lambda () (interactive) (company-complete-selection) (insert "-")))
+(define-key company-active-map (kbd ")") (lambda () (interactive) (company-complete-selection) (insert ")")))
+(define-key company-active-map (kbd "}") (lambda () (interactive) (company-complete-selection) (insert "}")))
+(define-key company-active-map (kbd ">") (lambda () (interactive) (company-complete-selection) (insert ">")))
+(define-key company-active-map (kbd ";") (lambda () (interactive) (company-complete-selection) (insert ";")))
+
+;(add-hook 'after-init-hook #'global-flycheck-mode)
+(require 'ycmd)
+(add-hook 'after-init-hook #'global-ycmd-mode)
+(setq ycmd-force-semantic-completion t)
+(set-variable 'ycmd-server-command (list "python" (expand-file-name "~/tmp/src/ycmd/ycmd")))
+(set-variable 'ycmd-global-config "~/tmp/src/ycmd/cpp/ycm/.ycm_extra_conf.py")
+(require 'company-ycmd)
+(company-ycmd-setup)
+;(require 'flycheck-ycmd)
+;(flycheck-ycmd-setup)
 
 (require 'cc-mode)
 (defun private-c-c++-mode-hook ()
-
-	; (fci-mode 1)
-    (setq ac-sources
-            '(ac-source-filename
-              ac-source-functions
-              ac-source-yasnippet
-              ac-source-variables
-              ac-source-symbols
-              ;ac-source-features
-              ;ac-source-abbrev
-              ac-source-words-in-same-mode-buffers
-              ;ac-source-dictionary
-              ac-source-semantic-raw
-              ac-source-semantic))
 
                 ;; Auto indenting and pairing curly brace
     (defun c-mode-insert-lcurly ()
@@ -464,10 +476,9 @@ scroll-down-aggressively 0.01)
 (add-hook 'cperl-mode-hook 'private-cperl-mode-hook)
 
 (add-to-list 'auto-mode-alist '("\\.R\\'" . R-mode))
-(defun load-autocomplete-ess ()
-    (setq ess-use-auto-complete t)
+(defun load-company-ess ()
 )
-(add-hook 'R-mode-hook 'load-autocomplete-ess)
+(add-hook 'R-mode-hook 'load-company-ess)
 
 (require 'projectile)
 (projectile-global-mode 1)
@@ -673,7 +684,7 @@ scroll-down-aggressively 0.01)
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-(require 'langtool)
+;(require 'langtool)
 (setq langtool-language-tool-jar "~/LanguageTool-3.0/languagetool-commandline.jar")
 (setq reftex-plug-into-AUCTeX t)
 (setq TeX-PDF-mode t)
