@@ -124,8 +124,12 @@
       :url "https://github.com/alpaker/Fill-Column-Indicator")
 
    (:name molokai-theme
-      :type git
-      :url "https://github.com/hbin/molokai-theme")
+	  :type git
+	  :url "https://github.com/hbin/molokai-theme")
+
+   (:name monokai-emacs-theme
+	  :type git
+	  :url "https://github.com/oneKelvinSmith/monokai-emacs")
    ))
 
 ;; install new packages and init already installed packages
@@ -291,7 +295,8 @@
 )
 (add-hook 'org-mode-hook 'nolinum)
 
-(require 'molokai-theme)
+;(require 'molokai-theme)
+(require 'monokai-theme)
 
 ;; make scroll smooth
 (setq scroll-step 1)
