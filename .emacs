@@ -428,6 +428,12 @@ scroll-down-aggressively 0.01)
 (define-key company-active-map (kbd ">") (lambda () (interactive) (company-complete-selection) (insert ">")))
 (define-key company-active-map (kbd ";") (lambda () (interactive) (company-complete-selection) (insert ";")))
 
+;; ycmd Installation
+;; 1) git clone https://github.com/Valloric/ycmd.git
+;; 2) git submodule update --init --recursive
+;; 3) install mono-xbuild and mono-devel
+;; 4) ./build.py --clang-completer --omnisharp-completer --gocode-completer --system-libclang
+
 ;(add-hook 'after-init-hook #'global-flycheck-mode)
 (require 'ycmd)
 (add-hook 'after-init-hook #'global-ycmd-mode)
