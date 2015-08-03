@@ -36,7 +36,7 @@
    (:name paredit)
    (:name highlight-parentheses)
 
-   (:name ace-jump-mode)
+   (:name avy)
    (:name history
 		:type git
 		:url "https://github.com/boyw165/history")
@@ -306,9 +306,8 @@ scroll-conservatively 0)
 (setq-default scroll-up-aggressively 0.01
 scroll-down-aggressively 0.01)
 
-(require 'ace-jump-mode)
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-(define-key evil-normal-state-map " " 'ace-jump-mode)
+(define-key global-map (kbd "C-c SPC") 'avy-goto-char-2)
+(define-key evil-normal-state-map (kbd "SPC") 'avy-goto-char-2)
 
 (require 'compile)
 ;; (add-hook 'c-mode-hook
