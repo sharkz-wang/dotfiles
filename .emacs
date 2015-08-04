@@ -390,9 +390,6 @@ scroll-down-aggressively 0.01)
 ;; (add-hook 'emacs-startup-hook (lambda () (sr-speedbar-open) (other-window 1)))
 (add-hook 'speedbar-mode-hook '(lambda () (linum-mode 0) (visual-line-mode 0)))
 
-(require 'yasnippet)
-(yas-global-mode 1)
-
 (require 'semantic)
 ;(global-semanticdb-minor-mode 1)
 ;(global-semantic-idle-scheduler-mode 1)
@@ -443,6 +440,20 @@ scroll-down-aggressively 0.01)
 (company-ycmd-setup)
 ;(require 'flycheck-ycmd)
 ;(flycheck-ycmd-setup)
+
+(require 'yasnippet)
+(yas-global-mode 1)
+
+(global-set-key (kbd "M-/") 'yas-expand)
+
+(defvar company-mode/enable-yas t
+  "Enable yasnippet for all backends.")
+(defun company-mode/backend-with-yas (backend)
+  (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+	  backend
+	(append (if (consp backend) backend (list backend))
+			'(:with company-yasnippet))))
+(setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
 
 (require 'cc-mode)
 (defun private-c-c++-mode-hook ()
