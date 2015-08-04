@@ -474,6 +474,18 @@ scroll-down-aggressively 0.01)
 	(require 'uncrustify-mode)
 	;(uncrustify-mode 1)
 	(setq uncrustify-config-path "~/.uncrustify/linux-kernel.cfg")
+
+	(defun company-transform-c-c++ (candidates)
+	  (let ((deleted))
+		(mapcar #'(lambda (c)
+					(if (string-prefix-p "_" c)
+					  (progn
+						(add-to-list 'deleted c)
+						(setq candidates (delete c candidates)))))
+				candidates)
+		(append candidates (nreverse deleted))))
+	(setq-local company-transformers
+				(append company-transformers '(company-transform-c-c++)))
 )
 (define-key c-mode-map (kbd "C-c C-c") 'compile)
 (add-hook 'c-mode-hook 'private-c-c++-mode-hook)
