@@ -36,7 +36,9 @@
    (:name paredit)
    (:name highlight-parentheses)
 
-   (:name avy)
+   (:name avy
+		:type git
+		:url "https://github.com/abo-abo/avy")
    (:name history
 		:type git
 		:url "https://github.com/boyw165/history")
