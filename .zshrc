@@ -48,6 +48,7 @@ alias ll='ls -lh'
 
 alias less='less -R'
 
+unset GREP_OPTIONS
 alias egrep='egrep --color=always'
 alias grep='grep --color=always'
 
