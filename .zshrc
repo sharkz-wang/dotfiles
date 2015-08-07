@@ -87,6 +87,11 @@ zle -N expand-or-complete-or-list-files
 # Go up one level by ctrl + backslash
 # Bind to ctrl + backslash
 function up-one-level() {
+
+	if [[ -n $BUFFER ]]; then
+		return 0
+	fi
+
 	cd ..
 	zle accept-line
 }
@@ -112,6 +117,10 @@ function cd() {
 }
 
 function forward() {
+	if [[ -n $BUFFER ]]; then
+		zle forward-char
+		return 0
+	fi
 	
 	if [ -z $FORWARD_HIST ]; then
 		return 0
@@ -132,6 +141,11 @@ function forward() {
 }
 
 function backward() {
+
+	if [[ -n $BUFFER ]]; then
+		zle backward-char
+		return 0
+	fi
 	
 	if [ -z $BACKWARD_HIST ]; then
 		return 0
