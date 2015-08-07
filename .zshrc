@@ -54,6 +54,9 @@ alias beep='/bin/echo -e "\a"'
 bindkey "^R" history-incremental-pattern-search-backward
 bindkey "^S" history-incremental-pattern-search-forward
 
+bindkey "^[F" forward-word
+bindkey "^[B" backward-word
+
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 
