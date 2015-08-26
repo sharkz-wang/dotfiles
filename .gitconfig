@@ -1,6 +1,7 @@
 [alias]
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	wdiff = diff --color-words
 [color]
 	branch = auto
 	diff = auto
