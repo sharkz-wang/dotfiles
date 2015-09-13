@@ -386,6 +386,8 @@ scroll-down-aggressively 0.01)
 (setq sr-speedbar-width 25)
 (setq sr-speedbar-auto-refresh t)
 (setq sr-speedbar-right-side nil)
+(setq speedbar-show-unknown-files t)
+(setq speedbar-use-images nil)
 
 (global-set-key (kbd "C-\\") 'sr-speedbar-toggle)
 
