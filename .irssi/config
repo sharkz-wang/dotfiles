@@ -104,76 +104,80 @@ chatnets = {
     max_whois = "30";
   };
   SILC = { type = "SILC"; };
-  FreeNode = { type = "IRC"; nick = "sharkz"; };
+  FreeNode = {
+    type = "IRC";
+    nick = "sharkz";
+    autosendcmd = "/msg NickServ IDENTIFY <passwd>; wait 2000";
+  };
   Mozilla = { type = "IRC"; nick = "sharkz"; };
 };
 
 channels = (
   { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
   { name = "silc"; chatnet = "silc"; autojoin = "No"; },
+
   { name = "#freenode"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#g0v.tw"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#reddit"; chatnet = "FreeNode"; autojoin = "yes"; },
+
   { name = "#linux"; chatnet = "FreeNode"; autojoin = "yes"; },
-  { name = "#archlinux"; chatnet = "FreeNode"; autojoin = "no"; },
-  { name = "#ubuntu"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#archlinux"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#ubuntu"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#ubuntu-tw"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#debian"; chatnet = "FreeNode"; autojoin = "no"; },
-  { name = "#android"; chatnet = "FreeNode"; autojoin = "yes"; },
-  { name = "#vim"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#android"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#vim"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#emacs"; chatnet = "FreeNode"; autojoin = "yes"; },
-  { name = "#zsh"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#zsh"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#bash"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#programming"; chatnet = "FreeNode"; autojoin = "yes"; },
   { name = "#prgmr"; chatnet = "FreeNode"; autojoin = "no"; },
-  { name = "#C"; chatnet = "FreeNode"; autojoin = "no"; },
-  { name = "#C++"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#C"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#C++"; chatnet = "FreeNode"; autojoin = "yes"; },
   { name = "#C++-general"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#python"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#perl"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#R"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#lisp"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#clojure"; chatnet = "FreeNode"; autojoin = "yes"; },
-  { name = "#erlang"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#erlang"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#git"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#puppet"; chatnet = "FreeNode"; autojoin = "no"; },
-  { name = "#kernel"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#kernel"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#ubuntu-kernel"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#raspberrypi"; chatnet = "FreeNode"; autojoin = "yes"; },
   { name = "#opensource"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#tossug"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#dot"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#kalug"; chatnet = "FreeNode"; autojoin = "no"; },
-  { name = "#gnu"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#gnu"; chatnet = "FreeNode"; autojoin = "yes"; },
   { name = "#xfce"; chatnet = "FreeNode"; autojoin = "no"; },
-  { name = "#security"; chatnet = "FreeNode"; autojoin = "yes"; },
-  { name = "#networking"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#security"; chatnet = "FreeNode"; autojoin = "no"; },
+  { name = "#networking"; chatnet = "FreeNode"; autojoin = "no"; },
   { name = "#anime"; chatnet = "FreeNode"; autojoin = "no"; },
-  { name = "#movie"; chatnet = "FreeNode"; autojoin = "no"; },
-  { name = "#metal"; chatnet = "FreeNode"; autojoin = "no"; },
-  { name = "#reddit"; chatnet = "FreeNode"; autojoin = "yes"; },
   { name = "#nethack"; chatnet = "FreeNode"; autojoin = "no"; },
-  { name = "#g0v.tw"; chatnet = "FreeNode"; autojoin = "yes"; },
 
-  { name = "#introduction"; chatnet = "Mozilla"; autojoin = "yes"; },
-  { name = "#firefox"; chatnet = "Mozilla"; autojoin = "yes"; },
-  { name = "#bugzilla"; chatnet = "Mozilla"; autojoin = "yes"; },
+  { name = "#introduction"; chatnet = "Mozilla"; autojoin = "no"; },
+  { name = "#firefox"; chatnet = "Mozilla"; autojoin = "no"; },
+  { name = "#bugzilla"; chatnet = "Mozilla"; autojoin = "no"; },
   { name = "#mdn"; chatnet = "Mozilla"; autojoin = "no"; },
   { name = "#mozwebqa"; chatnet = "Mozilla"; autojoin = "no"; },
-  { name = "#qa"; chatnet = "Mozilla"; autojoin = "yes"; },
+  { name = "#qa"; chatnet = "Mozilla"; autojoin = "no"; },
   { name = "#sumo"; chatnet = "Mozilla"; autojoin = "no"; },
-  { name = "#contributors"; chatnet = "Mozilla"; autojoin = "yes"; },
-  { name = "#developers"; chatnet = "Mozilla"; autojoin = "yes"; },
+  { name = "#contributors"; chatnet = "Mozilla"; autojoin = "no"; },
+  { name = "#developers"; chatnet = "Mozilla"; autojoin = "no"; },
   { name = "#planning"; chatnet = "Mozilla"; autojoin = "no"; },
-  { name = "#build"; chatnet = "Mozilla"; autojoin = "yes"; },
-  { name = "#devtools"; chatnet = "Mozilla"; autojoin = "yes"; },
-  { name = "#fx-team"; chatnet = "Mozilla"; autojoin = "yes"; },
-  { name = "#fxos"; chatnet = "Mozilla"; autojoin = "yes"; },
+  { name = "#build"; chatnet = "Mozilla"; autojoin = "no"; },
+  { name = "#devtools"; chatnet = "Mozilla"; autojoin = "no"; },
+  { name = "#fx-team"; chatnet = "Mozilla"; autojoin = "no"; },
+  { name = "#fxos"; chatnet = "Mozilla"; autojoin = "no"; },
   { name = "#mobile"; chatnet = "Mozilla"; autojoin = "no"; },
   { name = "#necko"; chatnet = "Mozilla"; autojoin = "no"; },
   { name = "#webdev"; chatnet = "Mozilla"; autojoin = "no"; },
   { name = "#webmaker"; chatnet = "Mozilla"; autojoin = "no"; },
   { name = "#www"; chatnet = "Mozilla"; autojoin = "no"; },
-  { name = "#mozilla-taiwan"; chatnet = "Mozilla"; autojoin = "yes"; },
-  { name = "#taipei-platform"; chatnet = "Mozilla"; autojoin = "yes"; }
+  { name = "#mozilla-taiwan"; chatnet = "Mozilla"; autojoin = "no"; },
+  { name = "#taipei-platform"; chatnet = "Mozilla"; autojoin = "no"; }
 );
 
 aliases = {
@@ -345,13 +349,6 @@ statusbar = {
       items = {
         barstart = { priority = "100"; };
         awl_1 = { };
-        barend = { priority = "100"; alignment = "right"; };
-      };
-    };
-    awl_2 = {
-      items = {
-        barstart = { priority = "100"; };
-        awl_2 = { };
         barend = { priority = "100"; alignment = "right"; };
       };
     };
