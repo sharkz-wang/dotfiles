@@ -1,0 +1,14 @@
+language: generic
+env:
+  - EMACS=emacs
+  - EMACS=emacs-snapshot
+install:
+  - env
+  - source test/travis-ci.sh
+  - prereqs
+  - '"$EMACS" --version'
+script:
+  - folded_call byte-compile
+  - folded_call ert-tests
+  - check-recipes
+  - check-whitespace

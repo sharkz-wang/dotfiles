@@ -1,0 +1,22 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:546: checking whether make sets ${MAKE}
+configure:603: checking for a BSD compatible install
+configure:658: checking for makeinfo
+configure:688: checking for texi2dvi
+configure:718: checking for ptex
+configure:750: checking for pbibtex
+configure:783: checking for dvipdfmx
+configure:813: checking for texi2pdf
+configure:845: checking for egrep
+configure:877: checking for cygpath
+configure:958: checking for /usr/bin/emacs
+configure:1131: checking what a flavor does /usr/bin/emacs have
+=> Emacs 24.5
+configure:1184: checking prefix for /usr/bin/emacs
+=> /usr
+configure:1223: checking where lisp files should go
+configure:1398: checking where icon files should go
+=> $(prefix)/share/emacs/24.5/etc/images/w3m
+configure:1485: checking for gzip
