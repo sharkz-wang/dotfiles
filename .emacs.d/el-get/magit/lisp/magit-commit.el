@@ -103,9 +103,9 @@ an error while using those is harder to recover from."
                (?n "Bypass git hooks"                       "--no-verify")
                (?s "Add Signed-off-by line"                 "--signoff")
                (?R "Claim authorship and reset author date" "--reset-author"))
-    :options  ((?A "Override the author"  "--author="        read-from-minibuffer)
-               (?S "Sign using gpg"       "--gpg-sign="      magit-read-gpg-secret-key)
-               (?C "Reuse commit message" "--reuse-message=" read-from-minibuffer))
+    :options  ((?A "Override the author"  "--author=")
+               (?S "Sign using gpg"       "--gpg-sign=" magit-read-gpg-secret-key)
+               (?C "Reuse commit message" "--reuse-message="))
     :actions  ((?c "Commit"         magit-commit)
                (?e "Extend"         magit-commit-extend)
                (?f "Fixup"          magit-commit-fixup)
@@ -260,7 +260,7 @@ depending on the value of option `magit-commit-squash-confirm'."
                 (substring option 2)))
       (when magit-commit-show-diff
         (let ((magit-display-buffer-noselect t))
-          (magit-diff-staged))))))
+          (apply #'magit-diff-staged nil (magit-diff-arguments)))))))
 
 (defun magit-commit-assert (args &optional strict)
   (cond

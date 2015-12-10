@@ -182,11 +182,12 @@ and then turned on again when turning off the latter."
                (when (overlay-get ov 'magit-blame)
                  (delete-overlay ov))))))))
 
-(defadvice auto-revert-handler (around magit-blame activate)
-  "If Magit-Blame mode is on, then do nothing.
-See #1731."
-  (unless magit-blame-mode
-    ad-do-it))
+(defun auto-revert-handler--unless-magit-blame-mode ()
+  "If Magit-Blame mode is on, then do nothing.  See #1731."
+  magit-blame-mode)
+
+(advice-add 'auto-revert-handler :before-until
+            'auto-revert-handler--unless-magit-blame-mode)
 
 ;;;###autoload (autoload 'magit-blame-popup "magit-blame" nil t)
 (magit-define-popup magit-blame-popup
@@ -195,8 +196,8 @@ See #1731."
   :man-page "git-blame"
   :switches '((?w "Ignore whitespace" "-w")
               (?r "Do not treat root commits as boundaries" "--root"))
-  :options  '((?C "Detect lines moved or copied within a file" "-C" read-string)
-              (?M "Detect lines moved or copied between files" "-M" read-string))
+  :options  '((?C "Detect lines moved or copied within a file" "-C")
+              (?M "Detect lines moved or copied between files" "-M"))
   :actions  '((?b "Blame" magit-blame))
   :default-arguments '("-w")
   :default-action 'magit-blame)

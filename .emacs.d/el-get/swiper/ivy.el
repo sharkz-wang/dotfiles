@@ -699,12 +699,14 @@ If the input is empty, select the previous history element instead."
 
 (defun ivy--get-window (state)
   "Get the window from STATE."
-  (let ((window (ivy-state-window state)))
-    (if (window-live-p window)
-        window
-      (if (= (length (window-list)) 1)
-          (selected-window)
-        (next-window)))))
+  (if (ivy-state-p state)
+      (let ((window (ivy-state-window state)))
+        (if (window-live-p window)
+            window
+          (if (= (length (window-list)) 1)
+              (selected-window)
+            (next-window))))
+    (selected-window)))
 
 (defun ivy--actionp (x)
   "Return non-nil when X is a list of actions."
@@ -1471,7 +1473,11 @@ match. Everything after \"!\" should not match."
       (0
        "")
       (1
-       (ivy--regex (car parts)))
+       (if (string-equal (substring str 0 1) "!")
+            (list
+             (cons "" t)
+             (list (ivy--regex (car parts))))
+           (ivy--regex (car parts))))
       (2
        (let ((res
               (mapcar #'list

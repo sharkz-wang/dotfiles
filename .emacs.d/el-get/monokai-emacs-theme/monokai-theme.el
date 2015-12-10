@@ -4,7 +4,7 @@
 
 ;; Author: Kelvin Smith <oneKelvinSmith@gmail.com>
 ;; URL: http://github.com/oneKelvinSmith/monokai-emacs
-;; Version: 0.2.2
+;; Version: 0.2.3
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -35,6 +35,9 @@
 ;;
 ;; Color Scheme Designer 3 for complementary colours.
 ;; - http://colorschemedesigner.com/
+;;
+;; Xterm 256 Color Chart
+;; - https://upload.wikimedia.org/wikipedia/en/1/15/Xterm_256color_chart.svg
 ;;
 ;; K. Adam Christensen for his personal monokai theme that addresses 256 colours.
 ;; - https://github.com/pope/personal/blob/master/etc/emacs.d/monokai-theme.el
@@ -183,27 +186,24 @@ Also affects 'linum-mode' background."
        (terminal-green                    "#87D700")
        (terminal-gray                     "#444444")
        ;; Darker and lighter accented colors
-       ;;
-       ;; TODO: find terminal equivalents for all window colors (on the right)
-       ;;
-       (terminal-yellow-d                 "#968B26")
-       (terminal-yellow-l                 "#FFF68F")
-       (terminal-orange-d                 "#A0522D")
-       (terminal-orange-l                 "#FFA54F")
-       (terminal-red-d                    "#5F0000")
-       (terminal-red-l                    "#EE6AA7")
-       (terminal-magenta-d                "#A41F99")
-       (terminal-magenta-l                "#FE87F4")
-       (terminal-violet-d                 "#562AA6")
-       (terminal-violet-l                 "#C2A1FF")
-       (terminal-blue-d                   "#21889B")
-       (terminal-blue-l                   "#8DE6F7")
-       (terminal-cyan-d                   "#349B8D")
-       (terminal-cyan-l                   "#AFEEEE")
-       (terminal-green-d                  "#6B8E23")
-       (terminal-green-l                  "#B3EE3A")
-       (terminal-gray-d                   "#3a3a3a")
-       (terminal-gray-l                   "#6c6c6c")
+       (terminal-yellow-d                 "#878700")
+       (terminal-yellow-l                 "#FFFF87")
+       (terminal-orange-d                 "#AF5F00")
+       (terminal-orange-l                 "#FFAF5F")
+       (terminal-red-d                    "#870000")
+       (terminal-red-l                    "#FF5F87")
+       (terminal-magenta-d                "#AF0087")
+       (terminal-magenta-l                "#FF87DF")
+       (terminal-violet-d                 "#5F00AF")
+       (terminal-violet-l                 "#AF87D7")
+       (terminal-blue-d                   "#008787")
+       (terminal-blue-l                   "#87D7FF")
+       (terminal-cyan-d                   "#5FAFAF")
+       (terminal-cyan-l                   "#AFFFFF")
+       (terminal-green-d                  "#5F8700")
+       (terminal-green-l                  "#AFD700")
+       (terminal-gray-d                   "#3A3A3A")
+       (terminal-gray-l                   "#6C6C6C")
        ;; Adaptive colors
        (terminal-monokai-fg               "#F5F5F5")
        (terminal-monokai-bg               "#1B1E1C")
@@ -215,22 +215,22 @@ Also affects 'linum-mode' background."
        (terminal-monokai-fg-hc            "#171A0B")
        (terminal-monokai-fg-lc            "#141414")
        ;; High contrast colors
-       (terminal-yellow-hc                yellow-d)
-       (terminal-yellow-lc                yellow-l)
-       (terminal-orange-hc                orange-d)
-       (terminal-orange-lc                orange-l)
-       (terminal-red-hc                   red-d)
-       (terminal-red-lc                   red-l)
-       (terminal-magenta-hc               magenta-d)
-       (terminal-magenta-lc               magenta-l)
-       (terminal-violet-hc                violet-d)
-       (terminal-violet-lc                violet-l)
-       (terminal-blue-hc                  blue-d)
-       (terminal-blue-lc                  blue-l)
-       (terminal-cyan-hc                  cyan-d)
-       (terminal-cyan-lc                  cyan-l)
-       (terminal-green-hc                 green-d)
-       (terminal-green-lc                 green-l)
+       (terminal-yellow-hc                terminal-yellow-d)
+       (terminal-yellow-lc                terminal-yellow-l)
+       (terminal-orange-hc                terminal-orange-d)
+       (terminal-orange-lc                terminal-orange-l)
+       (terminal-red-hc                   terminal-red-d)
+       (terminal-red-lc                   terminal-red-l)
+       (terminal-magenta-hc               terminal-magenta-d)
+       (terminal-magenta-lc               terminal-magenta-l)
+       (terminal-violet-hc                terminal-violet-d)
+       (terminal-violet-lc                terminal-violet-l)
+       (terminal-blue-hc                  terminal-blue-d)
+       (terminal-blue-lc                  terminal-blue-l)
+       (terminal-cyan-hc                  terminal-cyan-d)
+       (terminal-cyan-lc                  terminal-cyan-l)
+       (terminal-green-hc                 terminal-green-d)
+       (terminal-green-lc                 terminal-green-l)
        ;; customize based face properties
        (terminal-s-variable-pitch         (if monokai-use-variable-pitch
                                               'variable-pitch 'default))
@@ -2446,6 +2446,10 @@ Also affects 'linum-mode' background."
 
 
    ;; helm (these probably need tweaking)
+   ;;
+   ;; TODO: make helm navigation look less jarring
+   ;; https://github.com/emacs-helm/helm/search?utf8=%E2%9C%93&q=defface&type=Code
+   ;;
    `(helm-apt-deinstalled
      ((,class (:foreground ,monokai-comments))
       (,terminal-class (:foreground ,terminal-monokai-comments))))
@@ -2985,6 +2989,34 @@ Also affects 'linum-mode' background."
                                     :weight bold))))
 
    ;; magit
+   ;;
+   ;; TODO: Add supports for all magit faces
+   ;; https://github.com/magit/magit/search?utf8=%E2%9C%93&q=face
+   ;;
+   `(magit-diff-added
+     ((,class (:foreground ,green
+                           :background ,monokai-bg))
+      (,terminal-class (:foreground ,terminal-green
+                                    :background ,terminal-monokai-bg))))
+
+   `(magit-diff-added-highlight
+     ((,class (:foreground ,green
+                           :background ,monokai-hl))
+      (,terminal-class (:foreground ,terminal-green
+                                    :background ,terminal-monokai-hl))))
+
+   `(magit-diff-removed
+     ((,class (:foreground ,red
+                           :background ,monokai-bg))
+      (,terminal-class (:foreground ,terminal-red
+                                    :background ,terminal-monokai-bg))))
+
+   `(magit-diff-removed-highlight
+     ((,class (:foreground ,red
+                           :background ,monokai-hl))
+      (,terminal-class (:foreground ,terminal-red
+                                    :background ,terminal-monokai-hl))))
+
    `(magit-section-title
      ((,class (:foreground ,yellow
                            :weight bold))
@@ -4771,8 +4803,8 @@ Also affects 'linum-mode' background."
    ;; tooltip. (NOTE: This setting has no effect on the os widgets for me
    ;; zencoding uses this)
    `(tooltip
-     ((,class (:background ,yellow-lc
-                           :foreground ,yellow-hc
+     ((,class (:background ,green
+                           :foreground ,monokai-bg
                            :inherit ,s-variable-pitch))))
 
    ;; tuareg
@@ -5439,6 +5471,10 @@ Also affects 'linum-mode' background."
    `(highlight-tail-colors
      '((,monokai-hl . 0)(,green-lc . 20)(,cyan-lc . 30)(,blue-lc . 50)
        (,yellow-lc . 60)(,orange-lc . 70)(,magenta-lc . 85)(,monokai-hl . 100)))
+
+   ;; pos-tip
+   `(pos-tip-foreground-color ,monokai-bg)
+   `(pos-tip-background-color ,green)
 
    ;; vc
    `(vc-annotate-color-map

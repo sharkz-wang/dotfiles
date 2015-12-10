@@ -6,7 +6,7 @@
 # Clojure Mode
 
 Provides Emacs font-lock, indentation, and navigation for the
-[Clojure programming language](http://clojure.org).
+[Clojure(Script) programming language](http://clojure.org).
 
 More thorough walkthroughs are available at
 [clojure-doc.org](http://clojure-doc.org/articles/tutorials/emacs.html)
@@ -14,12 +14,12 @@ and [Clojure for the Brave and the True](http://www.braveclojure.com/basic-emacs
 
 ## Installation
 
-Available on all major `package.el` community maintained repos -  [MELPA Stable][],
-[MELPA][] and [Marmalade][] repos.
+Available on the major `package.el` community maintained repos -
+[MELPA Stable][] and [MELPA][] repos.
 
-MELPA Stable and Marmalade are recommended as they have the latest stable version.
-MELPA has a development snapshot for users who don't mind breakage but
-don't want to run from a git checkout.
+MELPA Stable is the recommended repo as it has the latest stable
+version.  MELPA has a development snapshot for users who don't mind
+(infrequent) breakage but don't want to run from a git checkout.
 
 You can install `clojure-mode` using the following command:
 
@@ -188,8 +188,10 @@ Install [inf-clojure][] for basic interaction with a REPL process.
 
 ### CIDER
 
-You can also use [Leiningen][] to start an
-enhanced REPL via [CIDER][].
+[CIDER][] is a powerful Clojure interactive development environment,
+similar to SLIME for Common Lisp.
+
+If you're into Clojure and Emacs you should definitely check it out.
 
 ## Changelog
 
@@ -207,14 +209,12 @@ Distributed under the GNU General Public License; type <kbd>C-h C-c</kbd> to vie
 [melpa-stable-badge]: http://stable.melpa.org/packages/clojure-mode-badge.svg
 [melpa-package]: http://melpa.org/#/clojure-mode
 [melpa-stable-package]: http://stable.melpa.org/#/clojure-mode
-[marmalade]: https://marmalade-repo.org
 [COPYING]: http://www.gnu.org/copyleft/gpl.html
 [badge-travis]: https://travis-ci.org/clojure-emacs/clojure-mode.svg?branch=master
 [travis]: https://travis-ci.org/clojure-emacs/clojure-mode
 [CIDER]: https://github.com/clojure-emacs/cider
 [cider-nrepl]: https://github.com/clojure-emacs/cider-nrepl
 [inf-clojure]: https://github.com/clojure-emacs/inf-clojure
-[Leiningen]: http://leiningen.org
 [contributors]: https://github.com/clojure-emacs/clojure-mode/contributors
 [melpa]: http://melpa.org
 [melpa stable]: http://stable.melpa.org
