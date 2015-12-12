@@ -356,6 +356,12 @@ scroll-down-aggressively 0.01)
 (global-unset-key (kbd "C-x c"))
 (define-key helm-map (kbd "C-h") 'delete-backward-char)
 
+;; Making GNU Global support more languages
+;; 1) Install Exuberant Ctags
+;; 2) Run `pip install pygments`
+;; 3) Copy /usr/local/share/gtags/gtags.conf to ~/.globalrc
+;; 4) Update ~/.globalrc: change pigments-parser.la and exuberant-ctags.la to *.so and correct their path
+;; 5) Build tags by running `gtags --gtagslabel=pygments`
 (require 'helm-gtags)
 (add-hook 'dired-mode-hook 'helm-gtags-mode)
 (add-hook 'eshell-mode-hook 'helm-gtags-mode)
