@@ -146,28 +146,26 @@
 
 (tool-bar-mode -1)			; no tool bar with icons
 (scroll-bar-mode -1)			; no scroll bars
-(unless (string-match "apple-darwin" system-configuration)
-;; on mac, there's always a menu bar drown, don't have it empty
-(menu-bar-mode -1))
+(menu-bar-mode -1)
 
 (global-hl-line-mode)			; highlight current line
 (global-linum-mode 1)			; add line numbers on the left
 (setq linum-format "%d ")
 
 (global-set-key (kbd "RET") 'newline-and-indent)
-(setq-default tab-width 8)
 (global-set-key (kbd "C-h") 'delete-backward-char)
 (define-key isearch-mode-map (kbd "C-h") 'isearch-del-char)
 
-;(setq browse-url-browser-function (quote browse-url-firefox))
-(setq browse-url-browser-function 'w3m-goto-url-new-session)
+(setq browse-url-browser-function (quote browse-url-firefox))
+;(setq browse-url-browser-function 'w3m-goto-url-new-session)
 
 (define-key global-map (kbd "C-w") 'evil-delete-backward-word)
 (define-key global-map (kbd "C-x C-o") 'ff-find-other-file)
 
-(setq-default indent-tabs-mode  nil)
-(setq tab-width 4 c-basic-offset 4)
-(define-key global-map (kbd "RET") 'newline-and-indent)
+(setq-default indent-tabs-mode t)
+(setq c-default-style "k&r")
+(setq-default tab-width 8)
+;(defvaralias 'c-basic-offset 'tab-width)
 
 ;; under mac, have Command as Meta and keep Option for localized input
 (when (string-match "apple-darwin" system-configuration)
@@ -363,6 +361,7 @@ scroll-down-aggressively 0.01)
 (add-hook 'eshell-mode-hook 'helm-gtags-mode)
 (add-hook 'c-mode-hook 'helm-gtags-mode)
 (add-hook 'c++-mode-hook 'helm-gtags-mode)
+(add-hook 'python-mode-hook 'helm-gtags-mode)
 (add-hook 'asm-mode-hook 'helm-gtags-mode)
 
 (setq
@@ -420,13 +419,13 @@ scroll-down-aggressively 0.01)
 (define-key company-active-map (kbd "C-h") 'delete-backward-char)
 (define-key company-active-map (kbd "C-w") 'evil-delete-backward-word)
 
-(define-key company-active-map (kbd "SPC") (lambda () (interactive) (company-complete-selection) (insert " ")))
-(define-key company-active-map (kbd ".") (lambda () (interactive) (company-complete-selection) (insert ".")))
-(define-key company-active-map (kbd "-") (lambda () (interactive) (company-complete-selection) (insert "-")))
-(define-key company-active-map (kbd ")") (lambda () (interactive) (company-complete-selection) (insert ")")))
-(define-key company-active-map (kbd "}") (lambda () (interactive) (company-complete-selection) (insert "}")))
-(define-key company-active-map (kbd ">") (lambda () (interactive) (company-complete-selection) (insert ">")))
-(define-key company-active-map (kbd ";") (lambda () (interactive) (company-complete-selection) (insert ";")))
+;(define-key company-active-map (kbd "SPC") (lambda () (interactive) (company-complete-selection) (insert " ")))
+;(define-key company-active-map (kbd ".") (lambda () (interactive) (company-complete-selection) (insert ".")))
+;(define-key company-active-map (kbd "-") (lambda () (interactive) (company-complete-selection) (insert "-")))
+;(define-key company-active-map (kbd ")") (lambda () (interactive) (company-complete-selection) (insert ")")))
+;(define-key company-active-map (kbd "}") (lambda () (interactive) (company-complete-selection) (insert "}")))
+;(define-key company-active-map (kbd ">") (lambda () (interactive) (company-complete-selection) (insert ">")))
+;(define-key company-active-map (kbd ";") (lambda () (interactive) (company-complete-selection) (insert ";")))
 
 ;; ycmd Installation
 ;; 1) git clone https://github.com/Valloric/ycmd.git
@@ -438,8 +437,8 @@ scroll-down-aggressively 0.01)
 (require 'ycmd)
 (add-hook 'after-init-hook #'global-ycmd-mode)
 (setq ycmd-force-semantic-completion t)
-(set-variable 'ycmd-server-command (list "python" (expand-file-name "~/tmp/src/ycmd/ycmd")))
-(set-variable 'ycmd-global-config "~/tmp/src/ycmd/cpp/ycm/.ycm_extra_conf.py")
+(set-variable 'ycmd-server-command (list "python" (expand-file-name "/opt/ycmd/ycmd")))
+(set-variable 'ycmd-global-config "/opt/ycmd/cpp/ycm/.ycm_extra_conf.py")
 (require 'company-ycmd)
 (company-ycmd-setup)
 ;(require 'flycheck-ycmd)
@@ -523,6 +522,7 @@ scroll-down-aggressively 0.01)
 (setq projectile-indexing-method 'native)
 (setq projectile-enable-caching t)
 (setq projectile-completion-system 'helm)
+(define-key projectile-mode-map (kbd "C-c p s g") 'helm-projectile-grep)
 
 (require 'dtrt-indent)
 (dtrt-indent-mode 1)
