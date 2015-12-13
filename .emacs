@@ -74,6 +74,8 @@
    (:name cedet)
    (:name yasnippet)
 
+   (:name elpy)
+
    (:name helm-dash)
 
    (:name emacs-w3m)
@@ -222,15 +224,20 @@
 (add-hook 'c++-mode-hook
     (lambda () (modify-syntax-entry ?_ "w")))
 (add-hook 'python-mode-hook
-    (lambda () (modify-syntax-entry ?_ "w")))
+    (lambda () (modify-syntax-entry ?_ "w")
+				(elpy-enable)
+				(flymake-mode t)
+				(global-set-key (kbd "C-c C-d") 'elpy-doc)))
 (add-hook 'emacs-lisp-mode-hook
     (lambda () (modify-syntax-entry ?_ "w")))
 
-(require 'evil-surround)
-(require 'evil-nerd-commenter)
 (require 'evil-leader)
 (global-evil-leader-mode)
 (evil-leader/set-leader "\\")
+(define-key evil-visual-state-map (kbd "\\ c i") 'evilnc-comment-or-uncomment-lines)
+(require 'evil-surround)
+(require 'evil-nerd-commenter)
+
 (require 'evil-org)
 
 ;; (setcdr evil-insert-state-map [escape])
