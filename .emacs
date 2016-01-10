@@ -401,7 +401,12 @@ scroll-down-aggressively 0.01)
 (setq speedbar-show-unknown-files t)
 (setq speedbar-use-images nil)
 
-(global-set-key (kbd "C-\\") 'sr-speedbar-toggle)
+(global-set-key (kbd "C-\\") '(lambda () (interactive)
+								(if (sr-speedbar-exist-p)
+								  (sr-speedbar-close)
+								  (if (sr-speedbar-buffer-exist-p speedbar-buffer)
+									(sr-speedbar-open)
+									(progn (sr-speedbar-open) (evil-goto-first-line))))))
 
 ;; (add-hook 'emacs-startup-hook (lambda () (sr-speedbar-open) (other-window 1)))
 (add-hook 'speedbar-mode-hook '(lambda () (linum-mode 0) (visual-line-mode 0)))
