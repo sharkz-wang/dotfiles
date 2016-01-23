@@ -129,6 +129,9 @@
       :type git
       :url "https://github.com/alpaker/Fill-Column-Indicator")
 
+   (:name hl-spotlight
+      :type elpa)
+
    (:name molokai-theme
 	  :type git
 	  :url "https://github.com/hbin/molokai-theme")
@@ -336,6 +339,11 @@
 
 ;(require 'molokai-theme)
 (require 'monokai-theme)
+
+(hl-spotlight-mode 1)
+(setq hl-spotlight-height 0)
+(custom-set-faces
+  '(hl-spotlight ((t :inherit highlight :weight bold))))
 
 ;; make scroll smooth
 (setq scroll-step 1)
