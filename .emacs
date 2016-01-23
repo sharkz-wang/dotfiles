@@ -97,6 +97,8 @@
 		:type git
 		:url "https://github.com/koko1000ban/emacs-uncrustify-mode")
 
+   (:name linum-relative)
+
    (:name sr-speedbar)
    (:name dtrt-indent)
 
@@ -151,8 +153,37 @@
 (menu-bar-mode -1)
 
 (global-hl-line-mode)			; highlight current line
+
 (global-linum-mode 1)			; add line numbers on the left
-(setq linum-format "%d ")
+(setq linum-format "%d  ")
+
+(require 'linum-relative)
+(setq linum-relative-current-symbol "")
+(custom-set-faces
+  '(linum-relative-current-face ((t :inherit linum :foreground "#CDC673" :weight bold))))
+
+(add-hook 'linum-before-numbering-hook
+		  (lambda ()
+			(if (eq linum-format 'linum-format-func)
+			  (setq-local linum-format-fmt
+						  (let ((w (length (number-to-string
+											 (count-lines (point-min) (point-max))))))
+							(concat " %" (number-to-string w) "d ")))
+			  (setq linum-relative-format
+					(let ((w (length (number-to-string
+									   (count-lines (point-min) (point-max))))))
+					  (concat " %" (number-to-string w) "s "))))))
+
+(defun linum-format-func (line)
+  (concat
+   (propertize (format linum-format-fmt line) 'face 'linum)
+   (propertize " " 'face 'mode-line)))
+
+(setq linum-format 'linum-format-func)
+(define-key evil-normal-state-map ";" '(lambda () (interactive)
+										 (if (eq linum-format 'linum-format-func)
+										   (setq linum-format 'linum-relative)
+										   (setq linum-format 'linum-format-func))))
 
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C-h") 'delete-backward-char)
@@ -575,22 +606,6 @@ scroll-down-aggressively 0.01)
 ;; (defun update-linum-format (window start)
 ;;     (interactive)
 ;;     (setq linum-format "%9d "))
-
-(unless window-system
-  (add-hook 'linum-before-numbering-hook
-            (lambda ()
-            (setq-local linum-format-fmt
-                        (let ((w (length (number-to-string
-                                            (count-lines (point-min) (point-max))))))
-                            (concat "%" (number-to-string w) "d "))))))
-
-(defun linum-format-func (line)
-  (concat
-   (propertize (format linum-format-fmt line) 'face 'linum)
-   (propertize " " 'face 'mode-line)))
-
-(unless window-system
-  (setq linum-format 'linum-format-func))
 
 ;(require 'indent-guide)
 ;(indent-guide-global-mode 1)
