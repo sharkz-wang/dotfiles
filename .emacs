@@ -163,7 +163,12 @@
 (require 'linum-relative)
 (setq linum-relative-current-symbol "")
 (custom-set-faces
-  '(linum-relative-current-face ((t :inherit linum :foreground "#CDC673" :weight bold))))
+  '(linum-relative-current-face ((t :inherit hl-spotlight :foreground "#CDC673"))))
+
+(defadvice linum-update (around hl-linum-update)
+		     (let ((linum-current-line-number (line-number-at-pos)))
+			       ad-do-it))
+(ad-activate 'linum-update)
 
 (add-hook 'linum-before-numbering-hook
 		  (lambda ()
@@ -179,7 +184,10 @@
 
 (defun linum-format-func (line)
   (concat
-   (propertize (format linum-format-fmt line) 'face 'linum)
+   (propertize (format linum-format-fmt line) 'face
+			   (if (eq linum-current-line-number line)
+			   '((t :inherit hl-spotlight :foreground "#CDC673"))
+			   '((t :inherit linum))))
    (propertize " " 'face 'mode-line)))
 
 (setq linum-format 'linum-format-func)
