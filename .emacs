@@ -282,6 +282,9 @@
 
 (require 'evil-org)
 
+(define-key evil-normal-state-map (kbd "C-i") '(lambda () (interactive)
+												 (evil-show-file-info)))
+
 ;; (setcdr evil-insert-state-map [escape])
 ;; (define-key evil-insert-state-map
 ;; 	(read-kbd-macro evil-toggle-key) 'evil-emacs-state)
