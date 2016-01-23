@@ -688,7 +688,7 @@ scroll-down-aggressively 0.01)
 (define-key global-map (kbd "M-}") 'paredit-forward-barf-sexp)
 (define-key global-map (kbd "M-{") 'paredit-backward-barf-sexp)
 
-(show-paren-mode 1)
+;(show-paren-mode 1)
 
 (require 'highlight-parentheses)
 (global-highlight-parentheses-mode 1)
