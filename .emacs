@@ -26,8 +26,11 @@
    (:name evil-leader)
    (:name evil-nerd-commenter)
    (:name evil-org-mode
-		:type git
-		:url "https://github.com/edwtjo/evil-org-mode")
+	  :type git
+	  :url "https://github.com/edwtjo/evil-org-mode")
+   (:name evil-visual-mark-mode
+	  :type git
+	  :url "https://github.com/roman/evil-visual-mark-mode")
 
    (:name golden-ratio)
    (:name adaptive-wrap)
