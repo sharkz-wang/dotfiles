@@ -32,6 +32,8 @@
 	  :type git
 	  :url "https://github.com/roman/evil-visual-mark-mode")
 
+   (:name evil-jumper)
+
    (:name golden-ratio)
    (:name adaptive-wrap)
 
@@ -259,6 +261,9 @@
 
 (require 'evil)
 (evil-mode t)
+
+(evil-jumper-mode t)
+(evil-visual-mark-mode t)
 
 (add-hook 'org-mode-hook
     (lambda () (modify-syntax-entry ?_ "w")))
