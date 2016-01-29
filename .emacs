@@ -163,7 +163,7 @@
 (require 'linum-relative)
 (setq linum-relative-current-symbol "")
 (custom-set-faces
-  '(linum-relative-current-face ((t :inherit hl-spotlight :foreground "#CDC673"))))
+  '(linum-relative-current-face ((t :inherit hl-spotlight :foreground "#FF8700"))))
 
 (defadvice linum-update (around hl-linum-update)
 		     (let ((linum-current-line-number (line-number-at-pos)))
@@ -186,7 +186,7 @@
   (concat
    (propertize (format linum-format-fmt line) 'face
 			   (if (eq linum-current-line-number line)
-			   '((t :inherit hl-spotlight :foreground "#CDC673"))
+			   '((t :inherit hl-spotlight :foreground "#FF8700"))
 			   '((t :inherit linum))))))
 
 (setq linum-format 'linum-format-func)
