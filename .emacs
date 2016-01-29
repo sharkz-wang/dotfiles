@@ -158,7 +158,7 @@
 (global-hl-line-mode)			; highlight current line
 
 (global-linum-mode 1)			; add line numbers on the left
-(setq linum-format "%d  ")
+(setq linum-format 'linum-relative)
 
 (require 'linum-relative)
 (setq linum-relative-current-symbol "")
@@ -189,7 +189,6 @@
 			   '((t :inherit hl-spotlight :foreground "#FF8700"))
 			   '((t :inherit linum))))))
 
-(setq linum-format 'linum-format-func)
 (define-key evil-normal-state-map ";" '(lambda () (interactive)
 										 (if (eq linum-format 'linum-format-func)
 										   (setq linum-format 'linum-relative)
