@@ -176,19 +176,18 @@
 			  (setq-local linum-format-fmt
 						  (let ((w (length (number-to-string
 											 (count-lines (point-min) (point-max))))))
-							(concat " %" (number-to-string w) "d ")))
+							(concat " %" (number-to-string w) "d   ")))
 			  (setq linum-relative-format
 					(let ((w (length (number-to-string
 									   (count-lines (point-min) (point-max))))))
-					  (concat " %" (number-to-string w) "s "))))))
+					  (concat " %" (number-to-string w) "s   "))))))
 
 (defun linum-format-func (line)
   (concat
    (propertize (format linum-format-fmt line) 'face
 			   (if (eq linum-current-line-number line)
 			   '((t :inherit hl-spotlight :foreground "#CDC673"))
-			   '((t :inherit linum))))
-   (propertize " " 'face 'mode-line)))
+			   '((t :inherit linum))))))
 
 (setq linum-format 'linum-format-func)
 (define-key evil-normal-state-map ";" '(lambda () (interactive)
