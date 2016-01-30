@@ -36,6 +36,9 @@
 
    (:name golden-ratio)
    (:name adaptive-wrap)
+   (:name ace-window
+	  :type git
+	  :url "https://github.com/abo-abo/ace-window")
 
    (:name undo-tree)
    (:name paredit)
@@ -290,6 +293,19 @@
 
 (define-key evil-normal-state-map (kbd "C-i") '(lambda () (interactive)
 												 (evil-show-file-info)))
+(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+(define-key evil-normal-state-map (kbd "C-w") 'ace-window)
+(define-key global-map (kbd "C-c w") 'ace-window)
+(defvar aw-dispatch-alist
+  '((?x aw-delete-window " Ace - Delete Window")
+    (?m aw-swap-window " Ace - Swap Window")
+    (?n aw-flip-window)
+    (?l aw-flip-window)
+    (?v aw-split-window-vert " Ace - Split Vert Window")
+    (?b aw-split-window-horz " Ace - Split Horz Window")
+    (?i delete-other-windows " Ace - Maximize Window")
+    (?o delete-other-windows))
+  "List of actions for `aw-dispatch-default'.")
 
 ;; (setcdr evil-insert-state-map [escape])
 ;; (define-key evil-insert-state-map
