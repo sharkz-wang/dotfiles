@@ -412,6 +412,10 @@
 
 ;(require 'molokai-theme)
 (require 'monokai-theme)
+(custom-set-faces
+ `(company-tooltip-selection ((t (:foreground ,"#F5F5F5" :background ,"#444444"))))
+ `(company-tooltip-common-selection ((t (:foreground ,"#F5F5F5" :background ,"#444444"))))
+ `(company-tooltip-common ((t (:foreground ,"#F5F5F5" :background ,"#444444")))))
 
 (hl-spotlight-mode 1)
 (setq hl-spotlight-height 0)
