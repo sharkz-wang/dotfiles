@@ -344,6 +344,9 @@
     (?o delete-other-windows))
   "List of actions for `aw-dispatch-default'.")
 
+(define-key evil-normal-state-map "'" 'evil-goto-mark)
+(define-key evil-normal-state-map "`" 'evil-goto-mark-line)
+
 ;; (setcdr evil-insert-state-map [escape])
 ;; (define-key evil-insert-state-map
 ;; 	(read-kbd-macro evil-toggle-key) 'evil-emacs-state)
