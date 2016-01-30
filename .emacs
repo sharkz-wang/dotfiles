@@ -285,9 +285,44 @@
 (require 'evil-leader)
 (global-evil-leader-mode)
 (evil-leader/set-leader "\\")
-(define-key evil-visual-state-map (kbd "\\ c i") 'evilnc-comment-or-uncomment-lines)
+
 (require 'evil-surround)
 (require 'evil-nerd-commenter)
+
+(defun evilnc-invert-comment-line-by-line (&optional NUM) (interactive "p")
+       (setq evilnc-invert-comment-line-by-line t)
+       (evilnc-comment-or-uncomment-lines NUM)
+       (setq evilnc-invert-comment-line-by-line nil))
+
+(defun comment-region-or-line ()
+  "Comments or uncomments the region or the current line if there's no active region."
+  (interactive)
+  (let (beg end)
+    (if (region-active-p)
+	(setq beg (region-beginning) end (region-end))
+      (setq beg (line-beginning-position) end (line-end-position)))
+    (comment-region beg end)))
+
+(defun uncomment-region-or-line ()
+  "Comments or uncomments the region or the current line if there's no active region."
+  (interactive)
+  (let (beg end)
+    (if (region-active-p)
+	(setq beg (region-beginning) end (region-end))
+      (setq beg (line-beginning-position) end (line-end-position)))
+    (uncomment-region beg end)))
+
+(global-set-key (kbd "C-/") 'evilnc-invert-comment-line-by-line)
+(global-set-key (kbd "C-_") 'evilnc-invert-comment-line-by-line)
+(define-key evil-normal-state-map (kbd "C-/") 'evilnc-invert-comment-line-by-line)
+(define-key evil-normal-state-map (kbd "C-_") 'evilnc-invert-comment-line-by-line)
+
+(evil-leader/set-key
+  "cc" 'comment-region-or-line
+  "cu" 'uncomment-region-or-line
+  "ci" 'evilnc-invert-comment-line-by-line
+  "cy" 'evilnc-copy-and-comment-lines
+  "\\" 'evilnc-comment-operator)
 
 (require 'evil-org)
 
@@ -719,21 +754,6 @@ scroll-down-aggressively 0.01)
 
 (require 'highlight-parentheses)
 (global-highlight-parentheses-mode 1)
-
-(defun evilnc-default-hotkeys ()
-	"Set the hotkeys of evil-nerd-comment"
-	(interactive)
-	(global-set-key (kbd "M-;") 'evilnc-comment-or-uncomment-lines)
-	(global-set-key (kbd "C-c l") 'evilnc-comment-or-uncomment-to-the-line)
-	(global-set-key (kbd "C-c c") 'evilnc-copy-and-comment-lines)
-	(global-set-key (kbd "C-c p") 'evilnc-comment-or-uncomment-paragraphs)
-
-	(define-key evil-normal-state-map "\\ci" 'evilnc-comment-or-uncomment-lines)
-	(define-key evil-normal-state-map "\\cl" 'evilnc-comment-or-uncomment-to-the-line)
-	(define-key evil-normal-state-map "\\cc" 'evilnc-copy-and-comment-lines)
-	(define-key evil-normal-state-map "\\cp" 'evilnc-comment-or-uncomment-paragraphs)
-	(define-key evil-normal-state-map "\\cr" 'comment-or-uncomment-region))
-(evilnc-default-hotkeys)
 
 (defun beginning-of-indentation-or-line ()
   "Move point to the beginning of text on the current line; if that is already
