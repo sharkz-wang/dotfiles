@@ -291,8 +291,10 @@
 
 (require 'evil-org)
 
-(define-key evil-normal-state-map (kbd "C-i") '(lambda () (interactive)
-												 (evil-show-file-info)))
+(define-key evil-normal-state-map (kbd "_") '(lambda () (interactive)
+						 (message (buffer-file-name
+							   (window-buffer (minibuffer-selected-window))))))
+
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 (define-key evil-normal-state-map (kbd "C-w") 'ace-window)
 (define-key global-map (kbd "C-c w") 'ace-window)
