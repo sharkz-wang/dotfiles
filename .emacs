@@ -690,6 +690,17 @@ scroll-down-aggressively 0.01)
 (make-directory "~/.emacs.d/autosaves/" t)
 (make-directory "~/.emacs.d/backups/" t)
 
+(setq undo-tree-history-dir (let ((dir (concat user-emacs-directory
+					       "undo-tree-history/")))
+			      (make-directory dir :parents)
+			      dir))
+(setq undo-tree-history-directory-alist `(("." . ,undo-tree-history-dir)))
+
+(advice-add 'undo-tree-make-history-save-file-name :filter-return
+	    (lambda (return-val) (concat return-val ".gz")))
+
+(setq undo-tree-auto-save-history t)
+
 ;(defun my-emacs-lisp-mode-hook ()
   ;(highlight-indentation)
   ;(set-face-background 'highlight-indentation-face "#303030"))
