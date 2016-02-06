@@ -45,6 +45,7 @@ alias egrep='egrep --color=always'
 alias grep='grep --color=always'
 
 alias cp='rsync -avh -P'
+alias scp='rsync -avhz'
 
 alias builddb='ctags -R && cscope -Rkbq && (find . -name "*.h" -exec echo "-include {}" \; > .clang_complete)'
 
