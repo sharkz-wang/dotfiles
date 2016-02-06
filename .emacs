@@ -429,8 +429,8 @@ scroll-conservatively 0)
 (setq-default scroll-up-aggressively 0.01
 scroll-down-aggressively 0.01)
 
-(define-key global-map (kbd "C-c SPC") 'avy-goto-char)
-(define-key evil-normal-state-map (kbd "SPC") 'avy-goto-char)
+(define-key global-map (kbd "C-c SPC") 'avy-goto-char-2)
+(define-key evil-normal-state-map (kbd "SPC") 'avy-goto-char-2)
 
 (require 'compile)
 ;; (add-hook 'c-mode-hook
