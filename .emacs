@@ -550,6 +550,17 @@ scroll-down-aggressively 0.01)
 ;(global-semantic-idle-summary-mode 1)
 (global-semantic-stickyfunc-mode 1)
 
+(define-key semantic-mode-map (kbd "C-c g i") 'semantic-ia-show-summary)
+
+(defun helm-gtags-dwim-new-split () (interactive)
+  (split-window-below)
+  (other-window 1)
+  (helm-gtags-dwim)
+  (recenter)
+  (other-window 1)
+  (recenter))
+(define-key semantic-mode-map (kbd "C-c g 2 d") 'helm-gtags-dwim-new-split)
+
 ;(semantic-add-system-include "/usr/include/boost" 'c++-mode)
 ;(semantic-add-system-include "~/linux/kernel")
 ;(semantic-add-system-include "~/linux/include")
