@@ -89,7 +89,7 @@ set shiftwidth=4
 "set expandtab
 
 set nowrap
-set virtualedit=all
+"set virtualedit=all
 
 set tabpagemax=255
 
