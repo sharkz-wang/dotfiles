@@ -197,11 +197,6 @@
 			   '((t :inherit hl-spotlight :foreground "#FF8700"))
 			   '((t :inherit linum))))))
 
-(define-key evil-normal-state-map ";" '(lambda () (interactive)
-										 (if (eq linum-format 'linum-format-func)
-										   (setq linum-format 'linum-relative)
-										   (setq linum-format 'linum-format-func))))
-
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C-h") 'delete-backward-char)
 (define-key isearch-mode-map (kbd "C-h") 'isearch-del-char)
@@ -909,3 +904,8 @@ scroll-down-aggressively 0.01)
 (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
 (setq TeX-view-program-list
      '(("PDF Viewer" "xpdf -g %n %o %b")))
+
+(define-key evil-normal-state-map (kbd "C-_") '(lambda () (interactive)
+										 (if (eq linum-format 'linum-format-func)
+										   (setq linum-format 'linum-relative)
+										   (setq linum-format 'linum-format-func))))
