@@ -78,6 +78,11 @@ eval `dircolors ${HOME}/.dircolors`
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 source "${HOME}/.zshsyntaxcolors"
 
+hello_in_c() {
+	echo '#include <stdio.h>'
+	echo 'int main(void) {\n\tprintf("Hello, World!\\n");\n\treturn 0;\n}'
+}
+
 # Tab-to-list
 function expand-or-complete-or-list-files() {
 	if [[ $#BUFFER == 0 ]]; then
