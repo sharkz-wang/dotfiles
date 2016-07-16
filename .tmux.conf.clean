@@ -50,9 +50,25 @@ bind R source-file ~/.tmux.conf
 # Dequeue notification on status bar
 bind r run-shell "tmux switch-client -t $(txndeq)"
 
+# Mini-screen management
+# Run: tmux -f ~/.tmux.conf.clean -L ${session_name} new-session 'zsh'
+bind-key N command-prompt -p 'session name:'\
+		"send-keys \'tmux -f ~/.tmux.conf.clean -L %1 new-session \"zsh\"\'\;\
+		 send-keys C-m"
+# Run: tmux -L ${session_name} attach-session
+bind-key A command-prompt -p 'session name:'\
+		"send-keys \'tmux -L %1 attach-session\'\;\
+		send-keys C-m"
+bind-key a command-prompt -p 'session name:'\
+		"split-window -h -p 40\;\
+		send-keys \'tmux -L %1 attach-session\'\;\
+		send-keys C-m"
 # tmux -f ~/.tmux.conf.clean -L gtd new-session 'run gtd'
 bind-key G split-window -h -p 35\;\
 		send-keys 'tmux -L gtd attach-session'\;\
+		send-keys C-m
+bind-key I split-window -h -p 40\;\
+		send-keys 'tmux -L irssi attach-session'\;\
 		send-keys C-m
 
 # vim copying
@@ -73,6 +89,7 @@ bind-key space send-keys C-e\;\
 		send-keys C-l\;\
 		clear-history\;\
 		send-keys 'eval $TMUX_COMPILE'\;\
+		send-keys C-i\;\
 		send-keys C-m
 bind-key C-e copy-mode\;\
 		send-keys "G?error"\;\
