@@ -70,7 +70,13 @@
 
    (:name magit				; git meet emacs, and a binding
 	  :after (progn
-		   (global-set-key (kbd "C-x C-z") 'magit-status)))
+		   (global-set-key (kbd "C-c m s") 'magit-status)
+		   (global-set-key (kbd "C-c m d") 'magit-diff)
+		   (global-set-key (kbd "C-c m c") 'magit-commit)
+		   (global-set-key (kbd "C-c m p") 'magit-push)
+		   (global-set-key (kbd "C-c m l") 'magit-log)
+		   (global-set-key (kbd "C-c m C") 'magit-clean)
+		   (global-set-key (kbd "C-c m o") 'magit-checkout)))
 
    (:name deferred)
    (:name popup)
