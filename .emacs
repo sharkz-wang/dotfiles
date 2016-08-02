@@ -68,13 +68,17 @@
 			(global-set-key (kbd "M-x") 'smex)
 			(global-set-key (kbd "M-X") 'smex-major-mode-commands)))
 
+   (:name evil-magit
+		:type git
+		:url "https://github.com/justbur/evil-magit")
    (:name magit				; git meet emacs, and a binding
 	  :after (progn
 		   (global-set-key (kbd "C-c m s") 'magit-status)
 		   (global-set-key (kbd "C-c m d") 'magit-diff)
 		   (global-set-key (kbd "C-c m c") 'magit-commit)
 		   (global-set-key (kbd "C-c m p") 'magit-push)
-		   (global-set-key (kbd "C-c m l") 'magit-log)
+		   (global-set-key (kbd "C-c m l") 'magit-log-current)
+		   (global-set-key (kbd "C-c m L") 'magit-log)
 		   (global-set-key (kbd "C-c m C") 'magit-clean)
 		   (global-set-key (kbd "C-c m o") 'magit-checkout)))
 
@@ -915,3 +919,5 @@ scroll-down-aggressively 0.01)
 										 (if (eq linum-format 'linum-format-func)
 										   (setq linum-format 'linum-relative)
 										   (setq linum-format 'linum-format-func))))
+
+(require 'evil-magit)
