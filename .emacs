@@ -335,6 +335,11 @@
 						 (message (buffer-file-name
 							   (window-buffer (minibuffer-selected-window))))))
 
+(define-key evil-normal-state-map (kbd "B") '(lambda () (interactive)
+						 ;(message (buffer-file-name
+						 (message (substring (shell-command-to-string "git rev-parse --abbrev-ref HEAD") 0 -1)
+							   )))
+
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 (define-key evil-normal-state-map (kbd "C-w") 'ace-window)
 (define-key global-map (kbd "C-c w") 'ace-window)
