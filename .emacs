@@ -77,6 +77,7 @@
 		   (global-set-key (kbd "C-c m d") 'magit-diff)
 		   (global-set-key (kbd "C-c m c") 'magit-commit)
 		   (global-set-key (kbd "C-c m p") 'magit-push)
+		   (global-set-key (kbd "C-c m P") 'magit-pull)
 		   (global-set-key (kbd "C-c m l") 'magit-log-current)
 		   (global-set-key (kbd "C-c m L") 'magit-log)
 		   (global-set-key (kbd "C-c m C") 'magit-clean)
@@ -926,3 +927,4 @@ scroll-down-aggressively 0.01)
 										   (setq linum-format 'linum-format-func))))
 
 (require 'evil-magit)
+(evil-define-key evil-magit-state magit-mode-map "=" 'magit-diff-less-context)
