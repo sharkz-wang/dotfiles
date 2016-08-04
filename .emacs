@@ -251,6 +251,8 @@
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 (global-set-key (kbd "C-x B") 'ibuffer)
 
+(global-set-key (kbd "C-c C-d") 'ediff-buffers)
+
 ;; C-x C-j opens dired with the cursor right on the file you're editing
 (require 'dired-x)
 
