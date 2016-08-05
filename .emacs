@@ -74,6 +74,8 @@
    (:name magit				; git meet emacs, and a binding
 	  :after (progn
 		   (global-set-key (kbd "C-c m s") 'magit-status)
+		   (global-set-key (kbd "C-c C-s") 'magit-status)
+		   (global-set-key (kbd "C-c s") 'magit-status)
 		   (global-set-key (kbd "C-c m d") 'magit-diff)
 		   (global-set-key (kbd "C-c m c") 'magit-commit)
 		   (global-set-key (kbd "C-c m p") 'magit-push)
