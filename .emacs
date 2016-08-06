@@ -251,6 +251,9 @@
 (global-set-key (kbd "C-c r") (lambda () (interactive) (load-file "~/.emacs")))
 (global-set-key (kbd "C-c C-r") (lambda () (interactive) (load-file "~/.emacs")))
 
+(global-set-key (kbd "C-c C-e") (lambda () (interactive) (find-file "~/.emacs")))
+(global-set-key (kbd "C-c e") (lambda () (interactive) (find-file "~/.emacs")))
+
 (global-set-key (kbd "C-x C-x") 'ido-switch-buffer)
 (global-set-key (kbd "C-q") 'delete-other-windows)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
