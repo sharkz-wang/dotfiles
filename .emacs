@@ -460,6 +460,9 @@ scroll-down-aggressively 0.01)
 (define-key evil-normal-state-map (kbd "SPC") 'avy-goto-char-2)
 
 (require 'compile)
+
+(setq compilation-scroll-output t)
+
 ;; (add-hook 'c-mode-hook
 ;; 	  (lambda ()
 ;; 		 (unless (file-exists-p "Makefile")
@@ -475,6 +478,8 @@ scroll-down-aggressively 0.01)
 ;; 			     (or (getenv "CPPFLAGS") "-DDEBUG=9")
 ;; 			     (or (getenv "CFLAGS") "-ansi -pedantic -Wall -g")
 ;; 			       file))))))
+
+(setq compile-command "make")
  (add-hook 'c-mode-hook
            (lambda ()
 	          (unless (file-exists-p "Makefile")
