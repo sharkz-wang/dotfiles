@@ -249,16 +249,21 @@
 (setq ido-show-dot-for-dired t)
 
 (global-set-key (kbd "C-c r") (lambda () (interactive) (load-file "~/.emacs")))
-(global-set-key (kbd "C-c C-r") (lambda () (interactive) (load-file "~/.emacs")))
 
 (global-set-key (kbd "C-c C-e") (lambda () (interactive) (find-file "~/.emacs")))
 (global-set-key (kbd "C-c e") (lambda () (interactive) (find-file "~/.emacs")))
+
+(global-set-key (kbd "C-c g g") (lambda () (interactive) (find-file "~/gtd.org")))
 
 (global-set-key (kbd "C-x C-x") 'ido-switch-buffer)
 (global-set-key (kbd "C-q") 'delete-other-windows)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 (global-set-key (kbd "C-x B") 'ibuffer)
+
+(global-set-key (kbd "C-x m") 'evil-visual-mark-mode)
+
+(global-set-key (kbd "C-x K") 'kill-buffer-and-window)
 
 (global-set-key (kbd "C-c C-d") 'ediff-buffers)
 
@@ -571,11 +576,14 @@ scroll-down-aggressively 0.01)
 														  (setq  speedbar-directory-unshown-regexp speedbar-default-visibility)
 														  (setq speedbar-directory-unshown-regexp speedbar-show-hidden-file))
 														  (speedbar-refresh)))
+				 (define-key speedbar-file-key-map (kbd "SPC") 'avy-goto-char-2)
 				 (define-key speedbar-file-key-map "n" 'evil-search-next)
 				 (define-key speedbar-file-key-map "N" 'evil-search-previous)
 				 (define-key speedbar-file-key-map "q" '(lambda () (interactive)
 																(kill-buffer "*SPEEDBAR*")))
-				 (define-key speedbar-file-key-map "e" 'speedbar-edit-line-and-close)
+				 (evil-define-key 'motion speedbar-file-key-map (kbd "RET") 'speedbar-edit-line-and-close)
+				 (evil-define-key 'motion speedbar-file-key-map (kbd "M-RET") 'speedbar-edit-line)
+				 (define-key speedbar-file-key-map "e" 'speedbar-edit-line)
 				 (define-key speedbar-file-key-map "d" 'speedbar-item-delete)
 				 (define-key speedbar-file-key-map "y" 'speedbar-item-copy)
 				 (define-key speedbar-key-map "g" 'evil-goto-first-line)))
@@ -716,10 +724,23 @@ scroll-down-aggressively 0.01)
 	(evil-insert-state))
   (global-set-key (kbd "C-c i ,") 'avy-insert-new-arg)
 )
+
+(add-hook 'compilation-mode-hook '(lambda ()
+				    (local-unset-key "g")
+				    (local-unset-key "h")
+				    (evil-define-key 'motion compilation-mode-map "g" 'evil-goto-first-line)
+				    (evil-define-key 'motion compilation-mode-map "h" 'evil-backward-char)
+				    (evil-define-key 'motion compilation-mode-map "r" 'recompile)
+				    ))
+
 (define-key c-mode-map (kbd "C-c C-c") 'compile)
+(define-key c-mode-map (kbd "C-c C-k") 'mode-compile-kill)
+(define-key c-mode-map (kbd "C-c C-r") 'recompile)
 (add-hook 'c-mode-hook 'private-c-c++-mode-hook)
 
 (define-key c++-mode-map (kbd "C-c C-c") 'compile)
+(define-key c++-mode-map (kbd "C-c C-k") 'mode-compile-kill)
+(define-key c++-mode-map (kbd "C-c C-r") 'recompile)
 (add-hook 'c++-mode-hook 'private-c-c++-mode-hook)
 
 (defun private-cperl-mode-hook ()
@@ -735,6 +756,8 @@ scroll-down-aggressively 0.01)
 	;; 	  (c-indent-line))))
 	;; (define-key global-map "{" 'cperl-mode-insert-lcurly)
 	(define-key global-map (kbd "C-c C-c") 'compile)
+	(define-key global-map (kbd "C-c C-k") 'mode-compile-kill)
+	(define-key global-map (kbd "C-c C-r") 'recompile)
 )
 (add-hook 'cperl-mode-hook 'private-cperl-mode-hook)
 
