@@ -275,6 +275,22 @@
 
 (global-set-key (kbd "C-c C-d") 'ediff-buffers)
 
+(global-set-key (kbd "C-M-w") 'delete-window)
+(global-set-key (kbd "C-M-a") 'delete-other-windows)
+
+(defvar global-keybinding-minor-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-M-q") 'kill-buffer-and-window)
+    map)
+  "global-keybinding-minor-mode keymap.")
+
+(define-minor-mode global-keybinding-minor-mode
+  "A minor mode for overriding all mode-specific key-bindings"
+  :init-value t
+  :lighter "global-keybinding")
+
+(global-keybinding-minor-mode 1)
+
 ;; C-x C-j opens dired with the cursor right on the file you're editing
 (require 'dired-x)
 
