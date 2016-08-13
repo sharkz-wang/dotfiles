@@ -99,6 +99,23 @@ bindkey '^I' expand-or-complete-or-list-files
 zle -N expand-or-complete-or-list-files
 # End tab-to-list
 
+# Tab-to-long-list
+function expand-or-complete-or-long-list-files() {
+	if [[ $#BUFFER == 0 ]]; then
+		echo -e "\r"
+		ls -hl --color -p | perl -pe 'chomp if eof'
+		zle accept-line
+	else
+		zle expand-or-complete
+	fi
+}
+
+# Bind to alt + tab
+bindkey '^[^I' expand-or-complete-or-long-list-files
+bindkey '^[[Z' expand-or-complete-or-long-list-files
+zle -N expand-or-complete-or-long-list-files
+# End tab-to-long-list
+
 # C-g to run `git status`
 function git-status() {
 	if [[ $#BUFFER == 0 ]]; then
