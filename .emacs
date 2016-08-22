@@ -1015,3 +1015,33 @@ scroll-down-aggressively 0.01)
 
 (require 'evil-magit)
 (evil-define-key evil-magit-state magit-mode-map "=" 'magit-diff-less-context)
+
+(require 'gud)
+
+(add-hook 'gdb-mode-hook '(lambda () (nolinum)))
+
+(global-set-key (kbd "C-c d g") 'gdb)
+(global-set-key (kbd "C-c d r") 'gud-run)
+(global-set-key (kbd "C-c d n") 'gud-next)
+(global-set-key (kbd "C-c d s") 'gud-step)
+(global-set-key (kbd "C-c d b") 'gud-break)
+(global-set-key (kbd "C-c d c") 'gud-cont)
+
+(defvar gud-overlay
+  (let* ((ov (make-overlay (point-min) (point-min))))
+	(overlay-put ov 'face 'secondary-selection)
+	ov)
+  "Overlay variable for GUD highlighting.")
+
+(defadvice gud-display-line (after my-gud-highlight act)
+		   "Highlight current line."
+		   (let* ((ov gud-overlay)
+				  (bf (gud-find-file true-file)))
+			 (save-excursion
+			     (set-buffer bf)
+				   (move-overlay ov (line-beginning-position) (line-end-position)
+								   (current-buffer)))))
+
+(defun gud-kill-buffer ()
+  (if (eq major-mode 'gud-mode)
+	(delete-overlay gud-overlay)))
