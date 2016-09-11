@@ -585,6 +585,8 @@ scroll-down-aggressively 0.01)
     helm-gtags-suggested-key-mapping t
 )
 
+(global-set-key (kbd "C-c g g") 'helm-occur)
+(global-set-key (kbd "C-c g f") 'helm-find-files)
 (define-key helm-gtags-mode-map (kbd "C-c g S") 'helm-gtags-select)
 (define-key helm-gtags-mode-map (kbd "C-c g d") 'helm-gtags-dwim)
 (define-key helm-gtags-mode-map (kbd "C-c g p") 'helm-gtags-find-pattern)
