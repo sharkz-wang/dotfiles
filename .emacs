@@ -79,6 +79,7 @@
 		   (global-set-key (kbd "C-M-_") 'magit-status)
 		   (global-set-key (kbd "C-c s") 'magit-status)
 		   (global-set-key (kbd "C-c m d") 'magit-diff-unstaged)
+		   (global-set-key (kbd "C-c m f d") 'magit-diff-buffer-file)
 		   (global-set-key (kbd "C-c m D") 'magit-diff)
 		   (global-set-key (kbd "C-c m f l") 'magit-log-buffer-file)
 		   (global-set-key (kbd "C-c m w") 'magit-diff-toggle-refine-hunk)
@@ -91,7 +92,8 @@
 		   (global-set-key (kbd "C-c m l") 'magit-log-current)
 		   (global-set-key (kbd "C-c m L") 'magit-log)
 		   (global-set-key (kbd "C-c m C") 'magit-clean)
-		   (global-set-key (kbd "C-c m o") 'magit-checkout)))
+		   (global-set-key (kbd "C-c m o") 'magit-checkout)
+		   (global-set-key (kbd "C-c m z") 'magit-stash)))
 
    (:name deferred)
    (:name popup)
