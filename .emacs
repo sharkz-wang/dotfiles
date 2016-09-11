@@ -431,6 +431,7 @@
 ;; Cursor motion in wrapped lines
 (define-key evil-normal-state-map "j" 'evil-next-visual-line)
 (define-key evil-normal-state-map "k" 'evil-previous-visual-line)
+(define-key evil-normal-state-map "$" 'evil-end-of-visual-line)
 
 (defadvice evil-insert-state (around emacs-state-instead-of-insert-state activate)
   (evil-emacs-state))
