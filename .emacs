@@ -265,7 +265,22 @@
 (global-set-key (kbd "C-c C-e") (lambda () (interactive) (find-file "~/.emacs")))
 (global-set-key (kbd "C-c e") (lambda () (interactive) (find-file "~/.emacs")))
 
-(global-set-key (kbd "C-c g g") (lambda () (interactive) (find-file "~/gtd.org")))
+(setq org-agenda-files '("~/gtd.org"))
+
+(global-set-key (kbd "C-c o o") (lambda () (interactive) (find-file "~/gtd.org")))
+
+(global-set-key (kbd "C-c o a") 'org-agenda)
+(global-set-key (kbd "C-c o t") 'org-todo-list)
+(global-set-key (kbd "C-c o l") 'org-agenda-list)
+(global-set-key (kbd "C-c o T") 'org-set-tags)
+(global-set-key (kbd "C-c o c") 'org-capture)
+(global-set-key (kbd "C-c o C") 'org-columns)
+(global-set-key (kbd "C-c o p") 'org-set-property)
+
+(setq org-capture-templates '(("t" "Todo" entry (file+headline "~/gtd.org" "Tasks")
+			       "* TODO %?%i\t%^g\n%T")
+			      ("c" "Trace code note" entry (file+olp "~/gtd.org" "Trace Code")
+			       "* %?%i\t%^g\n%T\n[file:%F::%(with-current-buffer (org-capture-get :original-buffer) (number-to-string (line-number-at-pos)))]\n%c")))
 
 (global-set-key (kbd "C-x C-x") 'ido-switch-buffer)
 (global-set-key (kbd "C-q") 'delete-other-windows)
@@ -318,8 +333,14 @@
 (evil-jumper-mode t)
 (evil-visual-mark-mode t)
 
+(require 'evil-org)
+
 (add-hook 'org-mode-hook
-    (lambda () (modify-syntax-entry ?_ "w")))
+	  (lambda () (modify-syntax-entry ?_ "w")
+	    (evil-define-key 'motion org-mode-map (kbd "TAB") 'org-cycle)
+	    (add-to-list 'org-modules "org-habit")))
+(add-hook 'org-capture-mode-hook
+	  (lambda () (evil-emacs-state)))
 (add-hook 'c-mode-hook
     (lambda () (modify-syntax-entry ?_ "w")))
 (add-hook 'c++-mode-hook
@@ -463,7 +484,7 @@
   (global-linum-mode 0)
   (linum-mode 0)
 )
-(add-hook 'org-mode-hook 'nolinum)
+;; (add-hook 'org-mode-hook 'nolinum)
 
 ;(require 'molokai-theme)
 (require 'monokai-theme)
@@ -538,6 +559,7 @@ scroll-down-aggressively 0.01)
 (global-set-key (kbd "C-c h") 'helm-command-prefix)
 (global-unset-key (kbd "C-x c"))
 (define-key helm-map (kbd "C-h") 'delete-backward-char)
+(global-set-key (kbd "C-c h o") 'helm-org-agenda-files-headings)
 
 ;; Making GNU Global support more languages
 ;; 1) Install Exuberant Ctags
