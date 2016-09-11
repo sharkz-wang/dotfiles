@@ -260,6 +260,8 @@
 
 (global-set-key (kbd "C-c r") (lambda () (interactive) (load-file "~/.emacs")))
 
+(global-set-key (kbd "C-c c") 'calendar)
+
 (global-set-key (kbd "C-c C-e") (lambda () (interactive) (find-file "~/.emacs")))
 (global-set-key (kbd "C-c e") (lambda () (interactive) (find-file "~/.emacs")))
 
