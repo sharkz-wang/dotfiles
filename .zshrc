@@ -1,9 +1,11 @@
 # Installation
 # 1) git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 # 2) cd ~/.oh-my-zsh/custom/plugins && git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
+# 3) mkdir -p ~/.oh-my-zsh/plugins/docker
+# 4) wget https://raw.githubusercontent.com/docker/docker/master/contrib/completion/zsh/_docker -O ~/.oh-my-zsh/plugins/docker/_docker
 
 export ZSH="${HOME}/.oh-my-zsh"
-plugins=(git zsh-syntax-highlighting)
+plugins=(git zsh-syntax-highlighting docker)
 source $ZSH/oh-my-zsh.sh
 
 unsetopt AUTO_NAME_DIRS
@@ -74,6 +76,9 @@ bindkey '^U' backward-kill-line
 bindkey '^K' kill-line
 
 eval `dircolors ${HOME}/.dircolors`
+
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 source "${HOME}/.zshsyntaxcolors"
