@@ -391,12 +391,29 @@
 (define-key evil-normal-state-map (kbd "C-/") 'evilnc-invert-comment-line-by-line)
 (define-key evil-normal-state-map (kbd "C-_") 'evilnc-invert-comment-line-by-line)
 
+(defun current-line-empty-p ()
+  (save-excursion
+    (beginning-of-line)
+    (looking-at "[[:space:]]*$")))
+
 (evil-leader/set-key
   "cc" 'comment-region-or-line
   "cu" 'uncomment-region-or-line
   "ci" 'evilnc-invert-comment-line-by-line
   "cy" 'evilnc-copy-and-comment-lines
-  "cf" 'srecode-document-insert-comment
+  "cf" '(lambda() (interactive)
+	  (srecode-document-insert-comment)
+	  (evil-insert-state)
+	  (previous-line)
+	  (previous-line)
+	  (end-of-line)
+	  (if (current-line-empty-p)
+	      nil
+	      (newline-and-indent))
+	  (next-line)
+	  (next-line)
+	  (end-of-line)
+	  )
   "\\" 'evilnc-comment-operator)
 
 (require 'evil-org)
