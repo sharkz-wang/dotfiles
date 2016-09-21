@@ -396,6 +396,7 @@
   "cu" 'uncomment-region-or-line
   "ci" 'evilnc-invert-comment-line-by-line
   "cy" 'evilnc-copy-and-comment-lines
+  "cf" 'srecode-document-insert-comment
   "\\" 'evilnc-comment-operator)
 
 (require 'evil-org)
