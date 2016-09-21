@@ -335,9 +335,12 @@
 
 (require 'evil-org)
 
+(add-hook 'evil-org-mode-hook
+	    (evil-define-key 'normal evil-org-mode-map (kbd "TAB") 'org-cycle)
+	    (evil-define-key 'normal evil-org-mode-map (kbd "H") 'evil-window-top)
+	    (evil-define-key 'normal evil-org-mode-map (kbd "L") 'evil-window-bottom))
 (add-hook 'org-mode-hook
 	  (lambda () (modify-syntax-entry ?_ "w")
-	    (evil-define-key 'motion org-mode-map (kbd "TAB") 'org-cycle)
 	    (add-to-list 'org-modules "org-habit")))
 (add-hook 'org-capture-mode-hook
 	  (lambda () (evil-emacs-state)))
