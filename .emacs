@@ -123,6 +123,7 @@
 
    (:name f)
    (:name projectile)
+   (:name helm-projectile)
 
    (:name uncrustify-mode
 		:type git
@@ -859,7 +860,17 @@ scroll-down-aggressively 0.01)
 (setq projectile-indexing-method 'native)
 (setq projectile-enable-caching t)
 (setq projectile-completion-system 'helm)
-(define-key projectile-mode-map (kbd "C-c p s g") 'helm-projectile-grep)
+
+(define-key projectile-mode-map (kbd "C-c h r") 'helm-resume)
+
+(require 'helm-projectile)
+(helm-projectile-on)
+
+(define-key projectile-mode-map (kbd "C-c p p") 'helm-projectile-switch-project)
+(define-key projectile-mode-map (kbd "C-c p f") 'helm-projectile-find-file-dwim)
+(define-key projectile-mode-map (kbd "C-c p r") 'helm-projectile-recentf)
+(define-key projectile-mode-map (kbd "C-c p g") 'helm-projectile-grep)
+(define-key projectile-mode-map (kbd "C-c p o") 'helm-projectile-find-other-file)
 
 (require 'dtrt-indent)
 (dtrt-indent-mode 1)
