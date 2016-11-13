@@ -263,7 +263,9 @@
 
 (global-set-key (kbd "C-c r") (lambda () (interactive) (load-file "~/.emacs")))
 
-(global-set-key (kbd "C-c c") 'calendar)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+
+(global-set-key (kbd "C-c C") 'calendar)
 
 (global-set-key (kbd "C-c C-e") (lambda () (interactive) (find-file "~/.emacs")))
 (global-set-key (kbd "C-c e") (lambda () (interactive) (find-file "~/.emacs")))
@@ -271,6 +273,10 @@
 (setq org-agenda-files '("~/gtd.org"))
 
 (global-set-key (kbd "C-c o o") (lambda () (interactive) (find-file "~/gtd.org")))
+(evil-global-set-key 'normal (kbd "z m") 'evil-scroll-line-to-center)
+(evil-global-set-key 'normal (kbd "z z") (lambda () (interactive)
+					   (evil-scroll-line-to-center (beginning-of-line))
+					   (evil-scroll-line-down (+ (/ (window-total-height) 4) 3))))
 
 (global-set-key (kbd "C-c o a") 'org-agenda)
 (global-set-key (kbd "C-c o t") 'org-todo-list)
