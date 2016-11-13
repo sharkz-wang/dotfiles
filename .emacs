@@ -272,11 +272,23 @@
 
 (setq org-agenda-files '("~/gtd.org"))
 
+(global-set-key (kbd "C-x C") 'calc-dispatch)
+
+(global-set-key (kbd "C-c i k") 'describe-key)
+(global-set-key (kbd "C-c i f") 'describe-function)
+
 (global-set-key (kbd "C-c o o") (lambda () (interactive) (find-file "~/gtd.org")))
 (evil-global-set-key 'normal (kbd "z m") 'evil-scroll-line-to-center)
 (evil-global-set-key 'normal (kbd "z z") (lambda () (interactive)
 					   (evil-scroll-line-to-center (beginning-of-line))
-					   (evil-scroll-line-down (+ (/ (window-total-height) 4) 3))))
+					   (evil-scroll-line-down (/ (window-total-height) 5))))
+
+(evil-global-set-key 'normal (kbd "C-f") (lambda () (interactive)
+					   (evil-scroll-page-down 1)
+					   (evil-window-middle)))
+(evil-global-set-key 'normal (kbd "C-b") (lambda () (interactive)
+					   (evil-scroll-page-up 1)
+					   (evil-window-middle)))
 
 (global-set-key (kbd "C-c o a") 'org-agenda)
 (global-set-key (kbd "C-c o t") 'org-todo-list)
