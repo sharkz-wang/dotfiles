@@ -48,6 +48,8 @@ alias ...='cd ../..'
 alias ls='ls --color=always -p'
 alias ll='ls -lh'
 
+alias df='df -h'
+
 alias less='less -R'
 
 unset GREP_OPTIONS
