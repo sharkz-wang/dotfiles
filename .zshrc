@@ -123,6 +123,20 @@ bindkey '^[[Z' expand-or-complete-or-long-list-files
 zle -N expand-or-complete-or-long-list-files
 # End tab-to-long-list
 
+# Ctrl+T to attach or create tmux session
+function send-tmux-attach-or-create-tmux-session() {
+	if [ "${TMUX}" = "" ]; then
+		BUFFER='tmux attach || tmux'
+		CURSOR=$#BUFFER
+		zle accept-line
+	fi
+}
+
+# Bind to ctrl + T
+bindkey '^T' send-tmux-attach-or-create-tmux-session
+zle -N send-tmux-attach-or-create-tmux-session
+# End ctrl+T to attach or create tmux session
+
 # C-g to run `git status`
 function git-status() {
 	if [[ $#BUFFER == 0 ]]; then
