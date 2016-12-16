@@ -36,6 +36,10 @@
 
    (:name evil-jumper)
 
+   (:name evil-snipe
+	  :type git
+	  :url "https://github.com/hlissner/evil-snipe")
+
    (:name golden-ratio)
    (:name adaptive-wrap)
    (:name ace-window
@@ -350,6 +354,18 @@
 
 (require 'evil)
 (evil-mode t)
+
+(require 'evil-snipe)
+
+(evil-snipe-override-mode 1)
+(setq evil-snipe-scope 'whole-visible)
+(setq evil-snipe-repeat-scope 'whole-visible)
+
+(push '(?\[ "[[{(]") evil-snipe-aliases)
+(push '(?\] "[]})]") evil-snipe-aliases)
+(make-variable-buffer-local 'evil-snipe-aliases)
+
+(add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
 
 (evil-jumper-mode t)
 (evil-visual-mark-mode t)
