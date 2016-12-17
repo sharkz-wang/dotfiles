@@ -114,6 +114,8 @@
 		   (define-key evil-normal-state-map (kbd "SPC m z") 'magit-stash)
 		   (global-set-key (kbd "C-c m w") 'magit-diff-toggle-refine-hunk)))
 
+   (:name ztree)
+
    (:name deferred)
    (:name popup)
 
@@ -1355,3 +1357,9 @@ scroll-down-aggressively 0.01)
 (add-hook 'find-file-hooks 'hexl-if-binary)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+;; XXX: an upstream bug: the first and-clause determining whether two files are equal
+;; in func. ztree-diff-model-files-equal of ztree-diff-model.el should
+;; be removed
+(require 'ztree)
+(define-key evil-normal-state-map (kbd "SPC f d d") 'ztree-diff)
