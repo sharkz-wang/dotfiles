@@ -477,11 +477,6 @@
       (setq beg (line-beginning-position) end (line-end-position)))
     (uncomment-region beg end)))
 
-(global-set-key (kbd "C-/") 'evilnc-invert-comment-line-by-line)
-(global-set-key (kbd "C-_") 'evilnc-invert-comment-line-by-line)
-(define-key evil-normal-state-map (kbd "C-/") 'evilnc-invert-comment-line-by-line)
-(define-key evil-normal-state-map (kbd "C-_") 'evilnc-invert-comment-line-by-line)
-
 (defun current-line-empty-p ()
   (save-excursion
     (beginning-of-line)
