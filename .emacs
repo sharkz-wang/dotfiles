@@ -186,11 +186,11 @@
 (line-number-mode 1)			; have line numbers and
 (column-number-mode 1)			; column numbers in the mode line
 
-(set-default-font "Deja Vu Sans Mono-14")
+(set-default-font "Deja Vu Sans Mono-16")
 ;(set-face-attribute 'default nil :height 140)
 
 (tool-bar-mode -1)			; no tool bar with icons
-(scroll-bar-mode -1)			; no scroll bars
+;(scroll-bar-mode -1)			; no scroll bars
 (menu-bar-mode -1)
 
 (global-hl-line-mode)			; highlight current line
@@ -278,6 +278,7 @@
 
 (global-set-key (kbd "C-x C") 'calc-dispatch)
 
+(global-set-key (kbd "M-z") 'smex)
 (global-set-key (kbd "C-c i k") 'describe-key)
 (global-set-key (kbd "C-c i f") 'describe-function)
 
