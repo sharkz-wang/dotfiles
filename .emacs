@@ -432,6 +432,7 @@
 
 (push '(?\[ "[[{(]") evil-snipe-aliases)
 (push '(?\] "[]})]") evil-snipe-aliases)
+(push '(?' "[\"']") evil-snipe-aliases)
 (make-variable-buffer-local 'evil-snipe-aliases)
 
 (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
