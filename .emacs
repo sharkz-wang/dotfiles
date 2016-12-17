@@ -118,8 +118,8 @@
 
    (:name company-mode)
    (:name emacs-ycmd
-		:type git
-		:url "https://github.com/abingham/emacs-ycmd")
+	  :type git
+	  :url "https://github.com/abingham/emacs-ycmd")
    (:name cedet)
    (:name yasnippet)
 
@@ -130,8 +130,8 @@
    (:name emacs-w3m)
 
    (:name semantic-refactor
-		:type git
-		:url "https://github.com/tuhdo/semantic-refactor")
+	  :type git
+	  :url "https://github.com/tuhdo/semantic-refactor")
 
    (:name function-args)
 
@@ -221,16 +221,16 @@
 (ad-activate 'linum-update)
 
 (add-hook 'linum-before-numbering-hook
-		  (lambda ()
-			(if (eq linum-format 'linum-format-func)
-			  (setq-local linum-format-fmt
-						  (let ((w (length (number-to-string
-											 (count-lines (point-min) (point-max))))))
-							(concat " %" (number-to-string w) "d   ")))
-			  (setq linum-relative-format
-					(let ((w (length (number-to-string
-									   (count-lines (point-min) (point-max))))))
-					  (concat " %" (number-to-string w) "s   "))))))
+	  (lambda ()
+	    (if (eq linum-format 'linum-format-func)
+		(setq-local linum-format-fmt
+			    (let ((w (length (number-to-string
+					      (count-lines (point-min) (point-max))))))
+			      (concat " %" (number-to-string w) "d   ")))
+	      (setq linum-relative-format
+		    (let ((w (length (number-to-string
+				      (count-lines (point-min) (point-max))))))
+		      (concat " %" (number-to-string w) "s   "))))))
 
 (defun linum-format-func (line)
   (concat
@@ -510,13 +510,15 @@
 (require 'evil-org)
 
 (define-key evil-normal-state-map (kbd "_") '(lambda () (interactive)
-						 (message (buffer-file-name
-							   (window-buffer (minibuffer-selected-window))))))
+					       (message (buffer-file-name
+							 (window-buffer (minibuffer-selected-window))))))
 
 (define-key evil-normal-state-map (kbd "B") '(lambda () (interactive)
-						 ;(message (buffer-file-name
-						 (message (substring (shell-command-to-string "git rev-parse --abbrev-ref HEAD") 0 -1)
-							   )))
+					       (message (substring
+							 (shell-command-to-string
+							  "git rev-parse --abbrev-ref HEAD")
+							 0
+							 -1))))
 
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 (define-key evil-normal-state-map (kbd "C-w") 'ace-window)
@@ -704,7 +706,6 @@ scroll-down-aggressively 0.01)
     helm-gtags-suggested-key-mapping t
 )
 
-
 (global-set-key (kbd "C-c h r") 'helm-resume)
 (define-key evil-normal-state-map (kbd "SPC h r") 'helm-resume)
 (global-set-key (kbd "C-c h b") 'helm-bookmark)
@@ -735,11 +736,11 @@ scroll-down-aggressively 0.01)
 (setq speedbar-use-images nil)
 
 (global-set-key (kbd "C-\\") '(lambda () (interactive)
-								(if (sr-speedbar-exist-p)
-								  (sr-speedbar-close)
-								  (if (sr-speedbar-buffer-exist-p speedbar-buffer)
-									(sr-speedbar-open)
-									(progn (sr-speedbar-open) (evil-goto-first-line))))))
+				(if (sr-speedbar-exist-p)
+				    (sr-speedbar-close)
+				  (if (sr-speedbar-buffer-exist-p speedbar-buffer)
+				      (sr-speedbar-open)
+				    (progn (sr-speedbar-open) (evil-goto-first-line))))))
 (defun ido-speedbar-buffers-to-end ()
   (let ((speedbar-buffer (delq nil (mapcar
 			      (lambda (x)
@@ -761,16 +762,20 @@ scroll-down-aggressively 0.01)
 				 (visual-line-mode 0)
 				 (setq case-fold-search t)
 
-				 (define-key speedbar-file-key-map "." '(lambda () (interactive)
-														  (if (eq speedbar-directory-unshown-regexp speedbar-show-hidden-file)
-														  (setq  speedbar-directory-unshown-regexp speedbar-default-visibility)
-														  (setq speedbar-directory-unshown-regexp speedbar-show-hidden-file))
-														  (speedbar-refresh)))
-				 (define-key speedbar-file-key-map (kbd "SPC") 'avy-goto-char-2)
+				 (define-key speedbar-file-key-map
+				   "."
+				   '(lambda () (interactive)
+				      (if (eq speedbar-directory-unshown-regexp speedbar-show-hidden-file)
+					  (setq  speedbar-directory-unshown-regexp speedbar-default-visibility)
+					(setq speedbar-directory-unshown-regexp speedbar-show-hidden-file))
+				      (speedbar-refresh)))
+				 ;; (define-key speedbar-file-key-map (kbd "SPC SPC") 'avy-goto-char-2)
+				 (evil-define-key 'motion speedbar-file-key-map
+				   (kbd "TAB") 'speedbar-toggle-line-expansion)
 				 (define-key speedbar-file-key-map "n" 'evil-search-next)
 				 (define-key speedbar-file-key-map "N" 'evil-search-previous)
 				 (define-key speedbar-file-key-map "q" '(lambda () (interactive)
-																(kill-buffer "*SPEEDBAR*")))
+									  (kill-buffer "*SPEEDBAR*")))
 				 (evil-define-key 'motion speedbar-file-key-map (kbd "RET") 'speedbar-edit-line-and-close)
 				 (evil-define-key 'motion speedbar-file-key-map (kbd "M-RET") 'speedbar-edit-line)
 				 (define-key speedbar-file-key-map "e" 'speedbar-edit-line)
@@ -869,34 +874,34 @@ scroll-down-aggressively 0.01)
 (require 'cc-mode)
 (defun private-c-c++-mode-hook ()
 
-                ;; Auto indenting and pairing curly brace
-    (defun c-mode-insert-lcurly ()
-      (interactive)
-      (insert "{")
-      (let ((pps (syntax-ppss)))
-        (when (and (eolp) (not (or (nth 3 pps) (nth 4 pps)))) ;; EOL and not in string or comment
-          (c-indent-line)
-          (insert "\n\n}")
-          (c-indent-line)
-          (forward-line -1)
-          (c-indent-line))))
-    (define-key c-mode-base-map "{" 'c-mode-insert-lcurly)
+  ;; Auto indenting and pairing curly brace
+  (defun c-mode-insert-lcurly ()
+	(interactive)
+	(insert "{")
+	(let ((pps (syntax-ppss)))
+	  (when (and (eolp) (not (or (nth 3 pps) (nth 4 pps)))) ;; EOL and not in string or comment
+		(c-indent-line)
+		(insert "\n\n}")
+		(c-indent-line)
+		(forward-line -1)
+		(c-indent-line))))
+  (define-key c-mode-base-map "{" 'c-mode-insert-lcurly)
 
-	(require 'uncrustify-mode)
-	;(uncrustify-mode 1)
-	(setq uncrustify-config-path "~/.uncrustify/linux-kernel.cfg")
+  (require 'uncrustify-mode)
+  ;(uncrustify-mode 1)
+  (setq uncrustify-config-path "~/.uncrustify/linux-kernel.cfg")
 
-	(defun company-transform-c-c++ (candidates)
-	  (let ((deleted))
-		(mapcar #'(lambda (c)
-					(if (string-prefix-p "_" c)
-					  (progn
-						(add-to-list 'deleted c)
-						(setq candidates (delete c candidates)))))
-				candidates)
-		(append candidates (nreverse deleted))))
-	(setq-local company-transformers
-				(append company-transformers '(company-transform-c-c++)))
+  (defun company-transform-c-c++ (candidates)
+	(let ((deleted))
+	  (mapcar #'(lambda (c)
+				  (if (string-prefix-p "_" c)
+					(progn
+					  (add-to-list 'deleted c)
+					  (setq candidates (delete c candidates)))))
+			  candidates)
+	  (append candidates (nreverse deleted))))
+  (setq-local company-transformers
+			  (append company-transformers '(company-transform-c-c++)))
 
   (defun insert-printf-stderr ()
 	(interactive)
@@ -1200,9 +1205,9 @@ scroll-down-aggressively 0.01)
      '(("PDF Viewer" "xpdf -g %n %o %b")))
 
 (define-key evil-normal-state-map (kbd "C-_") '(lambda () (interactive)
-										 (if (eq linum-format 'linum-format-func)
-										   (setq linum-format 'linum-relative)
-										   (setq linum-format 'linum-format-func))))
+						 (if (eq linum-format 'linum-format-func)
+						     (setq linum-format 'linum-relative)
+						   (setq linum-format 'linum-format-func))))
 
 (require 'evil-magit)
 (evil-define-key evil-magit-state magit-mode-map "=" 'magit-diff-less-context)
@@ -1225,13 +1230,13 @@ scroll-down-aggressively 0.01)
   "Overlay variable for GUD highlighting.")
 
 (defadvice gud-display-line (after my-gud-highlight act)
-		   "Highlight current line."
-		   (let* ((ov gud-overlay)
-				  (bf (gud-find-file true-file)))
-			 (save-excursion
-			     (set-buffer bf)
-				   (move-overlay ov (line-beginning-position) (line-end-position)
-								   (current-buffer)))))
+  "Highlight current line."
+  (let* ((ov gud-overlay)
+	 (bf (gud-find-file true-file)))
+    (save-excursion
+      (set-buffer bf)
+      (move-overlay ov (line-beginning-position) (line-end-position)
+		    (current-buffer)))))
 
 (defun gud-kill-buffer ()
   (if (eq major-mode 'gud-mode)
