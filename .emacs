@@ -450,11 +450,20 @@
     (lambda () (modify-syntax-entry ?_ "w")))
 (add-hook 'python-mode-hook
     (lambda () (modify-syntax-entry ?_ "w")
-				(elpy-enable)
-				(flymake-mode t)
-				(global-set-key (kbd "C-c C-d") 'elpy-doc)))
+				;; (elpy-enable)
+				;; (flymake-mode t)
+				(define-key python-mode-map (kbd "C-c C-c") 'compile)
+				(define-key python-mode-map (kbd "C-c C-d") 'elpy-doc)))
+(add-hook 'shellscript-mode-hook
+    (lambda () (define-key shellscript-mode-map (kbd "C-c C-c") 'compile)))
 (add-hook 'emacs-lisp-mode-hook
-    (lambda () (modify-syntax-entry ?_ "w")))
+	  (lambda ()
+	    (modify-syntax-entry ?_ "w")
+	    (global-set-key (kbd "C-c d p")
+			    (lambda () (interactive)
+			      (insert "(message (format \"\"))")
+			      (left-char 3)))
+	    ))
 
 (require 'evil-leader)
 (global-evil-leader-mode)
