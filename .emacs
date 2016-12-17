@@ -80,26 +80,38 @@
    (:name magit				; git meet emacs, and a binding
 	  :after (progn
 		   (global-set-key (kbd "C-c m s") 'magit-status)
-		   (global-set-key (kbd "C-c C-s") 'magit-status)
-		   (global-set-key (kbd "C-M-\\") 'magit-status)
-		   (global-set-key (kbd "C-M-_") 'magit-status)
-		   (global-set-key (kbd "C-c s") 'magit-status)
+		   (define-key evil-normal-state-map (kbd "SPC m s") 'magit-status)
 		   (global-set-key (kbd "C-c m d") 'magit-diff-unstaged)
+		   (define-key evil-normal-state-map (kbd "SPC m d") 'magit-diff-unstaged)
 		   (global-set-key (kbd "C-c m f d") 'magit-diff-buffer-file)
+		   (define-key evil-normal-state-map (kbd "SPC m f d") 'magit-diff-buffer-file)
 		   (global-set-key (kbd "C-c m D") 'magit-diff)
+		   (define-key evil-normal-state-map (kbd "SPC m D") 'magit-diff)
 		   (global-set-key (kbd "C-c m f l") 'magit-log-buffer-file)
-		   (global-set-key (kbd "C-c m w") 'magit-diff-toggle-refine-hunk)
+		   (define-key evil-normal-state-map (kbd "SPC m f l") 'magit-log-buffer-file)
 		   (global-set-key (kbd "C-c m b") 'magit-blame)
+		   (define-key evil-normal-state-map (kbd "SPC m b") 'magit-blame)
 		   (global-set-key (kbd "C-c m c") 'magit-commit)
+		   (define-key evil-normal-state-map (kbd "SPC m c") 'magit-commit)
 		   (global-set-key (kbd "C-c m r") 'magit-rebase-interactive)
+		   (define-key evil-normal-state-map (kbd "SPC m r") 'magit-rebase-interactive)
 		   (global-set-key (kbd "C-c m R") 'magit-ediff-resolve)
+		   (define-key evil-normal-state-map (kbd "SPC m R") 'magit-ediff-resolve)
 		   (global-set-key (kbd "C-c m p") 'magit-push)
+		   (define-key evil-normal-state-map (kbd "SPC m p") 'magit-push)
 		   (global-set-key (kbd "C-c m P") 'magit-pull)
+		   (define-key evil-normal-state-map (kbd "SPC m P") 'magit-pull)
 		   (global-set-key (kbd "C-c m l") 'magit-log-current)
+		   (define-key evil-normal-state-map (kbd "SPC m l") 'magit-log-current)
 		   (global-set-key (kbd "C-c m L") 'magit-log)
+		   (define-key evil-normal-state-map (kbd "SPC m L") 'magit-log)
 		   (global-set-key (kbd "C-c m C") 'magit-clean)
+		   (define-key evil-normal-state-map (kbd "SPC m C") 'magit-clean)
 		   (global-set-key (kbd "C-c m o") 'magit-checkout)
-		   (global-set-key (kbd "C-c m z") 'magit-stash)))
+		   (define-key evil-normal-state-map (kbd "SPC m o") 'magit-checkout)
+		   (global-set-key (kbd "C-c m z") 'magit-stash)
+		   (define-key evil-normal-state-map (kbd "SPC m z") 'magit-stash)
+		   (global-set-key (kbd "C-c m w") 'magit-diff-toggle-refine-hunk)))
 
    (:name deferred)
    (:name popup)
@@ -268,21 +280,30 @@
 (global-set-key (kbd "C-c r") (lambda () (interactive) (load-file "~/.emacs")))
 
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
+(define-key evil-normal-state-map (kbd "SPC f") 'helm-find-files)
 
 (global-set-key (kbd "C-c C") 'calendar)
 
 (global-set-key (kbd "C-c C-e") (lambda () (interactive) (find-file "~/.emacs")))
 (global-set-key (kbd "C-c e") (lambda () (interactive) (find-file "~/.emacs")))
+(define-key evil-normal-state-map (kbd "SPC c e") (lambda () (interactive) (find-file "~/.emacs")))
+
+(define-key evil-normal-state-map (kbd "SPC x c") 'save-buffers-kill-terminal)
 
 (setq org-agenda-files '("~/gtd.org"))
+(global-set-key (kbd "C-c o o") (lambda () (interactive) (find-file "~/gtd.org")))
+(define-key evil-normal-state-map (kbd "SPC o o")
+  (lambda () (interactive) (find-file "~/gtd.org")))
 
 (global-set-key (kbd "C-x C") 'calc-dispatch)
 
 (global-set-key (kbd "M-z") 'smex)
-(global-set-key (kbd "C-c i k") 'describe-key)
-(global-set-key (kbd "C-c i f") 'describe-function)
 
-(global-set-key (kbd "C-c o o") (lambda () (interactive) (find-file "~/gtd.org")))
+(global-set-key (kbd "C-c i k") 'describe-key)
+(define-key evil-normal-state-map (kbd "SPC i k") 'describe-key)
+(global-set-key (kbd "C-c i f") 'describe-function)
+(define-key evil-normal-state-map (kbd "SPC i f") 'describe-function)
+
 (evil-global-set-key 'normal (kbd "z m") 'evil-scroll-line-to-center)
 (evil-global-set-key 'normal (kbd "z z") (lambda () (interactive)
 					   (evil-scroll-line-to-center (beginning-of-line))
@@ -296,32 +317,61 @@
 					   (evil-window-middle)))
 
 (global-set-key (kbd "C-c o a") 'org-agenda)
+(define-key evil-normal-state-map (kbd "SPC o a") 'org-agenda)
 (global-set-key (kbd "C-c o t") 'org-todo-list)
+(define-key evil-normal-state-map (kbd "SPC o t") 'org-todo-list)
 (global-set-key (kbd "C-c o l") 'org-agenda-list)
+(define-key evil-normal-state-map (kbd "SPC o l") 'org-agenda-list)
 (global-set-key (kbd "C-c o T") 'org-set-tags)
+(define-key evil-normal-state-map (kbd "SPC o T") 'org-set-tags)
 (global-set-key (kbd "C-c o c") 'org-capture)
+(define-key evil-normal-state-map (kbd "SPC o c") 'org-capture)
 (global-set-key (kbd "C-c o C") 'org-columns)
+(define-key evil-normal-state-map (kbd "SPC o C") 'org-columns)
 (global-set-key (kbd "C-c o p") 'org-set-property)
+(define-key evil-normal-state-map (kbd "SPC o p") 'org-set-property)
+
+(defalias 'outline-show-all 'show-all)
 
 (setq org-capture-templates '(("t" "Todo" entry (file+headline "~/gtd.org" "Tasks")
 			       "* TODO %?%i\t%^g\n%T")
 			      ("c" "Trace code note" entry (file+olp "~/gtd.org" "Trace Code")
 			       "* %?%i\t%^g\n%T\n[file:%F::%(with-current-buffer (org-capture-get :original-buffer) (number-to-string (line-number-at-pos)))]\n%c")))
 
+(define-key evil-normal-state-map (kbd "SPC s") 'save-buffer)
+
 (global-set-key (kbd "C-x C-x") 'ido-switch-buffer)
+(define-key evil-normal-state-map (kbd "SPC x x") 'ido-switch-buffer)
+
+(define-key evil-normal-state-map (kbd "SPC x c") 'save-buffers-kill-terminal)
+
+(global-set-key (kbd "C-x 2") (lambda () (interactive) (split-window-below) (other-window 1)))
+(define-key evil-normal-state-map (kbd "SPC x 2") (lambda () (interactive) (split-window-left) (other-window 1)))
+
+(global-set-key (kbd "C-x 3") (lambda () (interactive) (split-window-right) (other-window 1)))
+(define-key evil-normal-state-map (kbd "SPC x 3") (lambda () (interactive) (split-window-right) (other-window 1)))
+
 (global-set-key (kbd "C-q") 'delete-other-windows)
-(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+(define-key evil-normal-state-map (kbd "SPC q") 'delete-other-windows)
+
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+(define-key evil-normal-state-map (kbd "SPC x b") 'helm-buffers-list)
+
 (global-set-key (kbd "C-x B") 'ibuffer)
+(define-key evil-normal-state-map (kbd "SPC B") 'ibuffer)
 
 (global-set-key (kbd "C-x m") 'evil-visual-mark-mode)
+(define-key evil-normal-state-map (kbd "SPC x m") 'evil-visual-mark-mode)
+
+(define-key evil-normal-state-map (kbd "SPC x k") 'ido-kill-buffer)
+(define-key evil-normal-state-map (kbd "SPC k") 'ido-kill-buffer)
 
 (global-set-key (kbd "C-x K") 'kill-buffer-and-window)
+(define-key evil-normal-state-map (kbd "SPC K") 'kill-buffer-and-window)
 
-(global-set-key (kbd "C-c C-d") 'ediff-buffers)
-
-(global-set-key (kbd "C-M-w") 'delete-window)
-(global-set-key (kbd "C-M-a") 'delete-other-windows)
+(global-set-key (kbd "C-x C-d") 'ediff-buffers)
+(define-key evil-normal-state-map (kbd "SPC x d") 'ediff-buffers)
 
 (defvar global-keybinding-minor-mode-map
   (let ((map (make-sparse-keymap)))
@@ -566,7 +616,7 @@ scroll-conservatively 0)
 scroll-down-aggressively 0.01)
 
 (define-key global-map (kbd "C-c SPC") 'avy-goto-char-2)
-(define-key evil-normal-state-map (kbd "SPC") 'avy-goto-char-2)
+(define-key evil-normal-state-map (kbd "SPC SPC") 'avy-goto-char-2)
 
 (require 'compile)
 
@@ -617,9 +667,16 @@ scroll-down-aggressively 0.01)
 ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
 ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
 (global-set-key (kbd "C-c h") 'helm-command-prefix)
+(define-key evil-normal-state-map (kbd "SPC h") 'helm-command-prefix)
+
 (global-unset-key (kbd "C-x c"))
 (define-key helm-map (kbd "C-h") 'delete-backward-char)
+
 (global-set-key (kbd "C-c h o") 'helm-org-agenda-files-headings)
+
+(define-key helm-map (kbd "C-o") 'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-j") 'helm-next-line)
+(define-key helm-map (kbd "C-k") 'helm-previous-line)
 
 ;; Making GNU Global support more languages
 ;; 1) Install Exuberant Ctags
@@ -644,15 +701,28 @@ scroll-down-aggressively 0.01)
     helm-gtags-suggested-key-mapping t
 )
 
-(global-set-key (kbd "C-c g g") 'helm-occur)
-(global-set-key (kbd "C-c g f") 'helm-find-files)
+
+(global-set-key (kbd "C-c h r") 'helm-resume)
+(define-key evil-normal-state-map (kbd "SPC h r") 'helm-resume)
+(global-set-key (kbd "C-c h b") 'helm-bookmark)
+(define-key evil-normal-state-map (kbd "SPC h b") 'helm-bookmark)
+(global-set-key (kbd "C-c h g") 'helm-occur)
+(define-key evil-normal-state-map (kbd "SPC h g") 'helm-occur)
+
 (define-key helm-gtags-mode-map (kbd "C-c g S") 'helm-gtags-select)
+(define-key evil-normal-state-map (kbd "SPC g S") 'helm-gtags-select)
 (define-key helm-gtags-mode-map (kbd "C-c g d") 'helm-gtags-dwim)
+(define-key evil-normal-state-map (kbd "SPC g d") 'helm-gtags-dwim)
 (define-key helm-gtags-mode-map (kbd "C-c g p") 'helm-gtags-find-pattern)
+(define-key evil-normal-state-map (kbd "SPC g p") 'helm-gtags-find-pattern)
 (define-key helm-gtags-mode-map (kbd "C-c g f") 'helm-gtags-find-files)
+(define-key evil-normal-state-map (kbd "SPC g f") 'helm-gtags-find-files)
 (define-key helm-gtags-mode-map (kbd "C-c g r") 'helm-gtags-find-rtag)
+(define-key evil-normal-state-map (kbd "SPC g r") 'helm-gtags-find-rtag)
 (define-key helm-gtags-mode-map (kbd "C-c g s") 'helm-gtags-find-symbol)
+(define-key evil-normal-state-map (kbd "SPC g s") 'helm-gtags-find-symbol)
 (define-key helm-gtags-mode-map (kbd "C-c g t") 'helm-gtags-find-tag)
+(define-key evil-normal-state-map (kbd "SPC g t") 'helm-gtags-find-tag)
 
 (require 'sr-speedbar)
 (setq sr-speedbar-width 25)
@@ -722,6 +792,7 @@ scroll-down-aggressively 0.01)
   (other-window 1)
   (recenter))
 (define-key semantic-mode-map (kbd "C-c g 2 d") 'helm-gtags-dwim-new-horizontal-split)
+(define-key evil-normal-state-map (kbd "SPC g 2 d") 'helm-gtags-dwim-new-horizontal-split)
 
 (defun helm-gtags-dwim-new-vertical-split () (interactive)
   (split-window-right)
@@ -731,6 +802,7 @@ scroll-down-aggressively 0.01)
   (other-window 1)
   (recenter))
 (define-key semantic-mode-map (kbd "C-c g 3 d") 'helm-gtags-dwim-new-vertical-split)
+(define-key evil-normal-state-map (kbd "SPC g 3 d") 'helm-gtags-dwim-new-vertical-split)
 
 ;(semantic-add-system-include "/usr/include/boost" 'c++-mode)
 ;(semantic-add-system-include "~/linux/kernel")
@@ -829,11 +901,13 @@ scroll-down-aggressively 0.01)
 	(left-char 5)
 	(evil-insert-state))
   (global-set-key (kbd "C-c d p") 'insert-printf-stderr)
+  (define-key evil-normal-state-map (kbd "SPC d p") 'insert-printf-stderr)
 
   (defun insert-exit ()
 	(interactive)
 	(insert "exit(1);"))
   (global-set-key (kbd "C-c d e") 'insert-exit)
+  (define-key evil-normal-state-map (kbd "SPC d e") 'insert-exit)
 
   (defun insert-new-arg () (interactive)
 	(search-forward ";")
@@ -841,6 +915,7 @@ scroll-down-aggressively 0.01)
 	(insert ", ")
 	(evil-insert-state))
   (global-set-key (kbd "C-c a ,") 'insert-new-arg)
+  (define-key evil-normal-state-map (kbd "SPC a ,") 'insert-new-arg)
 
   (defun avy-insert-new-arg () (interactive)
 	(avy-goto-char-in-line ?,)
@@ -849,6 +924,7 @@ scroll-down-aggressively 0.01)
 	(left-char)
 	(evil-insert-state))
   (global-set-key (kbd "C-c i ,") 'avy-insert-new-arg)
+  (define-key evil-normal-state-map (kbd "SPC i ,") 'avy-insert-new-arg)
 )
 
 (add-hook 'compilation-mode-hook '(lambda ()
@@ -860,13 +936,21 @@ scroll-down-aggressively 0.01)
 				    ))
 
 (define-key c-mode-map (kbd "C-c C-c") 'compile)
+(define-key evil-normal-state-map (kbd "SPC c c") 'compile)
 (define-key c-mode-map (kbd "C-c C-k") 'mode-compile-kill)
+(define-key evil-normal-state-map (kbd "SPC c k") 'mode-compile-kill)
 (define-key c-mode-map (kbd "C-c C-r") 'recompile)
+(define-key evil-normal-state-map (kbd "SPC c r") 'recompile)
+
 (add-hook 'c-mode-hook 'private-c-c++-mode-hook)
 
 (define-key c++-mode-map (kbd "C-c C-c") 'compile)
+(define-key evil-normal-state-map (kbd "SPC c c") 'compile)
 (define-key c++-mode-map (kbd "C-c C-k") 'mode-compile-kill)
+(define-key evil-normal-state-map (kbd "SPC c k") 'mode-compile-kill)
 (define-key c++-mode-map (kbd "C-c C-r") 'recompile)
+(define-key evil-normal-state-map (kbd "SPC c r") 'recompile)
+
 (add-hook 'c++-mode-hook 'private-c-c++-mode-hook)
 
 (defun private-cperl-mode-hook ()
@@ -882,8 +966,11 @@ scroll-down-aggressively 0.01)
 	;; 	  (c-indent-line))))
 	;; (define-key global-map "{" 'cperl-mode-insert-lcurly)
 	(define-key global-map (kbd "C-c C-c") 'compile)
+	(define-key evil-normal-state-map (kbd "SPC c c") 'compile)
 	(define-key global-map (kbd "C-c C-k") 'mode-compile-kill)
+	(define-key evil-normal-state-map (kbd "SPC c k") 'mode-compile-kill)
 	(define-key global-map (kbd "C-c C-r") 'recompile)
+	(define-key evil-normal-state-map (kbd "SPC c r") 'recompile)
 )
 (add-hook 'cperl-mode-hook 'private-cperl-mode-hook)
 
@@ -898,16 +985,19 @@ scroll-down-aggressively 0.01)
 (setq projectile-enable-caching t)
 (setq projectile-completion-system 'helm)
 
-(define-key projectile-mode-map (kbd "C-c h r") 'helm-resume)
-
 (require 'helm-projectile)
 (helm-projectile-on)
 
 (define-key projectile-mode-map (kbd "C-c p p") 'helm-projectile-switch-project)
+(define-key evil-normal-state-map (kbd "SPC p p") 'helm-projectile-switch-project)
 (define-key projectile-mode-map (kbd "C-c p f") 'helm-projectile-find-file-dwim)
+(define-key evil-normal-state-map (kbd "SPC p f") 'helm-projectile-find-file-dwim)
 (define-key projectile-mode-map (kbd "C-c p r") 'helm-projectile-recentf)
+(define-key evil-normal-state-map (kbd "SPC p r") 'helm-projectile-recentf)
 (define-key projectile-mode-map (kbd "C-c p g") 'helm-projectile-grep)
+(define-key evil-normal-state-map (kbd "SPC p g") 'helm-projectile-grep)
 (define-key projectile-mode-map (kbd "C-c p o") 'helm-projectile-find-other-file)
+(define-key evil-normal-state-map (kbd "SPC p o") 'helm-projectile-find-other-file)
 
 (require 'dtrt-indent)
 (dtrt-indent-mode 1)
