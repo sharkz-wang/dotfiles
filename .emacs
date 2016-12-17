@@ -421,8 +421,8 @@
 (require 'evil-snipe)
 
 (evil-snipe-override-mode 1)
-(setq evil-snipe-scope 'whole-visible)
 (setq evil-snipe-repeat-scope 'whole-visible)
+;; (setq evil-snipe-scope 'whole-visible)
 
 (push '(?\[ "[[{(]") evil-snipe-aliases)
 (push '(?\] "[]})]") evil-snipe-aliases)
