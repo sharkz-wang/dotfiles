@@ -1321,3 +1321,5 @@ scroll-down-aggressively 0.01)
       (hexl-mode))))
 
 (add-hook 'find-file-hooks 'hexl-if-binary)
+
+(defalias 'yes-or-no-p 'y-or-n-p)
