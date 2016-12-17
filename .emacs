@@ -343,6 +343,15 @@
 (global-set-key (kbd "C-x C-x") 'ido-switch-buffer)
 (define-key evil-normal-state-map (kbd "SPC x x") 'ido-switch-buffer)
 
+(defun switch-to-last-buffer ()
+  "Switch to previously open buffer.
+   Repeated invocations toggle between the two most recently open buffers."
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) 1)))
+(global-set-key (kbd "C-x l") 'switch-to-last-buffer)
+(define-key evil-normal-state-map (kbd "SPC l") 'switch-to-last-buffer)
+(define-key evil-normal-state-map (kbd "SPC x l") 'switch-to-last-buffer)
+
 (define-key evil-normal-state-map (kbd "SPC x c") 'save-buffers-kill-terminal)
 
 (global-set-key (kbd "C-x 2") (lambda () (interactive) (split-window-below) (other-window 1)))
