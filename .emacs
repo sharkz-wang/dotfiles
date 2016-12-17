@@ -77,6 +77,7 @@
    (:name evil-magit
 		:type git
 		:url "https://github.com/justbur/evil-magit")
+
    (:name magit				; git meet emacs, and a binding
 	  :after (progn
 		   (global-set-key (kbd "C-c m s") 'magit-status)
@@ -280,13 +281,13 @@
 (global-set-key (kbd "C-c r") (lambda () (interactive) (load-file "~/.emacs")))
 
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
-(define-key evil-normal-state-map (kbd "SPC f") 'helm-find-files)
+(define-key evil-normal-state-map (kbd "SPC f o") 'helm-find-files)
 
 (global-set-key (kbd "C-c C") 'calendar)
 
 (global-set-key (kbd "C-c C-e") (lambda () (interactive) (find-file "~/.emacs")))
 (global-set-key (kbd "C-c e") (lambda () (interactive) (find-file "~/.emacs")))
-(define-key evil-normal-state-map (kbd "SPC c e") (lambda () (interactive) (find-file "~/.emacs")))
+(define-key evil-normal-state-map (kbd "SPC i e") (lambda () (interactive) (find-file "~/.emacs")))
 
 (define-key evil-normal-state-map (kbd "SPC x c") 'save-buffers-kill-terminal)
 
@@ -381,6 +382,9 @@
 
 (global-set-key (kbd "C-x C-d") 'ediff-buffers)
 (define-key evil-normal-state-map (kbd "SPC x d") 'ediff-buffers)
+
+(global-set-key (kbd "C-x D") 'ediff-files)
+(define-key evil-normal-state-map (kbd "SPC f f d") 'ediff-files)
 
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 (setq ediff-split-window-function 'split-window-horizontally)
@@ -692,11 +696,16 @@ scroll-down-aggressively 0.01)
 
 (global-set-key (kbd "C-c h o") 'helm-org-agenda-files-headings)
 
-(define-key helm-map (kbd "M-RET") 'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-o") 'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-j") 'helm-next-line)
 (define-key helm-map (kbd "C-k") 'helm-previous-line)
-(define-key helm-map (kbd "C-o") 'helm-find-files-up-one-level)
-(define-key helm-map (kbd "C-i") 'helm-find-files-down-last-level)
+(define-key helm-map (kbd "C-h") 'helm-find-files-up-one-level)
+(define-key helm-map (kbd "C-l") 'helm-find-files-down-last-level)
+
+(define-key helm-find-files-map (kbd "C-o") 'helm-execute-persistent-action)
+(define-key helm-find-files-map (kbd "C-h") 'helm-find-files-up-one-level)
+(define-key helm-find-files-map (kbd "C-l") 'helm-execute-persistent-action)
+
 
 ;; Making GNU Global support more languages
 ;; 1) Install Exuberant Ctags
