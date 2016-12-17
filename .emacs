@@ -306,7 +306,7 @@
 
 (evil-global-set-key 'normal (kbd "z m") 'evil-scroll-line-to-center)
 (evil-global-set-key 'normal (kbd "z z") (lambda () (interactive)
-					   (evil-scroll-line-to-center (beginning-of-line))
+					   (evil-scroll-line-to-center (line-number-at-pos))
 					   (evil-scroll-line-down (/ (window-total-height) 5))))
 
 (evil-global-set-key 'normal (kbd "C-f") (lambda () (interactive)
