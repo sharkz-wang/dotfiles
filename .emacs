@@ -373,6 +373,9 @@
 (global-set-key (kbd "C-x C-d") 'ediff-buffers)
 (define-key evil-normal-state-map (kbd "SPC x d") 'ediff-buffers)
 
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+(setq ediff-split-window-function 'split-window-horizontally)
+
 (defvar global-keybinding-minor-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-M-q") 'kill-buffer-and-window)
