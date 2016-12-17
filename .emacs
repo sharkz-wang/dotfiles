@@ -674,9 +674,11 @@ scroll-down-aggressively 0.01)
 
 (global-set-key (kbd "C-c h o") 'helm-org-agenda-files-headings)
 
-(define-key helm-map (kbd "C-o") 'helm-execute-persistent-action)
+(define-key helm-map (kbd "M-RET") 'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-j") 'helm-next-line)
 (define-key helm-map (kbd "C-k") 'helm-previous-line)
+(define-key helm-map (kbd "C-o") 'helm-find-files-up-one-level)
+(define-key helm-map (kbd "C-i") 'helm-find-files-down-last-level)
 
 ;; Making GNU Global support more languages
 ;; 1) Install Exuberant Ctags
