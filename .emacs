@@ -292,6 +292,7 @@
 (define-key evil-normal-state-map (kbd "SPC i e") (lambda () (interactive) (find-file "~/.emacs")))
 
 (define-key evil-normal-state-map (kbd "SPC x c") 'save-buffers-kill-terminal)
+(define-key evil-normal-state-map (kbd "SPC x q") 'save-buffers-kill-terminal)
 
 (setq org-agenda-files '("~/gtd.org"))
 (global-set-key (kbd "C-c o o") (lambda () (interactive) (find-file "~/gtd.org")))
@@ -707,7 +708,11 @@ scroll-down-aggressively 0.01)
 
 (define-key helm-find-files-map (kbd "C-o") 'helm-execute-persistent-action)
 (define-key helm-find-files-map (kbd "C-h") 'helm-find-files-up-one-level)
-(define-key helm-find-files-map (kbd "C-l") 'helm-execute-persistent-action)
+(define-key helm-find-files-map (kbd "C-l") 'helm-find-files-down-last-level)
+
+(define-key helm-read-file-map (kbd "C-o") 'helm-execute-persistent-action)
+(define-key helm-read-file-map (kbd "C-h") 'helm-find-files-up-one-level)
+(define-key helm-read-file-map (kbd "C-l") 'helm-find-files-down-last-level)
 
 
 ;; Making GNU Global support more languages
@@ -738,6 +743,7 @@ scroll-down-aggressively 0.01)
 (global-set-key (kbd "C-c h b") 'helm-bookmark)
 (define-key evil-normal-state-map (kbd "SPC h b") 'helm-bookmark)
 (global-set-key (kbd "C-c h g") 'helm-occur)
+(global-set-key (kbd "C-c g g") 'helm-occur)
 (define-key evil-normal-state-map (kbd "SPC h g") 'helm-occur)
 
 (define-key helm-gtags-mode-map (kbd "C-c g S") 'helm-gtags-select)
