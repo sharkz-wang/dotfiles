@@ -3,6 +3,8 @@
 # 2) cd ~/.oh-my-zsh/custom/plugins && git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
 # 3) mkdir -p ~/.oh-my-zsh/plugins/docker
 # 4) wget https://raw.githubusercontent.com/docker/docker/master/contrib/completion/zsh/_docker -O ~/.oh-my-zsh/plugins/docker/_docker
+# 5) Download fzf from https://github.com/junegunn/fzf-bin/releases to ${PATH}
+# 6) git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
 export ZSH="${HOME}/.oh-my-zsh"
 plugins=(git zsh-syntax-highlighting docker)
@@ -65,9 +67,6 @@ alias today='date +%Y%m%d'
 
 alias beep='/bin/echo -e "\a"'
 
-bindkey "^R" history-incremental-pattern-search-backward
-bindkey "^S" history-incremental-pattern-search-forward
-
 bindkey "^[F" forward-word
 bindkey "^[B" backward-word
 
@@ -84,6 +83,26 @@ zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 source "${HOME}/.zshsyntaxcolors"
+
+export FZF_BOOKMARK="~"
+
+export FZF_ALT_C_COMMAND="command find -L ${FZF_BOOKMARK} \\( -maxdepth 3 -path '*/\\.*' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
+	-o -type d -print 2> /dev/null | sed 1d"
+
+export FZF_CTRL_T_COMMAND="command find -L ${FZF_BOOKMARK} \\( -maxdepth 3 -path '*/\\.*' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
+    -o -type f -print \
+    -o -type d -print \
+    -o -type l -print 2> /dev/null | sed 1d"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+bindkey '\ez' fzf-cd-widget
+bindkey '\ex' fzf-cd-widget
+bindkey '\ep' fzf-file-widget
+bindkey '\er' fzf-history-widget
+
+bindkey "^R" history-incremental-pattern-search-backward
+bindkey "^S" history-incremental-pattern-search-forward
 
 hello_in_c() {
 	echo '#include <stdio.h>'
