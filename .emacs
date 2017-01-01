@@ -65,8 +65,8 @@
 		    (lambda ()
 			(define-key ido-completion-map (kbd "C-h") 'delete-backward-char)
 			
-			(define-key ido-completion-map (kbd "C-n") 'ido-next-match)
-			(define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
+			(define-key ido-completion-map (kbd "C-j") 'ido-next-match)
+			(define-key ido-completion-map (kbd "C-k") 'ido-prev-match)
 
 			(define-key ido-completion-map (kbd "C-? f") 'smex-describe-function)
 			(define-key ido-completion-map (kbd "C-? w") 'smex-where-is)))
@@ -346,6 +346,7 @@
 
 (global-set-key (kbd "C-x C-x") 'ido-switch-buffer)
 (define-key evil-normal-state-map (kbd "SPC x x") 'ido-switch-buffer)
+(define-key evil-normal-state-map (kbd "SPC \'") 'ido-switch-buffer)
 
 (defun switch-to-last-buffer ()
   "Switch to previously open buffer.
@@ -354,15 +355,20 @@
   (switch-to-buffer (other-buffer (current-buffer) 1)))
 (global-set-key (kbd "C-x l") 'switch-to-last-buffer)
 (define-key evil-normal-state-map (kbd "SPC l") 'switch-to-last-buffer)
+(define-key evil-normal-state-map (kbd "SPC j") 'switch-to-last-buffer)
 (define-key evil-normal-state-map (kbd "SPC x l") 'switch-to-last-buffer)
 
 (define-key evil-normal-state-map (kbd "SPC x c") 'save-buffers-kill-terminal)
 
 (global-set-key (kbd "C-x 2") (lambda () (interactive) (split-window-below) (other-window 1)))
-(define-key evil-normal-state-map (kbd "SPC x 2") (lambda () (interactive) (split-window-left) (other-window 1)))
+(define-key evil-normal-state-map (kbd "SPC x 2") (lambda () (interactive) (split-window-below) (other-window 1)))
+(define-key evil-normal-state-map (kbd "SPC 2") (lambda () (interactive) (split-window-below) (other-window 1)))
 
 (global-set-key (kbd "C-x 3") (lambda () (interactive) (split-window-right) (other-window 1)))
 (define-key evil-normal-state-map (kbd "SPC x 3") (lambda () (interactive) (split-window-right) (other-window 1)))
+(define-key evil-normal-state-map (kbd "SPC 3") (lambda () (interactive) (split-window-right) (other-window 1)))
+
+(define-key evil-normal-state-map (kbd "SPC 0") 'delete-window)
 
 (global-set-key (kbd "C-q") 'delete-other-windows)
 (define-key evil-normal-state-map (kbd "SPC q") 'delete-other-windows)
@@ -377,17 +383,18 @@
 (global-set-key (kbd "C-x m") 'evil-visual-mark-mode)
 (define-key evil-normal-state-map (kbd "SPC x m") 'evil-visual-mark-mode)
 
-(define-key evil-normal-state-map (kbd "SPC x k") 'ido-kill-buffer)
-(define-key evil-normal-state-map (kbd "SPC k") 'ido-kill-buffer)
+(define-key evil-normal-state-map (kbd "SPC x k b") 'ido-kill-buffer)
 
 (global-set-key (kbd "C-x K") 'kill-buffer-and-window)
+(define-key evil-normal-state-map (kbd "SPC k") 'kill-buffer-and-window)
+(define-key evil-normal-state-map (kbd "SPC x k k") 'kill-buffer-and-window)
 (define-key evil-normal-state-map (kbd "SPC K") 'kill-buffer-and-window)
 
 (global-set-key (kbd "C-x C-d") 'ediff-buffers)
-(define-key evil-normal-state-map (kbd "SPC x d") 'ediff-buffers)
+(define-key evil-normal-state-map (kbd "SPC x d b") 'ediff-buffers)
 
 (global-set-key (kbd "C-x D") 'ediff-files)
-(define-key evil-normal-state-map (kbd "SPC f f d") 'ediff-files)
+(define-key evil-normal-state-map (kbd "SPC f d f") 'ediff-files)
 
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 (setq ediff-split-window-function 'split-window-horizontally)
@@ -543,6 +550,7 @@
 
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 (define-key evil-normal-state-map (kbd "C-w") 'ace-window)
+(define-key evil-normal-state-map (kbd "SPC w") 'ace-window)
 (define-key global-map (kbd "C-c w") 'ace-window)
 (defvar aw-dispatch-alist
   '((?x aw-delete-window " Ace - Delete Window")
@@ -687,8 +695,11 @@ scroll-down-aggressively 0.01)
 (require 'undo-tree)
 (global-undo-tree-mode 1)
 
+(require 'helm-files)
 (require 'helm-config)
 (require 'helm-grep)
+
+(helm-mode 1)
 ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
 ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
 ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
@@ -700,20 +711,24 @@ scroll-down-aggressively 0.01)
 
 (global-set-key (kbd "C-c h o") 'helm-org-agenda-files-headings)
 
+(define-key helm-map (kbd "TAB") 'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-o") 'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-j") 'helm-next-line)
 (define-key helm-map (kbd "C-k") 'helm-previous-line)
 (define-key helm-map (kbd "C-h") 'helm-find-files-up-one-level)
 (define-key helm-map (kbd "C-l") 'helm-find-files-down-last-level)
 
+(define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
 (define-key helm-find-files-map (kbd "C-o") 'helm-execute-persistent-action)
 (define-key helm-find-files-map (kbd "C-h") 'helm-find-files-up-one-level)
 (define-key helm-find-files-map (kbd "C-l") 'helm-find-files-down-last-level)
 
+(define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
 (define-key helm-read-file-map (kbd "C-o") 'helm-execute-persistent-action)
 (define-key helm-read-file-map (kbd "C-h") 'helm-find-files-up-one-level)
 (define-key helm-read-file-map (kbd "C-l") 'helm-find-files-down-last-level)
 
+(define-key evil-normal-state-map (kbd "SPC h j") (lambda () (interactive) (helm-resume ()) (helm-next-line)))
 
 ;; Making GNU Global support more languages
 ;; 1) Install Exuberant Ctags
@@ -745,6 +760,7 @@ scroll-down-aggressively 0.01)
 (global-set-key (kbd "C-c h g") 'helm-occur)
 (global-set-key (kbd "C-c g g") 'helm-occur)
 (define-key evil-normal-state-map (kbd "SPC h g") 'helm-occur)
+(define-key evil-normal-state-map (kbd "SPC g g") 'helm-occur)
 
 (define-key helm-gtags-mode-map (kbd "C-c g S") 'helm-gtags-select)
 (define-key evil-normal-state-map (kbd "SPC g S") 'helm-gtags-select)
@@ -1031,7 +1047,7 @@ scroll-down-aggressively 0.01)
 
 (define-key projectile-mode-map (kbd "C-c p p") 'helm-projectile-switch-project)
 (define-key evil-normal-state-map (kbd "SPC p p") 'helm-projectile-switch-project)
-(define-key projectile-mode-map (kbd "C-c p f") 'helm-projectile-find-file-dwim)
+(define-key projectile-mode-map (kbd "C-c p f") 'helm-projectile-find-file)
 (define-key evil-normal-state-map (kbd "SPC p f") 'helm-projectile-find-file-dwim)
 (define-key projectile-mode-map (kbd "C-c p r") 'helm-projectile-recentf)
 (define-key evil-normal-state-map (kbd "SPC p r") 'helm-projectile-recentf)
@@ -1344,6 +1360,7 @@ scroll-down-aggressively 0.01)
   )
 
 (global-set-key (kbd "C-c c C-x C-e") 'calc-eval-region)
+(define-key evil-visual-state-map (kbd "SPC i c x e") 'calc-eval-region)
 
 (defun buffer-binary-p (&optional buffer)
   "Return whether BUFFER or the current buffer is binary.
