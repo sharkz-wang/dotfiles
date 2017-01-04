@@ -80,6 +80,10 @@
 
    (:name magit				; git meet emacs, and a binding
 	  :after (progn
+		   ;; Unbind SPC - leading key of many useful key-bindings
+		   (eval-after-load 'magit '(define-key magit-mode-map (kbd "SPC") nil))
+
+		   (define-key evil-normal-state-map (kbd "SPC m m") 'magit-status)
 		   (global-set-key (kbd "C-c m s") 'magit-status)
 		   (define-key evil-normal-state-map (kbd "SPC m s") 'magit-status)
 		   (global-set-key (kbd "C-c m d") 'magit-diff-unstaged)
@@ -139,7 +143,15 @@
    (:name function-args)
 
    (:name ggtags)
-   (:name helm)
+   (:name helm
+	  ;; hides `.' in file list (hiding both `.' and `..`'
+	  ;; invalidate helm-find-files-up-one-level)
+	  :after (progn
+		   (advice-add 'helm-ff-filter-candidate-one-by-one
+			       :around (lambda (fcn file)
+					 (unless (string-match "\\(?:/\\|\\`\\)\\.\\{1\\}\\'" file)
+					   (funcall fcn file))))
+		   ))
    (:name helm-gtags)
 
    (:name f)
@@ -347,6 +359,29 @@
 (global-set-key (kbd "C-x C-x") 'ido-switch-buffer)
 (define-key evil-normal-state-map (kbd "SPC x x") 'ido-switch-buffer)
 (define-key evil-normal-state-map (kbd "SPC \'") 'ido-switch-buffer)
+(define-key evil-normal-state-map (kbd "SPC \;") 'helm-buffers-list)
+
+;; Toggling paste state - something like vim's `set paste' mode
+(define-key evil-normal-state-map (kbd "SPC i P") '(lambda () (interactive)
+						     (if (bound-and-true-p company-mode)
+							 (progn
+							   (company-mode -1)
+							   (message "Ready to paste."))
+							 (progn
+							   (company-mode t)
+							   (message "Stop paste state.")))
+						     ))
+(define-key evil-normal-state-map (kbd "SPC i P") '(lambda () (interactive)
+						     (if (bound-and-true-p company-mode)
+							 (progn
+							   (company-mode -1)
+							   (message "Ready to paste."))
+							 (progn
+							   (company-mode t)
+							   (message "Stop paste state.")))
+						     ))
+(define-key evil-normal-state-map (kbd "SPC e l") 'eval-last-sexp)
+(define-key evil-normal-state-map (kbd "SPC e e") 'eval-last-sexp)
 
 (defun switch-to-last-buffer ()
   "Switch to previously open buffer.
@@ -369,6 +404,8 @@
 (define-key evil-normal-state-map (kbd "SPC 3") (lambda () (interactive) (split-window-right) (other-window 1)))
 
 (define-key evil-normal-state-map (kbd "SPC 0") 'delete-window)
+
+(define-key evil-normal-state-map (kbd "SPC 4") 'evil-end-of-visual-line)
 
 (global-set-key (kbd "C-q") 'delete-other-windows)
 (define-key evil-normal-state-map (kbd "SPC q") 'delete-other-windows)
@@ -1055,6 +1092,7 @@ scroll-down-aggressively 0.01)
 (define-key evil-normal-state-map (kbd "SPC p g") 'helm-projectile-grep)
 (define-key projectile-mode-map (kbd "C-c p o") 'helm-projectile-find-other-file)
 (define-key evil-normal-state-map (kbd "SPC p o") 'helm-projectile-find-other-file)
+(define-key evil-normal-state-map (kbd "SPC p i") 'projectile-invalidate-cache)
 
 (require 'dtrt-indent)
 (dtrt-indent-mode 1)
