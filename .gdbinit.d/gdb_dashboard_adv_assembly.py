@@ -7,6 +7,9 @@ import re
 import struct
 import termios
 
+named_breakpoint_dict = dict()
+max_named_bp_len = 0
+
 class AdvAssembly(Dashboard.Module):
 
     """Show the disassembled code surrounding the program counter. The
@@ -103,10 +106,19 @@ instructions constituting the current statement are marked, if available."""
             text = highlighter.process(text)
 
             is_bp = self.is_break_point(int(addr_str, 16))
+            bp_name = self.lookup_breakpoint_name(int(addr_str, 16))
+
+            bp_name_field_len = max_named_bp_len + 3
             if not R.ansi:
-                bp_mark = "BP " if is_bp else "   "
+                if bp_name is not None:
+                    bp_mark = (bp_name + " " * (bp_name_field_len - len(bp_name))) if is_bp else " " * bp_name_field_len
+                else:
+                    bp_mark = ("BP" + " " * (bp_name_field_len - 2)) if is_bp else " " * bp_name_field_len
             else:
-                bp_mark = ansi("BP ", R.style_error) if is_bp else "   "
+                if bp_name is not None:
+                    bp_mark = ansi(bp_name + " " * (bp_name_field_len - len(bp_name)), R.style_error) if is_bp else " " * bp_name_field_len
+                else:
+                    bp_mark = ansi("BP" + " " * (bp_name_field_len - 2), R.style_error) if is_bp else " " * bp_name_field_len
 
             if addr == frame.pc():
                 if not R.ansi:
@@ -137,6 +149,11 @@ instructions constituting the current statement are marked, if available."""
                 return True
         return False
 
+    def lookup_breakpoint_name(self, addr):
+        if str(addr) in named_breakpoint_dict:
+            return named_breakpoint_dict[str(addr)]
+        return None
+
     def attributes(self):
         return {
             'context': {
@@ -158,3 +175,19 @@ instructions constituting the current statement are marked, if available."""
                 'type': bool
             }
         }
+
+class SetNamedBreakPoint (gdb.Command):
+    "Prefix command for saving things."
+
+    def __init__ (self):
+        super(SetNamedBreakPoint, self).__init__ ("nbreak", gdb.COMMAND_SUPPORT, gdb.COMPLETE_NONE, True)
+
+    def invoke (self, arg, from_tty):
+        global max_named_bp_len
+        args = arg.split()
+        gdb.execute("break " + args[1])
+        named_breakpoint_dict[str(int(args[1].replace("*", ""), 16))] = args[0]
+        if len(args[0]) > max_named_bp_len:
+            max_named_bp_len = len(args[0])
+
+SetNamedBreakPoint()
