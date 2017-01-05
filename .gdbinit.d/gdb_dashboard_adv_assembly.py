@@ -1,5 +1,7 @@
 # Based on commit 8a33017 of https://github.com/cyrus-and/gdb-dashboard
 
+from __future__ import print_function
+
 import ast
 import fcntl
 import os
@@ -191,3 +193,28 @@ class SetNamedBreakPoint (gdb.Command):
             max_named_bp_len = len(args[0])
 
 SetNamedBreakPoint()
+
+class HookedNamedBreakpoint(gdb.Breakpoint):
+
+    hook = None
+
+    def __init__(self, name, addr, hook=None):
+        global max_named_bp_len
+        gdb.Breakpoint.__init__(self, addr)
+        self.hook = hook
+        named_breakpoint_dict[str(int(addr.replace("*", ""), 16))] = name
+        if len(name) > max_named_bp_len:
+            max_named_bp_len = len(name)
+
+    def stop(self):
+        if self.hook != None:
+            self.hook()
+        return True # stop the execution at this point
+
+def get_register_value(reg_name):
+    return int(gdb.parse_and_eval(reg_name))
+
+# example of hooked breakpoint
+# HookedNamedBreakpoint("bootloader",
+                      # "*0x00007c00",
+                      # lambda: print("EAX: " + str("%#x" % get_register_value("$eax"))))
