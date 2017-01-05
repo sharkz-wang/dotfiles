@@ -867,6 +867,8 @@ scroll-down-aggressively 0.01)
 				 (define-key speedbar-file-key-map "d" 'speedbar-item-delete)
 				 (define-key speedbar-file-key-map "y" 'speedbar-item-copy)
 				 (define-key speedbar-file-key-map "c" 'speedbar-item-copy)
+				 (define-key speedbar-file-key-map "r" 'speedbar-item-rename)
+				 (define-key speedbar-file-key-map "m" 'speedbar-item-rename)
 				 (define-key speedbar-key-map "g" 'evil-goto-first-line)))
 
 (require 'semantic)
