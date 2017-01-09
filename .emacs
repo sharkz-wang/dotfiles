@@ -369,7 +369,7 @@
 (define-key evil-normal-state-map (kbd "SPC \;") 'helm-buffers-list)
 
 ;; Toggling paste state - something like vim's `set paste' mode
-(define-key evil-normal-state-map (kbd "SPC i P") '(lambda () (interactive)
+(define-key evil-normal-state-map (kbd "C-c i p") '(lambda () (interactive)
 						     (if (bound-and-true-p company-mode)
 							 (progn
 							   (company-mode -1)
@@ -378,7 +378,7 @@
 							   (company-mode t)
 							   (message "Stop paste state.")))
 						     ))
-(define-key evil-normal-state-map (kbd "SPC i P") '(lambda () (interactive)
+(define-key evil-normal-state-map (kbd "SPC i p") '(lambda () (interactive)
 						     (if (bound-and-true-p company-mode)
 							 (progn
 							   (company-mode -1)
@@ -1395,7 +1395,13 @@ scroll-down-aggressively 0.01)
 	    do
 	    ( let ((m-keyword (base-keyword m)) (n-keyword (base-keyword n)))
 	     (global-set-key (kbd (format "C-c b %c %c" m-keyword n-keyword)) (convert-region-base-m-to-n m n))
+	     (define-key evil-visual-state-map
+	       (kbd (format "SPC i c %c %c" m-keyword n-keyword))
+	       (convert-region-base-m-to-n m n))
 	     (global-set-key (kbd (format "C-c b l %c %c" m-keyword n-keyword)) (convert-region-list-base-m-to-n m n))
+	     (define-key evil-visual-state-map
+	       (kbd (format "SPC i c l %c %c" m-keyword n-keyword))
+	       (convert-region-list-base-m-to-n m n))
 	     )))
 
 (global-set-key (kbd "C-c b h 2") (convert-region-base-m-to-n 16 2))
