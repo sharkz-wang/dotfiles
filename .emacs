@@ -1444,3 +1444,26 @@ scroll-down-aggressively 0.01)
 ;; be removed
 (require 'ztree)
 (define-key evil-normal-state-map (kbd "SPC f d d") 'ztree-diff)
+
+(eval-after-load "ztree"
+  '(progn
+     (evil-define-key 'motion ztree-mode-map (kbd "TAB") 'ztree-perform-soft-action)
+     (evil-define-key 'motion ztree-mode-map (kbd "RET") 'ztree-perform-action)
+     (evil-define-key 'motion ztree-mode-map (kbd "h") 'ztree-jump-side)
+     (evil-define-key 'motion ztree-mode-map (kbd "l") 'ztree-jump-side)
+     (evil-define-key 'motion ztree-mode-map (kbd "r") 'ztree-diff-partial-rescan)
+     (evil-define-key 'motion ztree-mode-map (kbd "R") 'ztree-diff-full-rescan)
+     (evil-define-key 'motion ztree-mode-map (kbd "h") 'ztree-diff-toggle-show-equal-files)
+     (evil-define-key 'motion ztree-mode-map (kbd "v") 'ztree-diff-view-file)
+     (evil-define-key 'motion ztree-mode-map (kbd "o") 'ztree-diff-view-file)
+     (evil-define-key 'motion ztree-mode-map (kbd "q") 'quit-window)
+     ))
+
+(eval-after-load "projectile"
+  '(progn (setq magit-repo-dirs (mapcar (lambda (dir)
+					  (substring dir 0 -1))
+					(remove-if-not (lambda (project)
+							 (file-directory-p (concat project "/.git/")))
+						       (projectile-relevant-known-projects))))
+
+	  (setq magit-repo-dirs-depth 1)))
