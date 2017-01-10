@@ -217,8 +217,19 @@ class HookedNamedBreakpoint(gdb.Breakpoint):
             self.hook()
         return self.bp_stop
 
-def get_register_value(reg_name):
-    return int(gdb.parse_and_eval(reg_name))
+
+def get_register_str(reg_name):
+
+    reg_str = str(gdb.parse_and_eval(reg_name))
+
+    if re.match("0[xX].*", reg_str) is None:
+        reg = int(reg_str)
+        if reg < 0:
+            reg_str = hex(((abs(reg) ^ 0xffffffff) + 1) & 0xffffffff)
+        else:
+            reg_str = hex(reg)
+
+    return reg_str
 
 # example of hooked breakpoint
 # HookedNamedBreakpoint("bootloader",
