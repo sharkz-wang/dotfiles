@@ -197,19 +197,25 @@ SetNamedBreakPoint()
 class HookedNamedBreakpoint(gdb.Breakpoint):
 
     hook = None
+    bp_stop = True
 
-    def __init__(self, name, addr, hook=None):
+    def __init__(self, name, addr, bp_stop=True, hook=None):
+
         global max_named_bp_len
         gdb.Breakpoint.__init__(self, addr)
+
         self.hook = hook
+
         named_breakpoint_dict[str(int(addr.replace("*", ""), 16))] = name
         if len(name) > max_named_bp_len:
             max_named_bp_len = len(name)
 
+        self.bp_stop = bp_stop
+
     def stop(self):
         if self.hook != None:
             self.hook()
-        return True # stop the execution at this point
+        return self.bp_stop
 
 def get_register_value(reg_name):
     return int(gdb.parse_and_eval(reg_name))
