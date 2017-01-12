@@ -410,6 +410,7 @@
 (define-key evil-normal-state-map (kbd "SPC x 3") (lambda () (interactive) (split-window-right) (other-window 1)))
 (define-key evil-normal-state-map (kbd "SPC 3") (lambda () (interactive) (split-window-right) (other-window 1)))
 
+(define-key evil-normal-state-map (kbd "SPC 1") 'delete-other-windows)
 (define-key evil-normal-state-map (kbd "SPC 0") 'delete-window)
 
 (define-key evil-normal-state-map (kbd "SPC 4") 'evil-end-of-visual-line)
