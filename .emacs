@@ -354,6 +354,8 @@
 (global-set-key (kbd "C-c o p") 'org-set-property)
 (define-key evil-normal-state-map (kbd "SPC o p") 'org-set-property)
 
+(define-key evil-normal-state-map  (kbd "SPC o O") 'org-open-at-point)
+
 (defalias 'outline-show-all 'show-all)
 
 (setq org-capture-templates '(("t" "Todo" entry (file+headline "~/gtd.org" "Tasks")
