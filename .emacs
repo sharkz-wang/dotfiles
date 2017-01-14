@@ -1289,11 +1289,6 @@ scroll-down-aggressively 0.01)
 ;;     (interactive)
 ;;     (setq linum-format "%9d "))
 
-;(require 'indent-guide)
-;(indent-guide-global-mode 1)
-;(setq indent-guide-recursive t)
-;; (setq indent-guide-char ":")
-
 (defvar endless/margin-display
     `((margin left-margin) ,(propertize "-----" 'face 'linum))
 	  "String used on the margin.")
@@ -1605,3 +1600,22 @@ scroll-down-aggressively 0.01)
 						       (projectile-relevant-known-projects))))
 
 	  (setq magit-repo-dirs-depth 1)))
+
+(require 'fill-column-indicator)
+(define-globalized-minor-mode fci-global-mode fci-mode turn-on-fci-mode)
+(setq fci-rule-column 74)
+(fci-global-mode -1)
+
+(require 'indent-guide)
+(setq indent-guide-recursive t)
+(setq indent-guide-char "|")
+(indent-guide-global-mode -1)
+
+(define-key evil-normal-state-map (kbd "SPC i g 1") (lambda () (interactive)
+						    (fci-global-mode)
+						    (indent-guide-global-mode)
+						    ))
+(define-key evil-normal-state-map (kbd "SPC i g 0") (lambda () (interactive)
+						    (fci-global-mode -1)
+						    (indent-guide-global-mode -1)
+						    ))
