@@ -82,6 +82,7 @@
 	  :after (progn
 		   ;; Unbind SPC - leading key of many useful key-bindings
 		   (eval-after-load 'magit '(define-key magit-mode-map (kbd "SPC") nil))
+		   (eval-after-load 'magit '(define-key magit-diff-mode-map (kbd "SPC") nil))
 
 		   (define-key evil-normal-state-map (kbd "SPC m m") 'magit-status)
 		   (global-set-key (kbd "C-c m s") 'magit-status)
