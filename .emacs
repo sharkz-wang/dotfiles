@@ -499,9 +499,15 @@
 (require 'evil-org)
 
 (add-hook 'evil-org-mode-hook
+	  (lambda ()
 	    (evil-define-key 'normal evil-org-mode-map (kbd "TAB") 'org-cycle)
 	    (evil-define-key 'normal evil-org-mode-map (kbd "H") 'evil-window-top)
-	    (evil-define-key 'normal evil-org-mode-map (kbd "L") 'evil-window-bottom))
+	    (evil-define-key 'normal evil-org-mode-map (kbd "L") 'evil-window-bottom)
+	    (define-key org-mode-map (kbd "M-RET") (lambda () (interactive)
+						     (org-insert-heading-after-current)
+						     (end-of-line)
+						     (evil-insert-state)))
+	    ))
 (add-hook 'org-mode-hook
 	  (lambda () (modify-syntax-entry ?_ "w")
 	    (add-to-list 'org-modules "org-habit")))
