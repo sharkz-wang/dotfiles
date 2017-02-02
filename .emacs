@@ -773,6 +773,9 @@
 (setq org-clock-sound t)
 (setq org-timer-default-timer 25)
 
+(custom-set-faces
+  '(org-todo ((t :foreground "#FF1493" :weight bold))))
+
 (defun nolinum ()
   (interactive)
   (global-linum-mode 0)
