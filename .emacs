@@ -66,7 +66,9 @@
 			(define-key ido-completion-map (kbd "C-h") 'delete-backward-char)
 			
 			(define-key ido-completion-map (kbd "C-j") 'ido-next-match)
+			(define-key ido-completion-map (kbd "C-n") 'ido-next-match)
 			(define-key ido-completion-map (kbd "C-k") 'ido-prev-match)
+			(define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
 
 			(define-key ido-completion-map (kbd "C-? f") 'smex-describe-function)
 			(define-key ido-completion-map (kbd "C-? w") 'smex-where-is)))
@@ -401,6 +403,7 @@
 (global-set-key (kbd "C-x l") 'switch-to-last-buffer)
 (define-key evil-normal-state-map (kbd "SPC l") 'switch-to-last-buffer)
 (define-key evil-normal-state-map (kbd "SPC j") 'switch-to-last-buffer)
+(define-key evil-normal-state-map (kbd "SPC TAB") 'switch-to-last-buffer)
 (define-key evil-normal-state-map (kbd "SPC x l") 'switch-to-last-buffer)
 
 (define-key evil-normal-state-map (kbd "SPC x c") 'save-buffers-kill-terminal)
@@ -417,6 +420,9 @@
 (define-key evil-normal-state-map (kbd "SPC 0") 'delete-window)
 
 (define-key evil-normal-state-map (kbd "SPC 4") 'evil-end-of-visual-line)
+(define-key evil-normal-state-map (kbd "SPC 5") 'evil-jump-item)
+
+(define-key evil-normal-state-map (kbd "SPC b g ") 'end-of-buffer)
 
 (global-set-key (kbd "C-q") 'delete-other-windows)
 (define-key evil-normal-state-map (kbd "SPC q") 'delete-other-windows)
