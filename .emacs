@@ -84,6 +84,10 @@
 
    (:name magit				; git meet emacs, and a binding
 	  :after (progn
+		   ;; set magit popup windows default to full-screen
+		   (setq magit-display-buffer-function
+			 #'magit-display-buffer-fullframe-status-v1)
+
 		   ;; Unbind SPC - leading key of many useful key-bindings
 		   (eval-after-load 'magit '(define-key magit-mode-map (kbd "SPC") nil))
 		   (eval-after-load 'magit '(define-key magit-diff-mode-map (kbd "SPC") nil))
