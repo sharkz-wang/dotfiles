@@ -80,6 +80,8 @@
 		:type git
 		:url "https://github.com/justbur/evil-magit")
 
+   (:name with-editor)
+
    (:name magit				; git meet emacs, and a binding
 	  :after (progn
 		   ;; Unbind SPC - leading key of many useful key-bindings
@@ -445,7 +447,7 @@
 (define-key evil-normal-state-map (kbd "SPC K") 'kill-buffer-and-window)
 
 (global-set-key (kbd "C-x C-d") 'ediff-buffers)
-(define-key evil-normal-state-map (kbd "SPC x d b") 'ediff-buffers)
+(define-key evil-normal-state-map (kbd "SPC x d") 'ediff-buffers)
 
 (global-set-key (kbd "C-x D") 'ediff-files)
 (define-key evil-normal-state-map (kbd "SPC f d f") 'ediff-files)
@@ -707,6 +709,8 @@
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 (define-key evil-normal-state-map (kbd "C-w") 'ace-window)
 (define-key evil-normal-state-map (kbd "SPC w") 'ace-window)
+(define-key evil-normal-state-map (kbd "SPC x o") 'ace-window)
+
 (define-key global-map (kbd "C-c w") 'ace-window)
 (defvar aw-dispatch-alist
   '((?x aw-delete-window " Ace - Delete Window")
