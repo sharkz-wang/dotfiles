@@ -94,6 +94,15 @@
 		   (eval-after-load 'magit '(define-key magit-mode-map (kbd "SPC") nil))
 		   (eval-after-load 'magit '(define-key magit-diff-mode-map (kbd "SPC") nil))
 
+		   (define-key evil-normal-state-map (kbd "SPC m 1 TAB") 'magit-section-show-level-1-all)
+		   (global-set-key (kbd "C-c m 1 TAB") 'magit-section-show-level-1-all)
+		   (define-key evil-normal-state-map (kbd "SPC m 2 TAB") 'magit-section-show-level-2-all)
+		   (global-set-key (kbd "C-c m 2 TAB") 'magit-section-show-level-2-all)
+		   (define-key evil-normal-state-map (kbd "SPC m 3 TAB") 'magit-section-show-level-3-all)
+		   (global-set-key (kbd "C-c m 3 TAB") 'magit-section-show-level-3-all)
+		   (define-key evil-normal-state-map (kbd "SPC m 4 TAB") 'magit-section-show-level-4-all)
+		   (global-set-key (kbd "C-c m 4 TAB") 'magit-section-show-level-4-all)
+
 		   (define-key evil-normal-state-map (kbd "SPC m e") 'magit-ediff-stage)
 
 		   (define-key evil-normal-state-map (kbd "SPC m m") 'magit-status)
