@@ -118,6 +118,8 @@
 		   (define-key evil-normal-state-map (kbd "SPC m d") 'magit-diff-unstaged)
 		   (global-set-key (kbd "C-c m f d") 'magit-diff-buffer-file)
 		   (define-key evil-normal-state-map (kbd "SPC m f d") 'magit-diff-buffer-file)
+		   (global-set-key (kbd "C-c m f b d") 'magit-ediff-compare)
+		   (define-key evil-normal-state-map (kbd "SPC m f b d") 'magit-ediff-compare)
 		   (global-set-key (kbd "C-c m D") 'magit-diff)
 		   (define-key evil-normal-state-map (kbd "SPC m D") 'magit-diff)
 		   (global-set-key (kbd "C-c m f l") 'magit-log-buffer-file)
