@@ -528,6 +528,9 @@
 						     (end-of-line)
 						     (evil-insert-state)))
 	    ))
+
+(add-hook 'emacs-lisp-mode-hook
+	  (lambda () (modify-syntax-entry ?- "w")))
 (add-hook 'org-mode-hook
 	  (lambda () (modify-syntax-entry ?_ "w")
 	    (add-to-list 'org-modules "org-habit")))
