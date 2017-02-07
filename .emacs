@@ -84,6 +84,8 @@
 
    (:name magit				; git meet emacs, and a binding
 	  :after (progn
+		   (setq magit-log-margin (quote (t "%Y-%m-%d %H:%M" magit-log-margin-width t 18)))
+
 		   ;; set magit popup windows default to full-screen
 		   (setq magit-display-buffer-function
 			 #'magit-display-buffer-fullframe-status-v1)
