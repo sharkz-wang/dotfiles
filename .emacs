@@ -1491,6 +1491,7 @@ scroll-down-aggressively 0.01)
 
 (require 'evil-magit)
 (evil-define-key evil-magit-state magit-mode-map "=" 'magit-diff-less-context)
+(define-key magit-log-mode-map (kbd "TAB") 'magit-cycle-margin-style)
 
 (require 'gud)
 
