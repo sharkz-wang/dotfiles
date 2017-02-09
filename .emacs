@@ -93,6 +93,7 @@
 		   ;; Unbind SPC - leading key of many useful key-bindings
 		   (eval-after-load 'magit '(define-key magit-mode-map (kbd "SPC") nil))
 		   (eval-after-load 'magit '(define-key magit-diff-mode-map (kbd "SPC") nil))
+		   (eval-after-load 'magit '(define-key magit-blame-mode-map (kbd "SPC") nil))
 
 		   (define-key evil-normal-state-map (kbd "SPC m 1 TAB") 'magit-section-show-level-1-all)
 		   (global-set-key (kbd "C-c m 1 TAB") 'magit-section-show-level-1-all)
@@ -152,6 +153,9 @@
 		   (define-key evil-normal-state-map (kbd "SPC m z") 'magit-stash)
 		   (global-set-key (kbd "C-c m w") 'magit-diff-toggle-refine-hunk)))
 
+   (:name emacs-git-gutter
+	  :type git
+	  :url "https://github.com/syohex/emacs-git-gutter")
    (:name ztree)
 
    (:name deferred)
@@ -1732,3 +1736,35 @@ scroll-down-aggressively 0.01)
 						  (evil-next-line (- region-line-num 1))
 						  )
 						))
+
+(global-git-gutter-mode 1)
+
+(setq git-gutter:ask-p nil)
+
+(setq git-gutter:added-sign "+")
+(setq git-gutter:deleted-sign "-")
+(setq git-gutter:modified-sign "  ")
+
+(global-set-key (kbd "C-c m g TAB") 'global-git-gutter-mode)
+(define-key evil-normal-state-map (kbd "SPC m g TAB") 'global-git-gutter-mode)
+
+(global-set-key (kbd "C-c m g g") 'git-gutter)
+(define-key evil-normal-state-map (kbd "SPC m g g") 'git-gutter)
+(global-set-key (kbd "C-c m g SPC") 'git-gutter:popup-hunk)
+(define-key evil-normal-state-map (kbd "SPC m g SPC") 'git-gutter:popup-hunk)
+
+(global-set-key (kbd "C-c m g s") 'git-gutter:stage-hunk)
+(define-key evil-normal-state-map (kbd "SPC m g s") 'git-gutter:stage-hunk)
+(global-set-key (kbd "C-c m g d") 'git-gutter:revert-hunk)
+(define-key evil-normal-state-map (kbd "SPC m g d") 'git-gutter:revert-hunk)
+(global-set-key (kbd "C-c m g r") 'git-gutter:revert-hunk)
+(define-key evil-normal-state-map (kbd "SPC m g r") 'git-gutter:revert-hunk)
+
+(global-set-key (kbd "C-c m g n") 'git-gutter:next-hunk)
+(define-key evil-normal-state-map (kbd "SPC m g n") 'git-gutter:next-hunk)
+(global-set-key (kbd "C-c m g j") 'git-gutter:next-hunk)
+(define-key evil-normal-state-map (kbd "SPC m g j") 'git-gutter:next-hunk)
+(global-set-key (kbd "C-c m g p") 'git-gutter:previous-hunk)
+(define-key evil-normal-state-map (kbd "SPC m g p") 'git-gutter:previous-hunk)
+(global-set-key (kbd "C-c m g k") 'git-gutter:previous-hunk)
+(define-key evil-normal-state-map (kbd "SPC m g k") 'git-gutter:previous-hunk)
