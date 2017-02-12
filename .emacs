@@ -40,7 +40,9 @@
 	  :type git
 	  :url "https://github.com/hlissner/evil-snipe")
 
-   (:name golden-ratio)
+   ;; (:name golden-ratio)
+   (:name transpose-frame)
+
    (:name adaptive-wrap)
    (:name ace-window
 	  :type git
@@ -1768,3 +1770,20 @@ scroll-down-aggressively 0.01)
 (define-key evil-normal-state-map (kbd "SPC m g p") 'git-gutter:previous-hunk)
 (global-set-key (kbd "C-c m g k") 'git-gutter:previous-hunk)
 (define-key evil-normal-state-map (kbd "SPC m g k") 'git-gutter:previous-hunk)
+
+(global-set-key (kbd "C-x t t") 'transpose-frame)
+(define-key evil-normal-state-map (kbd "SPC x t t") 'transpose-frame)
+(global-set-key (kbd "C-x t j") 'flip-frame)
+(define-key evil-normal-state-map (kbd "SPC x t j") 'flip-frame)
+(global-set-key (kbd "C-x t k") 'flip-frame)
+(define-key evil-normal-state-map (kbd "SPC x t k") 'flip-frame)
+(global-set-key (kbd "C-x t h") 'flop-frame)
+(define-key evil-normal-state-map (kbd "SPC x t h") 'flop-frame)
+(global-set-key (kbd "C-x t l") 'flop-frame)
+(define-key evil-normal-state-map (kbd "SPC x t l") 'flop-frame)
+(global-set-key (kbd "C-x t r r") 'rotate-frame)
+(define-key evil-normal-state-map (kbd "SPC x t r r") 'rotate-frame)
+(global-set-key (kbd "C-x t r l") 'rotate-frame-clockwise)
+(define-key evil-normal-state-map (kbd "SPC x t r l") 'rotate-frame-clockwise)
+(global-set-key (kbd "C-x t r h") 'rotate-frame-anticlockwise)
+(define-key evil-normal-state-map (kbd "SPC x t r h") 'rotate-frame-anticlockwise)
