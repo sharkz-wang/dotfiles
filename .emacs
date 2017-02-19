@@ -109,6 +109,7 @@
 		   (define-key evil-normal-state-map (kbd "SPC m e") 'magit-ediff-stage)
 
 		   (define-key evil-normal-state-map (kbd "SPC m m") 'magit-status)
+		   (define-key evil-normal-state-map (kbd "SPC TAB") 'magit-status)
 		   (global-set-key (kbd "C-c m s") 'magit-status)
 		   (define-key evil-normal-state-map (kbd "SPC m s") 'magit-status)
 		   (global-set-key (kbd "C-c m $") 'magit-process-buffer)
@@ -434,7 +435,6 @@
 (global-set-key (kbd "C-x l") 'switch-to-last-buffer)
 (define-key evil-normal-state-map (kbd "SPC l") 'switch-to-last-buffer)
 (define-key evil-normal-state-map (kbd "SPC j") 'switch-to-last-buffer)
-(define-key evil-normal-state-map (kbd "SPC TAB") 'switch-to-last-buffer)
 (define-key evil-normal-state-map (kbd "SPC x l") 'switch-to-last-buffer)
 
 (define-key evil-normal-state-map (kbd "SPC x c") 'save-buffers-kill-terminal)
