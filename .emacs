@@ -540,10 +540,13 @@
 	    (evil-define-key 'normal evil-org-mode-map (kbd "TAB") 'org-cycle)
 	    (evil-define-key 'normal evil-org-mode-map (kbd "H") 'evil-window-top)
 	    (evil-define-key 'normal evil-org-mode-map (kbd "L") 'evil-window-bottom)
-	    (define-key org-mode-map (kbd "M-RET") (lambda () (interactive)
+	    (define-key org-mode-map (kbd "M-RET") (lambda (arg) (interactive "P")
 						     (org-insert-heading-after-current)
 						     (end-of-line)
-						     (evil-insert-state)))
+						     (evil-insert-state)
+						     (when (equal current-prefix-arg '(4))
+						       (org-move-subtree-up))
+						     ))
 	    ))
 
 (add-hook 'emacs-lisp-mode-hook
