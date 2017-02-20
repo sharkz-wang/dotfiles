@@ -518,8 +518,10 @@
 (evil-mode t)
 
 (require 'evil-snipe)
+(evil-snipe-mode t)
 
 (setq evil-snipe-repeat-keys nil)
+(setq evil-snipe-smart-case t)
 ;; (setq evil-snipe-repeat-scope 'whole-visible)
 ;; (setq evil-snipe-scope 'whole-visible)
 
