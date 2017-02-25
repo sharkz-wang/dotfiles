@@ -362,6 +362,7 @@
 (global-set-key (kbd "C-x C") 'calc-dispatch)
 
 (global-set-key (kbd "M-z") 'smex)
+(define-key evil-normal-state-map (kbd "SPC z") 'smex)
 
 (global-set-key (kbd "C-c i k") 'describe-key)
 (define-key evil-normal-state-map (kbd "SPC i k") 'describe-key)
@@ -408,8 +409,10 @@
 
 (global-set-key (kbd "C-x C-x") 'ido-switch-buffer)
 (define-key evil-normal-state-map (kbd "SPC x x") 'ido-switch-buffer)
-(define-key evil-normal-state-map (kbd "SPC \'") 'ido-switch-buffer)
-(define-key evil-normal-state-map (kbd "SPC \;") 'helm-buffers-list)
+(define-key evil-normal-state-map (kbd "SPC \'") 'helm-buffers-list)
+(define-key evil-normal-state-map (kbd "SPC \;") 'ido-switch-buffer)
+
+(define-key evil-normal-state-map (kbd "SPC i w") 'toggle-truncate-lines)
 
 ;; Toggling paste state - something like vim's `set paste' mode
 (define-key evil-normal-state-map (kbd "C-c i p") '(lambda () (interactive)
