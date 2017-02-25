@@ -1314,6 +1314,9 @@ scroll-down-aggressively 0.01)
 (define-key evil-normal-state-map (kbd "SPC p o") 'helm-projectile-find-other-file)
 (define-key evil-normal-state-map (kbd "SPC p i") 'projectile-invalidate-cache)
 
+(define-key evil-normal-state-map (kbd "SPC \\") 'helm-projectile-find-file-dwim)
+(define-key evil-normal-state-map (kbd "SPC \`") 'helm-projectile-switch-project)
+
 (require 'dtrt-indent)
 (dtrt-indent-mode 1)
 (setq dtrt-indent-verbosity 0)
