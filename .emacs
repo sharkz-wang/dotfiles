@@ -354,6 +354,12 @@
 (define-key evil-normal-state-map (kbd "SPC x c") 'save-buffers-kill-terminal)
 (define-key evil-normal-state-map (kbd "SPC x q") 'save-buffers-kill-terminal)
 
+(add-hook 'org-mode-hook (lambda ()
+			   (require 'ob-ditaa)
+			   (require 'ob-dot)
+			   ))
+(setq org-ditaa-jar-path "/opt/ditaa/ditaa.jar")
+
 (setq org-agenda-files '("~/gtd.org"))
 (global-set-key (kbd "C-c o o") (lambda () (interactive) (find-file "~/gtd.org")))
 (define-key evil-normal-state-map (kbd "SPC o o")
@@ -549,6 +555,10 @@
 (add-hook 'evil-org-mode-hook
 	  (lambda ()
 	    (evil-define-key 'normal evil-org-mode-map (kbd "TAB") 'org-cycle)
+	    (evil-define-key 'normal evil-org-mode-map (kbd "M-<") 'org-metaleft)
+	    (evil-define-key 'normal evil-org-mode-map (kbd "M->") 'org-metaright)
+	    (evil-define-key 'normal evil-org-mode-map (kbd "<") 'evil-shift-left)
+	    (evil-define-key 'normal evil-org-mode-map (kbd ">") 'evil-shift-right)
 	    (evil-define-key 'normal evil-org-mode-map (kbd "H") 'evil-window-top)
 	    (evil-define-key 'normal evil-org-mode-map (kbd "L") 'evil-window-bottom)
 	    (define-key org-mode-map (kbd "M-RET") (lambda (arg) (interactive "P")
@@ -1638,8 +1648,15 @@ scroll-down-aggressively 0.01)
   "If `hexl-mode' is not already active, and the current bufferis binary, activate `hexl-mode'."
   (interactive)
   (unless (eq major-mode 'hexl-mode)
-    (when (buffer-binary-p)
-      (hexl-mode))))
+    (let ((file-ext (file-name-extension (buffer-name))))
+    (when
+      (and
+       (buffer-binary-p)
+       (not (string= file-ext "png"))
+       (not (string= file-ext "jpg"))
+       (not (string= file-ext "jpeg"))
+	   )
+      (hexl-mode)))))
 
 (add-hook 'find-file-hooks 'hexl-if-binary)
 
@@ -1806,3 +1823,17 @@ scroll-down-aggressively 0.01)
 (define-key evil-normal-state-map (kbd "SPC x t r l") 'rotate-frame-clockwise)
 (global-set-key (kbd "C-x t r h") 'rotate-frame-anticlockwise)
 (define-key evil-normal-state-map (kbd "SPC x t r h") 'rotate-frame-anticlockwise)
+
+(define-key evil-normal-state-map (kbd "SPC i a a") 'artist-mode)
+
+(evil-define-key 'normal artist-mode-map (kbd "RET") 'artist-key-set-point)
+(evil-define-key 'normal artist-mode-map (kbd "j") 'artist-next-line)
+(evil-define-key 'normal artist-mode-map (kbd "k") 'artist-previous-line)
+(evil-define-key 'normal artist-mode-map (kbd "h") 'artist-backward-char)
+(evil-define-key 'normal artist-mode-map (kbd "l") 'artist-forward-char)
+(evil-define-key 'normal artist-mode-map (kbd "<") 'artist-toggle-first-arrow)
+(evil-define-key 'normal artist-mode-map (kbd ">") 'artist-toggle-second-arrow)
+
+(evil-define-key 'normal artist-mode-map (kbd "SPC i a o") 'artist-select-operation)
+(evil-define-key 'normal artist-mode-map (kbd "SPC i a r") 'artist-select-op-rectangle)
+(evil-define-key 'normal artist-mode-map (kbd "SPC i a l") 'artist-select-op-poly-line)
