@@ -1003,6 +1003,7 @@ scroll-down-aggressively 0.01)
 (global-set-key (kbd "C-c g g") 'helm-occur)
 (define-key evil-normal-state-map (kbd "SPC h g") 'helm-occur)
 (define-key evil-normal-state-map (kbd "SPC g g") 'helm-occur)
+(define-key evil-normal-state-map (kbd "SPC t") 'helm-occur)
 (define-key evil-normal-state-map (kbd "SPC h a") 'helm-do-ag)
 
 (define-key helm-gtags-mode-map (kbd "C-c g S") 'helm-gtags-select)
