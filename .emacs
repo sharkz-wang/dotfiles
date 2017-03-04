@@ -66,7 +66,7 @@
 		(add-hook 'ido-setup-hook
 		    (lambda ()
 			(define-key ido-completion-map (kbd "C-h") 'delete-backward-char)
-			
+
 			(define-key ido-completion-map (kbd "C-j") 'ido-next-match)
 			(define-key ido-completion-map (kbd "C-n") 'ido-next-match)
 			(define-key ido-completion-map (kbd "C-k") 'ido-prev-match)
@@ -223,7 +223,7 @@
    (:name langtool)
 
    (:name cperl-mode)
-   
+
    (:name clojure-mode)
    (:name cider)
    (:name ac-cider
