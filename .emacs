@@ -386,6 +386,9 @@
 (evil-global-set-key 'normal (kbd "C-b") (lambda () (interactive)
 					   (evil-scroll-page-up 1)
 					   (evil-window-middle)))
+(evil-global-set-key 'normal (kbd "C-d") (lambda () (interactive)
+					   (evil-window-bottom)
+					   (recenter)))
 
 (global-set-key (kbd "C-c o a") 'org-agenda)
 (define-key evil-normal-state-map (kbd "SPC o a") 'org-agenda)
