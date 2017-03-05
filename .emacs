@@ -24,6 +24,7 @@
    (:name evil)
    (:name evil-matchit)
    (:name evil-surround)
+   (:name evil-indent-textobject)
    (:name evil-numbers)
    (:name evil-leader)
    (:name evil-nerd-commenter)
