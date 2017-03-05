@@ -1208,7 +1208,9 @@ scroll-down-aggressively 0.01)
 			  candidates)
 	  (append candidates (nreverse deleted))))
   (setq-local company-transformers
-			  (append company-transformers '(company-transform-c-c++)))
+	      (append company-transformers
+		      '(company-sort-by-occurrence
+			company-transform-c-c++)))
 
   (defun insert-printf-stderr ()
 	(interactive)
