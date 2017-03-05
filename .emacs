@@ -611,6 +611,16 @@
 				(define-key python-mode-map (kbd "C-c d s") 'python-insert-formated-string)
 				(evil-define-key 'motion python-mode-map (kbd "SPC d s") 'python-insert-formated-string)
 
+				(defun python-append-formated-string-param ()
+				  (interactive)
+				  (search-forward "\"")
+				  (insert " % ()")
+				  (left-char)
+				  (evil-insert-state)
+				  (indent-according-to-mode))
+				(define-key python-mode-map (kbd "C-c a s") 'python-append-formated-string-param)
+				(evil-define-key 'motion python-mode-map (kbd "SPC a s") 'python-append-formated-string-param)
+
 				(defun python-insert-formated-string-print ()
 				  (interactive)
 				  (insert "print(\"\" % ())")
@@ -628,8 +638,8 @@
 				(evil-define-key 'motion python-mode-map (kbd "SPC d e") 'python-insert-exit)
 
 				(defun python-insert-new-arg () (interactive)
-				       (search-forward ";")
-				       (search-backward ")")
+				       (search-forward ")")
+				       (left-char)
 				       (insert ", ")
 				       (evil-insert-state))
 				(define-key python-mode-map (kbd "C-c a ,") 'python-insert-new-arg)
