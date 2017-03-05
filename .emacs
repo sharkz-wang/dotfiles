@@ -306,8 +306,8 @@
 (global-set-key (kbd "C-h") 'delete-backward-char)
 (define-key isearch-mode-map (kbd "C-h") 'isearch-del-char)
 
-(setq browse-url-browser-function (quote browse-url-firefox))
-;(setq browse-url-browser-function 'w3m-goto-url-new-session)
+;; (setq browse-url-browser-function (quote browse-url-firefox))
+(setq browse-url-browser-function 'w3m-goto-url-new-session)
 
 (define-key global-map (kbd "C-w") 'evil-delete-backward-word)
 (define-key global-map (kbd "C-x C-o") 'ff-find-other-file)
@@ -1509,7 +1509,12 @@ scroll-down-aggressively 0.01)
       (beginning-of-line))))
 (global-set-key (kbd "C-a") 'beginning-of-indentation-or-line)
 
-(add-hook 'w3m-mode-hook (lambda () (linum-mode 0) (indent-guide-mode 0)))
+(add-hook 'w3m-mode-hook (lambda ()
+			   (indent-guide-mode 0)
+			   (evil-normal-state)
+			   (evil-define-key 'normal w3m-mode-map (kbd "RET") 'w3m-view-this-url)
+			   (evil-define-key 'normal w3m-mode-map (kbd "q") 'w3m-close-window)
+			   ))
 ;;change w3m user-agent to android
 (setq w3m-user-agent "Mozilla/5.0 (Linux; U; Android 2.3.3; zh-tw; HTC_Pyramid Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.")
 
@@ -1553,7 +1558,10 @@ scroll-down-aggressively 0.01)
    (concat "http://" site))) 
  
 (setq helm-dash-docsets-path (expand-file-name "~/.emacs.d/docsets"))
-(setq helm-dash-common-docsets '("C" "C++" "Perl" "Python_2" "Python_3" "Clojure" "R"))
+(setq helm-dash-common-docsets '("C" "C++" "Perl" "Python 2" "Python 3" "Clojure" "R"))
+
+(global-set-key (kbd "C-c h d") 'helm-dash)
+(define-key evil-normal-state-map (kbd "SPC h d") 'helm-dash)
 
 ;; AucTeX
 (setq TeX-auto-save t)
