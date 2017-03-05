@@ -171,6 +171,7 @@
    (:name popup)
 
    (:name company-mode)
+   (:name company-statistics)
    (:name emacs-ycmd
 	  :type git
 	  :url "https://github.com/abingham/emacs-ycmd")
@@ -1908,3 +1909,6 @@ scroll-down-aggressively 0.01)
 (evil-define-key 'normal artist-mode-map (kbd "SPC i a o") 'artist-select-operation)
 (evil-define-key 'normal artist-mode-map (kbd "SPC i a r") 'artist-select-op-rectangle)
 (evil-define-key 'normal artist-mode-map (kbd "SPC i a l") 'artist-select-op-poly-line)
+
+(require 'company-statistics)
+(company-statistics-mode)
