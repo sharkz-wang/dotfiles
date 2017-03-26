@@ -456,7 +456,7 @@
   (interactive)
   (switch-to-buffer (other-buffer (current-buffer) 1)))
 (global-set-key (kbd "C-x l") 'switch-to-last-buffer)
-(define-key evil-normal-state-map (kbd "SPC l") 'switch-to-last-buffer)
+(define-key evil-normal-state-map (kbd "SPC l") 'flop-frame)
 (define-key evil-normal-state-map (kbd "SPC j") 'switch-to-last-buffer)
 (define-key evil-normal-state-map (kbd "SPC x l") 'switch-to-last-buffer)
 
@@ -1013,6 +1013,8 @@ scroll-down-aggressively 0.01)
     helm-gtags-suggested-key-mapping t
 )
 
+(global-set-key (kbd "C-c h i") 'helm-imenu)
+(define-key evil-normal-state-map (kbd "SPC h i") 'helm-imenu)
 (global-set-key (kbd "C-c h r") 'helm-resume)
 (define-key evil-normal-state-map (kbd "SPC h r") 'helm-resume)
 (global-set-key (kbd "C-c h b") 'helm-bookmark)
