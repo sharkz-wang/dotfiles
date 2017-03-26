@@ -177,6 +177,7 @@
 	  :type git
 	  :url "https://github.com/abingham/emacs-ycmd")
    (:name cedet)
+   (:name ecb)
    (:name yasnippet)
 
    (:name elpy)
@@ -349,8 +350,7 @@
 
 (global-set-key (kbd "C-c C") 'calendar)
 
-(global-set-key (kbd "C-c C-e") (lambda () (interactive) (find-file "~/.emacs")))
-(global-set-key (kbd "C-c e") (lambda () (interactive) (find-file "~/.emacs")))
+(global-set-key (kbd "C-c i e") (lambda () (interactive) (find-file "~/.emacs")))
 (define-key evil-normal-state-map (kbd "SPC i e") (lambda () (interactive) (find-file "~/.emacs")))
 
 (define-key evil-normal-state-map (kbd "SPC x c") 'save-buffers-kill-terminal)
@@ -1926,3 +1926,43 @@ scroll-down-aggressively 0.01)
 
 (require 'company-statistics)
 (company-statistics-mode)
+
+(require 'ecb)
+
+(ecb-layout-define "right-side-simplistic" right nil
+		   (ecb-split-ver 0.696969696969697 t)
+		   (if (fboundp (quote ecb-set-methods-buffer)) (ecb-set-methods-buffer) (ecb-set-default-ecb-buffer))
+		   (dotimes (i 1) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
+		   (if (fboundp (quote ecb-set-history-buffer)) (ecb-set-history-buffer) (ecb-set-default-ecb-buffer))
+		   (dotimes (i 2) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
+		   (dotimes (i 2) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
+		   )
+
+(setq ecb-windows-width 35)
+(ecb-layout-switch "right-side-simplistic")
+
+(setq ecb-highlight-token-with-point t)
+(setq ecb-auto-expand-token-tree t)
+(setq expand-methods-switch-off-auto-expand t)
+
+;; ECB does not provide a major mode to bind key-bindings,
+;; so use motion-state instead
+(define-key evil-motion-state-map (kbd "RET") nil)
+;; move evil-ret onto evil normal state
+(define-key evil-normal-state-map (kbd "RET") 'evil-ret)
+(add-hook 'ecb-history-buffer-after-create-hook 'evil-motion-state)
+(add-hook 'ecb-directories-buffer-after-create-hook 'evil-motion-state)
+(add-hook 'ecb-methods-buffer-after-create-hook 'evil-motion-state)
+(add-hook 'ecb-sources-buffer-after-create-hook 'evil-motion-state)
+
+(global-set-key (kbd "C-M-\\") 'ecb-toggle-ecb-windows)
+
+(global-set-key (kbd "C-c e m") 'ecb-goto-window-methods)
+(define-key evil-normal-state-map (kbd "SPC e m") 'ecb-goto-window-methods)
+(global-set-key (kbd "C-c e c") 'ecb-clear-history)
+(define-key evil-normal-state-map (kbd "SPC e c") 'ecb-clear-history)
+(global-set-key (kbd "C-c e RET") 'ecb-expand-methods-nodes)
+(define-key evil-normal-state-map (kbd "SPC e RET") 'ecb-expand-methods-nodes)
+
+(ecb-activate)
+(ecb-hide-ecb-windows)
