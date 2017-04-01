@@ -1931,6 +1931,8 @@ scroll-down-aggressively 0.01)
 
 (require 'ecb)
 
+(setq ecb-tip-of-the-day nil)
+
 (ecb-layout-define "right-side-simplistic" right nil
 		   (ecb-split-ver 0.696969696969697 t)
 		   (if (fboundp (quote ecb-set-methods-buffer)) (ecb-set-methods-buffer) (ecb-set-default-ecb-buffer))
