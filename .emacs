@@ -474,6 +474,7 @@
 (define-key evil-normal-state-map (kbd "SPC 0") 'delete-window)
 
 (define-key evil-normal-state-map (kbd "SPC 4") 'evil-end-of-visual-line)
+(define-key evil-visual-state-map (kbd "SPC 4") 'evil-end-of-visual-line)
 (define-key evil-normal-state-map (kbd "SPC 5") 'evil-jump-item)
 
 (define-key evil-normal-state-map (kbd "SPC b g ") 'end-of-buffer)
