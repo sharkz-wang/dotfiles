@@ -471,7 +471,9 @@
   (interactive)
   (switch-to-buffer (other-buffer (current-buffer) 1)))
 (global-set-key (kbd "C-x l") 'switch-to-last-buffer)
-(define-key evil-normal-state-map (kbd "SPC l") 'flop-frame)
+(define-key evil-normal-state-map (kbd "SPC l") (lambda () (interactive)
+						  (flop-frame)
+						  (other-window 1)))
 (define-key evil-normal-state-map (kbd "SPC j") 'switch-to-last-buffer)
 (define-key evil-normal-state-map (kbd "SPC x l") 'switch-to-last-buffer)
 
