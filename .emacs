@@ -1873,9 +1873,9 @@ scroll-down-aggressively 0.01)
 
 (setq git-gutter:ask-p nil)
 
-(setq git-gutter:added-sign "+")
-(setq git-gutter:deleted-sign "-")
-(setq git-gutter:modified-sign "*")
+(setq git-gutter:added-sign " + ")
+(setq git-gutter:deleted-sign " - ")
+(setq git-gutter:modified-sign " * ")
 
 (global-set-key (kbd "C-c m g TAB") 'global-git-gutter-mode)
 (define-key evil-normal-state-map (kbd "SPC m g TAB") 'global-git-gutter-mode)
