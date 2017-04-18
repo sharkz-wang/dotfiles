@@ -365,6 +365,8 @@
 			   ))
 (setq org-ditaa-jar-path "/opt/ditaa/ditaa.jar")
 
+(add-to-list 'auto-mode-alist '("\\.org.txt\\'" . org-mode))
+
 (setq org-agenda-files '("~/gtd.org"))
 (global-set-key (kbd "C-c o o") (lambda () (interactive) (find-file "~/gtd.org")))
 (define-key evil-normal-state-map (kbd "SPC o o")
