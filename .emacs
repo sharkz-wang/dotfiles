@@ -275,6 +275,16 @@
 
 ;; (global-linum-mode 1)			; add line numbers on the left
 (setq left-margin-width 3)
+
+(defun toggle-linum-mode ()
+  (interactive)
+  (if (bound-and-true-p linum-mode)
+      (progn
+	(linum-mode 0)
+	(setq left-margin-width 3))
+    (linum-mode 1))
+  )
+
 (setq linum-format 'linum-relative)
 
 (require 'linum-relative)
@@ -351,7 +361,7 @@
 
 (global-set-key (kbd "C-c C") 'calendar)
 
-(define-key evil-normal-state-map (kbd "SPC i l") 'linum-mode)
+(define-key evil-normal-state-map (kbd "SPC i l") 'toggle-linum-mode)
 
 (global-set-key (kbd "C-c i e") (lambda () (interactive) (find-file "~/.emacs")))
 (define-key evil-normal-state-map (kbd "SPC i e") (lambda () (interactive) (find-file "~/.emacs")))
