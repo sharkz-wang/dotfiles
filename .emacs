@@ -273,7 +273,8 @@
 
 (global-hl-line-mode)			; highlight current line
 
-(global-linum-mode 1)			; add line numbers on the left
+;; (global-linum-mode 1)			; add line numbers on the left
+(setq left-margin-width 3)
 (setq linum-format 'linum-relative)
 
 (require 'linum-relative)
@@ -349,6 +350,8 @@
 (define-key evil-normal-state-map (kbd "SPC f o") 'helm-find-files)
 
 (global-set-key (kbd "C-c C") 'calendar)
+
+(define-key evil-normal-state-map (kbd "SPC i l") 'linum-mode)
 
 (global-set-key (kbd "C-c i e") (lambda () (interactive) (find-file "~/.emacs")))
 (define-key evil-normal-state-map (kbd "SPC i e") (lambda () (interactive) (find-file "~/.emacs")))
