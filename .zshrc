@@ -282,3 +282,13 @@ export THEFUCK_RULES='DEFAULT_RULES'
 export THEFUCK_REQUIRE_CONFIRMATION='true'
 export THEFUCK_WAIT_COMMAND=10
 export THEFUCK_NO_COLORS='false'
+
+export PIP_REQUIRE_VIRTUALENV=true
+export PIP_RESPECT_VIRTUALENV=true
+export WORKON_HOME=$HOME/.virtualenvs
+
+command -v virtualenvwrapper.sh &>/dev/null
+if [ $? ];
+then
+	source virtualenvwrapper.sh 2>/dev/null
+fi
