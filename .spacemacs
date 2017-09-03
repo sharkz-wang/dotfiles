@@ -318,7 +318,7 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (setq-default evil-escape-key-sequence "kj")
   (setq helm-dash-common-docsets '("C" "Python 2"))
-  (setq browse-url-browser-function 'eww-browse-url)
+  ;; (setq browse-url-browser-function 'eww-browse-url)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
