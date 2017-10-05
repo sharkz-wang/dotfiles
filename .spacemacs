@@ -387,6 +387,26 @@ you should place your code here."
                   (if (re-search-forward "^[ \t]*:END:" limit t)
                       (outline-flag-region start (point-at-eol) t)
                     (user-error msg))))))))))
+  (defun bury-compile-buffer-if-successful (buffer string)
+    "Bury a compilation buffer if succeeded without warnings "
+    (when (and
+           (buffer-live-p buffer)
+           (string-match "compilation" (buffer-name buffer))
+           (string-match "finished" string)
+           (not
+            (with-current-buffer buffer
+              (goto-char (point-min))
+              (search-forward "warning" nil t))))
+      (run-with-timer 0.1 nil
+                      (lambda (buf)
+                        (bury-buffer buf)
+                        (switch-to-prev-buffer (get-buffer-window buf) 'kill)
+                        )
+                      buffer)))
+  (spacemacs/set-leader-keys "so" 'helm-org-rifle)
+  (add-hook 'org-mode-hook (lambda ()
+                             (org-sticky-header-mode)
+                             ))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
