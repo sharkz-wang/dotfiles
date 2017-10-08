@@ -407,6 +407,15 @@ you should place your code here."
   (add-hook 'org-mode-hook (lambda ()
                              (org-sticky-header-mode)
                              ))
+
+  (setq org-note-system-org-file "")
+  (setq org-note-system-dir "")
+
+  (add-hook 'after-save-hook (lambda ()
+                               (when (equal buffer-file-name org-note-system-org-file)
+                                 (progn
+                                   (interactive)
+                                   (shell-command (format "make -C %s" org-note-system-dir))))))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
