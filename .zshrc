@@ -67,6 +67,11 @@ alias today='date +%Y%m%d'
 
 alias beep='/bin/echo -e "\a"'
 
+alias pcogbranch='git branch | sed "s/[ \*]\+//" | peco'
+alias pcogmerged='git branch --merged | sed "s/[ \*]\+//" | peco'
+alias pcogremote='git branch --remote | sed "s/[ \*]\+//" | sed "s/ \->.*$//" | peco'
+alias pcoglog='git log --pretty="%h    %<(16)%an%<(12)%cr    %s" | peco | awk "{ print \$1 }"'
+
 bindkey "^[F" forward-word
 bindkey "^[B" backward-word
 
