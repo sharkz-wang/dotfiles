@@ -25,7 +25,7 @@ export LANG='en_US.utf8'
 export LANGUAGE='en_US.utf8'
 export LC_ALL='en_US.utf8'
 
-export EDITOR='vim'
+export EDITOR='vim -u ~/.vimrc.light'
 
 export LESS_TERMCAP_md=$'\e[01;38;5;118m'  # begin bold
 export LESS_TERMCAP_mb=$'\e[01;31m'       # begin blinking
