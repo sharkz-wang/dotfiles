@@ -147,19 +147,48 @@ bindkey '^[[Z' expand-or-complete-or-long-list-files
 zle -N expand-or-complete-or-long-list-files
 # End tab-to-long-list
 
-# Ctrl+T to attach or create tmux session
-function send-tmux-attach-or-create-tmux-session() {
-	if [ "${TMUX}" = "" ]; then
-		BUFFER='tmux attach || tmux'
-		CURSOR=$#BUFFER
-		zle accept-line
+# Ctrl+t to start switchable tmux connection
+export TMUX_ATTACH_CMD_LIST=${HOME}/.tmux.attach
+
+function tmux-select-session() {
+
+	cat ${TMUX_ATTACH_CMD_LIST} | peco
+}
+
+function tmux-create-switchable-connection() {
+
+	(tmux attach || tmux)
+
+	# prompt session list upon detaching current one
+	# can be aborted by pressing C-c on selection prompt
+	while true
+	do
+		unset TMUX_ATTACH_CMD
+		TMUX_ATTACH_CMD=`tmux-select-session`
+
+		if [ "${TMUX_ATTACH_CMD}" = "" ]
+		then
+			break
+		fi
+
+		eval "${TMUX_ATTACH_CMD}"
+	done
+}
+
+function send-tmux-create-switchable-connection() {
+	if [[ $#BUFFER == 0 ]]; then
+		if [ "${TMUX}" = "" ]; then
+			BUFFER='tmux-create-switchable-connection'
+			CURSOR=$#BUFFER
+			zle accept-line
+		fi
 	fi
 }
 
-# Bind to ctrl + T
-bindkey '^T' send-tmux-attach-or-create-tmux-session
-zle -N send-tmux-attach-or-create-tmux-session
-# End ctrl+T to attach or create tmux session
+# Bind to ctrl + t
+bindkey '^T' send-tmux-create-switchable-connection
+zle -N send-tmux-create-switchable-connection
+# End Ctrl+t to start switchable tmux connection
 
 # C-g to run `git status`
 function git-status() {
