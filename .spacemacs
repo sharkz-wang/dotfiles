@@ -416,6 +416,22 @@ you should place your code here."
                                  (progn
                                    (interactive)
                                    (shell-command (format "make -C %s" org-note-system-dir))))))
+
+  (eval-after-load 'whitespace '(progn
+                                  (setq whitespace-line-column -1)
+                                  ;; XXX: configured for monokai theme
+                                  (set-face-attribute 'whitespace-tab nil :background "gray45" :foreground "#1A1A1A")
+                                  (set-face-attribute 'whitespace-space nil :background "gray45" :foreground "#1A1A1A")
+                                  (set-face-attribute 'whitespace-big-indent nil :background "gray45" :foreground "#1A1A1A")
+                                 ))
+
+  (add-hook 'c-mode-hook (lambda ()
+                           (whitespace-mode)
+                           ))
+
+  (add-hook 'python-mode-hook (lambda ()
+                           (whitespace-mode)
+                           ))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
