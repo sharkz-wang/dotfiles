@@ -425,12 +425,19 @@ you should place your code here."
                                   (set-face-attribute 'whitespace-big-indent nil :background "gray45" :foreground "#1A1A1A")
                                  ))
 
+  (defvaralias 'c-basic-offset 'tab-width)
+  (defvaralias 'cperl-indent-level 'tab-width)
+
   (add-hook 'c-mode-hook (lambda ()
                            (whitespace-mode)
+                           (setq tab-width 8)
+                           (setq indent-tabs-mode 1)
                            ))
 
   (add-hook 'python-mode-hook (lambda ()
                            (whitespace-mode)
+                           (setq tab-width 4)
+                           (setq indent-tabs-mode 1)
                            ))
   )
 
