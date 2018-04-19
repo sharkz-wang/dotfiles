@@ -34,35 +34,39 @@ values."
      python
      c-c++
      gtags
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
-     ;; <M-m f e R> (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
      helm
      auto-completion
      better-defaults
      emacs-lisp
      git
-     ;; markdown
      org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
-     ;; spell-checking
-     ;; syntax-checking
-     dash
      (version-control :variables
                       version-control-global-margin t
                       version-control-diff-side 'left
                       version-control-diff-tool 'git-gutter+)
-     themes-megapack
-     )
+     dash
+     semantic
+     pdf-tools
+     (evil-snipe :variables
+                 evil-snipe-enable-alternate-f-and-t-behaviors t)
+     nlinum
+     windows-scripts
+     shell-scripts
+     asm
+     smex
+     ibuffer
+     dash
+     ycmd
+     ;; github
+   )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(helm-org-rifle org-sticky-header)
+   dotspacemacs-additional-packages '(org-sticky-header
+                                      interleave
+                                      dracula-theme
+                                      solarized-theme)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -317,12 +321,28 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  ;; evil-snipe settings
+  (evil-snipe-mode 1)
+  (push '(?\[ "[[{(]") evil-snipe-aliases)
+  (push '(?\] "[]})]") evil-snipe-aliases)
+  (push '(?\' "[\"\']") evil-snipe-aliases)
+
+  (setq evil-snipe-scope 'whole-line)
+  (setq evil-snipe-repeat-scope 'whole-line)
+  ;; end evil-snipe settings
+
+  ;; ycmd settings
+  (setq ycmd-server-command '("python" "/opt/ycmd/ycmd"))
+  (set-variable 'ycmd-global-config "/opt/ycmd/cpp/ycm/.ycm_extra_conf.py")
+  (setq ycmd-force-semantic-completion t)
+  ;; end ycmd settings
+
   ;; disable mouse in terminal
   (xterm-mouse-mode -1)
 
   (setq-default evil-escape-key-sequence "kj")
-  (setq helm-dash-common-docsets '("C" "Python 2"))
-  ;; (setq browse-url-browser-function 'eww-browse-url)
+  (setq helm-dash-common-docsets '("C" "Python 2" "Python 3"))
+
   (require 'org-id)
   (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
 
@@ -356,41 +376,6 @@ you should place your code here."
   (add-hook 'org-capture-prepare-finalize-hook
             (lambda () (eos/org-custom-id-get (point) 'create)))
 
-  (defun org-cycle-hide-drawers (state)
-    "Re-hide all drawers after a visibility state change."
-    (when (and (derived-mode-p 'org-mode)
-               (not (memq state '(overview folded contents))))
-      (save-excursion
-        (let* ((globalp (memq state '(contents all)))
-               (beg (if globalp
-                        (point-min)
-                      (point)))
-               (end (if globalp
-                        (point-max)
-                      (if (eq state 'children)
-                          (save-excursion
-                            (outline-next-heading)
-                            (point))
-                        (org-end-of-subtree t)))))
-          (goto-char beg)
-          (while (re-search-forward org-drawer-regexp end t)
-            (save-excursion
-              (beginning-of-line 1)
-              (when (looking-at org-drawer-regexp)
-                (let* ((start (1- (match-beginning 0)))
-                       (limit
-                        (save-excursion
-                          (outline-next-heading)
-                          (point)))
-                       (msg (format
-                             (concat
-                              "org-cycle-hide-drawers:  "
-                              "`:END:`"
-                              " line missing at position %s")
-                             (1+ start))))
-                  (if (re-search-forward "^[ \t]*:END:" limit t)
-                      (outline-flag-region start (point-at-eol) t)
-                    (user-error msg))))))))))
   (defun bury-compile-buffer-if-successful (buffer string)
     "Bury a compilation buffer if succeeded without warnings "
     (when (and
@@ -421,43 +406,99 @@ you should place your code here."
                                    (interactive)
                                    (shell-command (format "make -C %s" org-note-system-dir))))))
 
+  (setq-default pdf-view-midnight-colors (quote ("#ffffff" . "#000000")))
+
   (eval-after-load 'whitespace '(progn
                                   (setq whitespace-line-column -1)
                                   ;; XXX: configured for monokai theme
-                                  (set-face-attribute 'whitespace-tab nil :background "gray45" :foreground "#1A1A1A")
-                                  (set-face-attribute 'whitespace-space nil :background "gray45" :foreground "#1A1A1A")
-                                  (set-face-attribute 'whitespace-big-indent nil :background "gray45" :foreground "#1A1A1A")
+                                  (set-face-attribute 'whitespace-tab nil :foreground "gray35" :background "#1A1A1A")
+                                  (set-face-attribute 'whitespace-space nil :background "gray35" :foreground "#1A1A1A")
+                                  (set-face-attribute 'whitespace-big-indent nil :background "gray35" :foreground "#1A1A1A")
+                                  (setq whitespace-style '(face trailing tabs
+                                                           spaces lines newline
+                                                           empty indentation space-after-tab
+                                                           space-before-tab space-mark tab-mark))
                                  ))
 
   (defvaralias 'c-basic-offset 'tab-width)
   (defvaralias 'cperl-indent-level 'tab-width)
 
   (add-hook 'c-mode-hook (lambda ()
-                           (whitespace-mode)
                            (setq tab-width 8)
                            (setq indent-tabs-mode 1)
+                           (whitespace-mode)
                            ))
 
   (add-hook 'python-mode-hook (lambda ()
-                           (whitespace-mode)
-                           (setq tab-width 4)
-                           (setq indent-tabs-mode 1)
-                           ))
-  )
+                                (setq tab-width 4)
+                                (setq indent-tabs-mode 1)
+                                (whitespace-mode)
+                                ))
 
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (unfill mwim helm-company helm-c-yasnippet fuzzy company-statistics company-c-headers company-anaconda company auto-yasnippet yasnippet ac-ispell auto-complete smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter evil-magit magit magit-popup git-commit with-editor diff-hl evil-unimpaired ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((((class color) (min-colors 257)) (:foreground "#F8F8F2" :background "#272822")) (((class color) (min-colors 89)) (:foreground "#F5F5F5" :background "#1B1E1C")))))
+  (define-key evil-normal-state-map (kbd "M-k") (lambda () (interactive)
+                                                  (evil-delete-line (- (line-beginning-position) 1) (line-end-position) t)
+                                                  (evil-previous-line)
+                                                  (evil-end-of-line)
+                                                  (evil-paste-after 1)
+                                                  (evil-indent (line-beginning-position) (line-end-position))
+                                                  (evil-next-line)
+                                                  (evil-indent (line-beginning-position) (line-end-position))
+                                                  (evil-previous-line)
+                                                  (beginning-of-line-text)
+                                                  ))
+
+  (define-key evil-normal-state-map (kbd "M-j") (lambda () (interactive)
+                                                  (evil-delete-line (- (line-beginning-position) 1) (line-end-position) t)
+                                                  (evil-next-line)
+                                                  (evil-end-of-line)
+                                                  (evil-paste-after 1)
+                                                  (evil-previous-line)
+                                                  (evil-indent (line-beginning-position) (line-end-position))
+                                                  (evil-next-line)
+                                                  (evil-indent (line-beginning-position) (line-end-position))
+                                                  (beginning-of-line-text)
+                                                  ))
+
+  (add-hook 'c-mode-hook
+            (lambda ()
+              ;; auto indenting and pairing curly brace
+              (defun c-mode-insert-lcurly ()
+                (interactive)
+                (insert "{")
+                (let ((pps (syntax-ppss)))
+                  (when (and (eolp) (not (or (nth 3 pps) (nth 4 pps)))) ;; EOL and not in string or comment
+                    (c-indent-line)
+                    (insert "\n\n}")
+                    (c-indent-line)
+                    (forward-line -1)
+                    (c-indent-line))))
+              (define-key c-mode-base-map "{" 'c-mode-insert-lcurly)
+              ))
+
+  (defun buffer-binary-p (&optional buffer)
+    "Return whether BUFFER or the current buffer is binary.
+   A binary buffer is defined as containing at least on null byte.
+   Returns either nil, or the position of the first null byte."
+    (with-current-buffer (or buffer (current-buffer))
+      (save-excursion
+        (goto-char (point-min))
+        (search-forward (string ?\x00) nil t 1))))
+
+  (defun hexl-if-binary ()
+    "If `hexl-mode' is not already active, and the current bufferis binary, activate `hexl-mode'."
+    (interactive)
+    (unless (eq major-mode 'hexl-mode)
+      (let ((file-ext (file-name-extension (buffer-name))))
+        (when
+            (and
+             (buffer-binary-p)
+             (not (string= file-ext "png"))
+             (not (string= file-ext "jpg"))
+             (not (string= file-ext "jpeg"))
+             )
+          (hexl-mode)))))
+
+  (add-hook 'find-file-hooks 'hexl-if-binary)
+
+  ;; TODO: port argument insertion keys
+  )
