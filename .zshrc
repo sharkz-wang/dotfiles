@@ -151,20 +151,28 @@ zle -N expand-or-complete-or-long-list-files
 export TMUX_ATTACH_CMD_LIST=${HOME}/.tmux.attach
 
 function tmux-select-session() {
+	EXCLUDED_CMD=$1
 
-	cat ${TMUX_ATTACH_CMD_LIST} | peco
+	# exclude ${EXCLUDED_CMD} if not empty
+	if [ -z ${EXCLUDED_CMD} ]
+	then
+		cat ${TMUX_ATTACH_CMD_LIST} | peco
+	else
+		cat ${TMUX_ATTACH_CMD_LIST} | grep -v "${EXCLUDED_CMD}" | peco
+	fi
 }
 
 function tmux-create-switchable-connection() {
 
 	(tmux attach || tmux)
+  unset TMUX_ATTACH_CMD
 
 	# prompt session list upon detaching current one
 	# can be aborted by pressing C-c on selection prompt
 	while true
 	do
-		unset TMUX_ATTACH_CMD
-		TMUX_ATTACH_CMD=`tmux-select-session`
+		# exclude currently attached session ${TMUX_ATTACH_CMD}
+		TMUX_ATTACH_CMD=`tmux-select-session ${TMUX_ATTACH_CMD}`
 
 		if [ "${TMUX_ATTACH_CMD}" = "" ]
 		then
