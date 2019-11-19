@@ -83,6 +83,9 @@ bindkey '^K' kill-line
 
 eval `dircolors ${HOME}/.dircolors`
 
+#  tab-completion: sort filename by modification date
+zstyle ':completion:*' file-sort modification
+
 zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
