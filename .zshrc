@@ -82,6 +82,14 @@ bindkey '^E' end-of-line
 bindkey '^U' backward-kill-line
 bindkey '^K' kill-line
 
+backward-delete-arg() {
+	local WORDCHARS='~!#$%^&*(){}[]<>?.+;-_/\|=@`'
+	zle backward-delete-word
+}
+zle -N backward-delete-arg
+bindkey '^W' backward-delete-arg
+bindkey '^H' backward-delete-word
+
 eval `dircolors ${HOME}/.dircolors`
 
 #  tab-completion: sort filename by modification date
