@@ -42,6 +42,7 @@ alias e='emacs -nw'
 alias vim='TERM=screen-256color vim -p'
 alias irssi='TERM=screen irssi'
 alias tig='TERM=screen-256color tig'
+alias ftig='TERM=screen-256color TIGRC_USER=${HOME}/.tigrc.light tig'
 alias mutt='TERM=screen-256color mutt'
 
 alias ..='cd ..'

@@ -6,7 +6,8 @@ set main-view	 = line-number:yes,interval=5                 \
 				   id:yes                                     \
 				   date:default                               \
 				   author:full                                \
-				   commit-title:yes,graph=yes,refs,overflow=no
+				   commit-title:yes,graph=no,refs,overflow=no
+set main-options = -n 1000 # Show up to 1k commits
 
 # general
 color   default                 15      235
