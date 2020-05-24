@@ -1,0 +1,48 @@
+{
+    "ftrace" : {
+        "title" : "Ftrace log",
+        "description" : "Log format for Linux ftrace log",
+        "multiline" : false,
+        "regex" : {
+            "log_entry" : {
+                "pattern" : "(?<task>.*?)\\-(?<pid>[0-9]+) +\\[(?<core>.*?)\\] +(?<flags>.+?)? +(?<timestamp>[0-9\\.]+): +(?<event>.+?): +(?<body>.+)"
+            }
+        },
+		"timestamp-format": [
+			"%s.%f"
+		],
+        "value" : {
+            "task" : {
+                "kind" : "string",
+                "identifier" : true,
+                "description" : "Task/process name"
+            },
+            "pid" : {
+                "kind" : "integer",
+                "identifier" : true,
+                "description" : "PID"
+            },
+            "core" : {
+                "kind" : "string",
+                "identifier" : true,
+                "description" : "Core ID"
+            },
+            "flags" : {
+                "kind" : "string",
+                "identifier" : true,
+                "hidden" : true,
+                "description" : "Flags"
+            },
+            "event" : {
+                "kind" : "string",
+                "identifier" : true,
+                "description" : "Event type"
+            }
+		},
+        "sample" : [
+            {
+                "line" : "<idle>-0     [001] d..2   693.009744: sched_switch: prev_comm=swapper/1 prev_pid=0 prev_prio=120 prev_state=R ==> next_comm=kworker/u256:6 next_pid=484 next_prio=120"
+            }
+        ]
+    }
+}
