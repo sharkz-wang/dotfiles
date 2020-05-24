@@ -76,6 +76,9 @@ alias pcoglog='git log --pretty="%h    %<(16)%an%<(12)%cr    %s" | peco | awk "{
 alias fd='fd --no-ignore --hidden'
 alias ag='ag --all-types --hidden'
 
+# allow vi-mode by default, to activate it, press `esc' or `ctrl-['
+bindkey -v
+
 bindkey "^[F" forward-word
 bindkey "^[B" backward-word
 
