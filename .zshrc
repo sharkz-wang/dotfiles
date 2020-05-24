@@ -73,6 +73,9 @@ alias pcogmerged='git branch --merged | sed "s/[ \*]\+//" | peco'
 alias pcogremote='git branch --remote | sed "s/[ \*]\+//" | sed "s/ \->.*$//" | peco'
 alias pcoglog='git log --pretty="%h    %<(16)%an%<(12)%cr    %s" | peco | awk "{ print \$1 }"'
 
+alias fd='fd --no-ignore --hidden'
+alias ag='ag --all-types --hidden'
+
 bindkey "^[F" forward-word
 bindkey "^[B" backward-word
 
