@@ -8,6 +8,7 @@
 
 export ZSH="${HOME}/.oh-my-zsh"
 plugins=(git zsh-syntax-highlighting docker)
+DISABLE_AUTO_UPDATE="true"
 source $ZSH/oh-my-zsh.sh
 
 unsetopt AUTO_NAME_DIRS
