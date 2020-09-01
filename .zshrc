@@ -91,6 +91,13 @@ bindkey '^E' end-of-line
 bindkey '^U' backward-kill-line
 bindkey '^K' kill-line
 
+quit-history-search() {
+	zle backward-char
+	zle forward-char
+}
+bindkey "^G" quit-history-search
+zle -N quit-history-search
+
 backward-delete-arg() {
 	local WORDCHARS='~!#$%^&*(){}[]<>?.+;-_/\|=@`'
 	zle backward-delete-word
