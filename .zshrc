@@ -69,10 +69,12 @@ alias today='date +%Y%m%d'
 
 alias beep='/bin/echo -e "\a"'
 
-alias pcogbranch='git branch | sed "s/[ \*]\+//" | peco'
-alias pcogmerged='git branch --merged | sed "s/[ \*]\+//" | peco'
-alias pcogremote='git branch --remote | sed "s/[ \*]\+//" | sed "s/ \->.*$//" | peco'
-alias pcoglog='git log --pretty="%h    %<(16)%an%<(12)%cr    %s" | peco | awk "{ print \$1 }"'
+export FZF_DEFAULT_OPTS='--no-sort --reverse'
+
+alias ggb='git branch | sed "s/[ \*]\+//" | peco'
+alias qgbr='git branch --remote | sed "s/[ \*]\+//" | sed "s/ \->.*$//" | peco'
+alias qgb='git branch | sed "s/[ \*]\+//" | sed "s/ \->.*$//" | peco'
+alias qglol='git log --pretty="%h    %<(26,trunc)%an%<(32,trunc)%cr    %s" | head -n 20 | fzf | awk "{ print \$1 }"'
 
 alias fd='fd --no-ignore --hidden'
 alias ag='ag --all-types --hidden'
