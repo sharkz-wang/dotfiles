@@ -223,23 +223,6 @@ function send-tmux-create-switchable-connection() {
 bindkey '^T' send-tmux-create-switchable-connection
 zle -N send-tmux-create-switchable-connection
 # End Ctrl+t to start switchable tmux connection
-
-# C-g to run `git status`
-function git-status() {
-	if [[ $#BUFFER == 0 ]]; then
-		echo -e "\r"
-		git status
-		zle accept-line
-	else
-		zle send-break
-	fi
-}
-
-# Bind to C-g
-bindkey '^G' git-status
-zle -N git-status
-# End key-binding for `git status`
-
 # Go up one level by ctrl + backslash
 # Bind to ctrl + backslash
 function up-one-level() {
