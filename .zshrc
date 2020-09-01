@@ -149,22 +149,27 @@ bindkey '^I' expand-or-complete-or-list-files
 zle -N expand-or-complete-or-list-files
 # End tab-to-list
 
-# Tab-to-long-list
-function expand-or-complete-or-long-list-files() {
+# Tab to expand-macro or long list
+function expand-macro-or-long-list-files() {
 	if [[ $#BUFFER == 0 ]]; then
 		echo -e "\r"
 		ls -hl --color -p | perl -pe 'chomp if eof'
 		zle accept-line
 	else
+		zle emacs-backward-word
+		BUFFER=${LBUFFER}'`'${RBUFFER}
+		BUFFER=${BUFFER}'`'
+		zle emacs-forward-word
+		zle forward-char
 		zle expand-or-complete
 	fi
 }
 
-# Bind to alt + tab
-bindkey '^[^I' expand-or-complete-or-long-list-files
-bindkey '^[[Z' expand-or-complete-or-long-list-files
-zle -N expand-or-complete-or-long-list-files
-# End tab-to-long-list
+# Bind to shift + tab
+bindkey '^[^I' expand-macro-or-long-list-files
+bindkey '^[[Z' expand-macro-or-long-list-files
+zle -N expand-macro-or-long-list-files
+# End tabbing to expand-macro or long list
 
 # Ctrl+t to start switchable tmux connection
 export TMUX_ATTACH_CMD_LIST=${HOME}/.tmux.attach
