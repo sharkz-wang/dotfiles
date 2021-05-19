@@ -36,6 +36,9 @@ Plugin 'a.vim'
 
 Plugin 'c9s/gsession.vim'
 
+Plugin 'ag.vim'
+Plugin 'ctrlp.vim'
+
 Plugin 'SingleCompile'
 
 Plugin 'tpope/vim-surround'
@@ -159,6 +162,18 @@ inoremap <M-j> <C-o>j
 inoremap <M-w> <C-o>w
 inoremap <M-b> <C-o>b
 inoremap <M-e> <C-o>e
+
+
+" customizable to your ag alias
+let g:ag_prg="ag --vimgrep"
+" make ag start searching from project root
+let g:ag_working_path_mode="r"
+
+" CtrlP: work in project root,
+"        if not a project, then current dir
+let g:ctrlp_working_path_mode = 'ra'
+" invoke CtrlP by :ctrlp (lowercase for convinience)
+let g:ctrlp_cmd = 'ctrlp'
 
 nnoremap <silent> <f2> :NERDTreeTabsToggle<cr>
 let Tlist_Use_Right_Window = 1
