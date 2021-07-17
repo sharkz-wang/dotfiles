@@ -145,10 +145,6 @@ export ZLE_SPACE_SUFFIX_CHARS=$'&|'
 # ^[: alt
 # or just use M-x `describe-key-briefly'
 
-# overwrite ctrl-r/s with more generic history search functions
-bindkey '^R' history-incremental-search-backward
-bindkey '^S' history-incremental-search-forward
-
 #  tab-completion: sort filename by modification date
 zstyle ':completion:*' file-sort modification
 
@@ -193,3 +189,9 @@ export FZF_CTRL_T_COMMAND="command find -L ${FZF_BOOKMARK}           \
 bindkey '^[^R' fzf-history-widget
 bindkey '^[P'  fzf-file-widget
 bindkey '^[^P' fzf-cd-widget
+
+# overwrite ctrl-r/s with more generic history search functions
+# XXX: don't move this before loading `.fzf.zsh', as it overwrite
+#      history search functions
+bindkey '^R' history-incremental-search-backward
+bindkey '^S' history-incremental-search-forward
