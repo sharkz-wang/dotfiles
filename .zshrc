@@ -165,8 +165,8 @@ bindkey '^F' forward
 # bind to ctrl + B
 bindkey '^B' backward
 
-bindkey '^W' backward-delete-arg
-bindkey '^[^h' backward-delete-word
+bindkey '^W'   backward-kill-arg
+bindkey '^[^h' backward-kill-word
 
 bindkey '^G' quit-history-search
 
