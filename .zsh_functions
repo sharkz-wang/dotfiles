@@ -1,0 +1,148 @@
+
+# minimal hello world c program for busy people
+hello_in_c() {
+	echo '#include <stdio.h>'
+	echo 'int main(void) {\n\tprintf("Hello, world!\\n");\n\treturn 0;\n}'
+}
+
+# arg version of `backward-kill-word'
+# backward-kill-arg : kill whole argument separated by whitespaces
+# backward-kill-word: kill a word (separated by whitespaces/=/- ...)
+backward-kill-arg() {
+    # make `backward-kill-word' behave like `backward-kill-arg'
+    local WORDCHARS='~!#$%^&*(){}[]<>?.+;-_/\|=@`'
+    zle backward-kill-word
+}
+zle -N backward-kill-arg
+
+# print current directory's content
+# when commandline buffer is not empty, run `expand-or-complete'
+# instead (tab completion)
+function expand-or-complete-or-list-files() {
+	if [[ $#BUFFER == 0 ]]; then
+		echo -e "\r"
+		ls --color -C --width=${COLUMNS} -p | perl -pe 'chomp if eof'
+		zle accept-line
+	else
+		zle expand-or-complete
+	fi
+}
+zle -N expand-or-complete-or-list-files
+
+# quit history prompt like how emacs deals with C-g
+quit-history-search() {
+	# just a hack for breaking history search session
+	zle backward-char
+	zle forward-char
+}
+zle -N quit-history-search
+
+# print current directory's content with `ls -l'
+function long-list-files() {
+    echo -e "\r"
+    ls -hl --color -p -ltr | perl -pe 'chomp if eof'
+    zle accept-line
+}
+zle -N long-list-files
+
+# print current directory's content
+# when commandline buffer is not empty, don't do anything
+function dir-go-up-one-level() {
+
+	if [[ -n $BUFFER ]]; then
+		return 0
+	fi
+
+	cd ..
+	zle accept-line
+}
+zle -N dir-go-up-one-level
+
+# go to previous/next directory, like those handy
+# previous/next page button in our browser
+export FORWARD_HIST=''
+export BACKWARD_HIST=''
+
+# extend zsh's default `cd' to remember where it has been to
+function cd() {
+
+	if [ -z $BACKWARD_HIST ]; then
+		BACKWARD_HIST=${PWD}
+	else
+		BACKWARD_HIST=${PWD}:${BACKWARD_HIST}
+	fi
+	FORWARD_HIST=''
+
+	builtin cd $@
+}
+
+# go to next directory
+function forward() {
+	if [[ -n $BUFFER ]]; then
+		zle forward-char
+		return 0
+	fi
+
+	if [ -z $FORWARD_HIST ]; then
+		return 0
+	fi
+
+	NEXT=$(echo $FORWARD_HIST | awk -F':' '{ print $1}')
+	FORWARD_HIST=$(echo $FORWARD_HIST | \egrep -o ':.*' | sed 's/^.//')
+	if [ -z $BACKWARD_HIST ]; then
+		BACKWARD_HIST=${PWD}
+	else
+		BACKWARD_HIST=${PWD}:${BACKWARD_HIST}
+	fi
+
+	builtin cd ${NEXT}
+	unset NEXT
+
+	zle accept-line
+}
+
+# go to previous directory
+function backward() {
+
+	if [[ -n $BUFFER ]]; then
+		zle backward-char
+		return 0
+	fi
+
+	if [ -z $BACKWARD_HIST ]; then
+		return 0
+	fi
+
+	NEXT=$(echo $BACKWARD_HIST | awk -F':' '{ print $1}')
+	BACKWARD_HIST=$(echo $BACKWARD_HIST | \egrep -o ':.*' | sed 's/^.//')
+	if [ -z $FORWARD_HIST ]; then
+		FORWARD_HIST=${PWD}
+	else
+		FORWARD_HIST=${PWD}:${FORWARD_HIST}
+	fi
+
+	builtin cd ${NEXT}
+	unset NEXT
+
+	zle accept-line
+}
+zle -N forward
+zle -N backward
+
+# auto-completion from tmux buffer
+completion-from-tmux-buffer() {
+	INSERT_ITEM=$(tmux capture-pane -S - \; show-buffer \; delete-buffer 2>/dev/null | fzf --exact --print-query --height 10%)
+	# first line is query string
+	INSERT_ITEM1=$(echo ${INSERT_ITEM} | head -n 1)
+	INSERT_ITEM2=$(echo ${INSERT_ITEM} | tail -n +2)
+	INSERT_ITEM=$(echo ${INSERT_ITEM2} | sed -E "s/[[:space:]]+/\n/g" | fzf --exact --query=${INSERT_ITEM1} --height 10%)
+	BUFFER=${LBUFFER}${INSERT_ITEM}
+}
+zle -N completion-from-tmux-buffer
+
+# zsh equivalence of emacs' m-x
+execute-named-cmd-menu() {
+	CMD=$(zle -l -a | ag -v '^\.' | fzf --exact --query=${INSERT_ITEM1} --height 10%)
+	zle ${CMD}
+}
+zle -N execute-named-cmd-menu
