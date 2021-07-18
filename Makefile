@@ -9,6 +9,7 @@ all:
 	$(call __install,.zshrc.cust)
 	$(call __install,.zsh_functions)
 	$(call __install,.zshsyntaxcolors)
+	$(call __install,.fzf.zsh)
 	$(call __install,.oh-my-zsh)
 	$(call __install,.dircolors)
 
