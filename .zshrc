@@ -10,7 +10,8 @@
 source ${HOME}/.zshrc.cust
 
 export ZSH="${HOME}/.oh-my-zsh"
-plugins=(git zsh-syntax-highlighting fzf-marks)
+# `zsh-syntax-highlighting' should be the last imported one
+plugins=(git fzf-marks zsh-syntax-highlighting)
 
 # disable auto update for oh-my-zsh
 # commands for manual update:
