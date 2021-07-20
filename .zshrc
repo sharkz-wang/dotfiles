@@ -128,6 +128,8 @@ alias ipython='ipython --no-confirm-exit'
 
 # don't enable vi-mode, as it breaks a lot of useful keybindings
 # bindkey -v
+# use emacs key-bindings instead
+bindkey -e
 
 # by default zsh chomps the padding space, inserted as you
 # use tab-completion, when you type `|', `&', ` ', `\n', or `\t'
