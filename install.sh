@@ -9,8 +9,16 @@ __install .zshrc.cust
 __install .zsh_functions
 __install .zshsyntaxcolors
 __install .fzf.zsh
-__install .oh-my-zsh
 __install .dircolors
+
+#       does `~/.zinit' exist as a directory?
+if [ ! -d ~/.zinit ]
+then
+	mkdir ${HOME}/.zinit
+	git clone https://github.com/zdharma/zinit.git ${HOME}/.zinit/bin
+	zsh --interactive -c 'zinit self-update'
+	zsh --interactive -c 'zinit update --parallel'
+fi
 
 __install .bashrc
 

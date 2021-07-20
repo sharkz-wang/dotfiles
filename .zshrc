@@ -9,16 +9,17 @@
 # hook for per-node customization
 source ${HOME}/.zshrc.cust
 
-export ZSH="${HOME}/.oh-my-zsh"
-# `zsh-syntax-highlighting' should be the last imported one
-plugins=(git fzf-marks zsh-syntax-highlighting)
+# enable zinit
+# note: how to update zinit and plugins:
+#     - update zinit
+#           zinit self-update
+#     - update plugins
+#           zinit update --parallel
+source ~/.zinit/bin/zinit.zsh
 
-# disable auto update for oh-my-zsh
-# commands for manual update:
-#   $ upgrade_oh_my_zsh (deprecated)
-#   $ omz update
-export DISABLE_AUTO_UPDATE="true"
-source $ZSH/oh-my-zsh.sh
+zinit load urbainvaes/fzf-marks
+# `zsh-syntax-highlighting' should be the last imported one
+zinit load zsh-users/zsh-syntax-highlighting
 
 unsetopt AUTO_NAME_DIRS
 autoload -U zmv
