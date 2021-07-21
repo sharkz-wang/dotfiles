@@ -16,6 +16,8 @@ if [ ! -d ~/.zinit ]
 then
 	mkdir ${HOME}/.zinit
 	git clone https://github.com/zdharma/zinit.git ${HOME}/.zinit/bin
+	# make zinit runnable even when current zsh session does
+	# not equipped with zinit
 	zsh --interactive -c 'zinit self-update'
 	zsh --interactive -c 'zinit update --parallel'
 fi
