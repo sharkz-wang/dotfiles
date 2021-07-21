@@ -1,0 +1,34 @@
+
+function __install () {
+	echo installing $1 ...
+	test -h ${HOME}/$1 || ln -s ${PWD}/$1 ${HOME}/$1
+}
+
+__install .zshrc
+__install .zshrc.cust
+__install .zsh_functions
+__install .zshsyntaxcolors
+__install .fzf.zsh
+__install .oh-my-zsh
+__install .dircolors
+
+__install .bashrc
+
+__install .vimrc
+__install .vimrc.light
+
+__install .muttrc
+__install .irssi
+
+__install .gdbinit
+__install .gdbinit.d
+__install .gdb_dashboard
+
+__install .tmux.conf
+__install .tmux.conf.clean
+
+__install .tigrc
+__install .tigrc.light
+
+__install .gitconfig
+__install .gitignore_global
