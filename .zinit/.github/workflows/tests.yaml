@@ -1,0 +1,80 @@
+name: Unit tests
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  TERM: xterm-256color
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'tests/**'
+      - 'share/**'
+      - 'zinit*.zsh'
+      - '.github/workflows/tests.yaml'
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+
+  zunit-tests:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ['macos-12','ubuntu-20.04','ubuntu-22.04']
+      fail-fast: false
+
+    steps:
+      - name: checkout ${{ github.repository }}
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: install homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: "install musl"
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get clean && sudo apt-get update && sudo apt-get install \
+            build-essential curl file gcc gcc-multilib glibc-source \
+            libc6 libc6-dev \
+            musl musl-dev musl-tools unzip zsh
+
+      - name: "install dependencies"
+        id: install-deps
+        run: brew install ncurses svn unzip zsh xz
+
+      - name: "install revolver"
+        id: install-revolver
+        run: brew install molovo/revolver/revolver
+
+      - name: "install zunit"
+        id: install-zunit
+        run: |
+          mkdir -p "$HOME/.local/bin" && echo "$HOME/.local/bin" >> $GITHUB_PATH
+          git clone --depth 1 https://github.com/zdharma-continuum/zunit; cd ./zunit
+          zsh -c -l './build.zsh' && sudo chmod u+x ./zunit && cp ./zunit "$HOME/.local/bin/"
+
+      - name: "annexes"
+        run: zunit run tests/annexes.zunit
+
+      - name: "gh-r"
+        run: zunit run tests/gh-r.zunit
+
+      - name: "ices"
+        run: zunit run tests/ices.zunit
+
+      - name: "plugins"
+        run: zunit run tests/plugins.zunit
+
+      - name: "snippets"
+        run: zunit run tests/snippets.zunit

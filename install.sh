@@ -8,19 +8,21 @@ __install .zshrc
 __install .zshrc.cust
 __install .zsh_functions
 __install .zshsyntaxcolors
+__install .zinit
+
 __install .fzf.zsh
 __install .dircolors
 
 #       does `~/.zinit' exist as a directory?
-if [ ! -d ~/.zinit ]
-then
-	mkdir ${HOME}/.zinit
-	git clone https://github.com/zdharma/zinit.git ${HOME}/.zinit/bin
-	# make zinit runnable even when current zsh session does
-	# not equipped with zinit
-	zsh --interactive -c 'zinit self-update'
-	zsh --interactive -c 'zinit update --parallel'
-fi
+# if [ ! -d ~/.zinit ]
+# then
+# 	mkdir ${HOME}/.zinit
+# 	git clone https://github.com/zdharma/zinit.git ${HOME}/.zinit/bin
+# 	# make zinit runnable even when current zsh session does
+# 	# not equipped with zinit
+# 	zsh --interactive -c 'zinit self-update'
+# 	zsh --interactive -c 'zinit update --parallel'
+# fi
 
 __install .bashrc
 
