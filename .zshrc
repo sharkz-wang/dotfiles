@@ -197,5 +197,5 @@ bindkey '^[^P' fzf-cd-widget
 # overwrite ctrl-r/s with more generic history search functions
 # XXX: don't move this before loading `.fzf.zsh', as it overwrite
 #      history search functions
-bindkey '^R' history-incremental-search-backward
-bindkey '^S' history-incremental-search-forward
+bindkey '^R' history-incremental-pattern-search-backward
+bindkey '^S' history-incremental-pattern-search-forward
