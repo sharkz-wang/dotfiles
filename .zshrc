@@ -149,11 +149,12 @@ export ZLE_SPACE_SUFFIX_CHARS=$'&|'
 # ^[: alt
 # or just use M-x `describe-key-briefly'
 
-#  tab-completion: sort filename by modification date
-zstyle ':completion:*' file-sort modification
-
 # import my helper functions
 [ -f ~/.zsh_functions ] && source ~/.zsh_functions
+
+# override default ctrl-k/ctrl-u behavior
+bindkey "^k" kill-line
+bindkey "^u" backward-kill-line
 
 # bind to tab
 bindkey '^I' expand-or-complete-or-list-files
