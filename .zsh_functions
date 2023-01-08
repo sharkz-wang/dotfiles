@@ -21,7 +21,7 @@ zle -N backward-kill-arg
 function expand-or-complete-or-list-files() {
 	if [[ $#BUFFER == 0 ]]; then
 		echo -e "\r"
-		ls --color -C --width=${COLUMNS} -p | perl -pe 'chomp if eof'
+		ls --color -C --width=${COLUMNS} -p | tr -d '\n'
 		zle accept-line
 	else
 		zle expand-or-complete
@@ -40,7 +40,7 @@ zle -N quit-history-search
 # print current directory's content with `ls -l'
 function long-list-files() {
     echo -e "\r"
-    ls -hl --color -p -ltr | perl -pe 'chomp if eof'
+    ls -hl --color -p -ltr | tr -d '\n'
     zle accept-line
 }
 zle -N long-list-files
