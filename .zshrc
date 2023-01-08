@@ -15,7 +15,7 @@ source ${HOME}/.zshrc.cust
 #           zinit self-update
 #     - update plugins
 #           zinit update --parallel
-source ~/.zinit/bin/zinit.zsh
+source ~/.zinit/zinit.zsh
 
 zinit load urbainvaes/fzf-marks
 # `zsh-syntax-highlighting' should be the last imported one
