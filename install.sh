@@ -5,7 +5,7 @@ function __install () {
 	test -h ${HOME}/$1 || ln -s ${PWD}/$1 ${HOME}/$1
 }
 
-rm -rf .termux
+rm -rf ${HOME}/.termux
 __install .termux
 
 __install .zshrc
