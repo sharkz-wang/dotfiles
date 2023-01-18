@@ -1,8 +1,12 @@
+#!/bin/bash
 
 function __install () {
 	echo installing $1 ...
 	test -h ${HOME}/$1 || ln -s ${PWD}/$1 ${HOME}/$1
 }
+
+rm -rf .termux
+__install .termux
 
 __install .zshrc
 __install .zshrc.cust
