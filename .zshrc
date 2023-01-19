@@ -75,8 +75,14 @@ export LESS_TERMCAP_us=$'\e[04;38;5;135m'    # begin underline
 export LESS_TERMCAP_ue=$'\e[0m'              # end underline
 
 ### Terminal settings
+export HISTFILE="${HOME}/.history"
+export HISTSIZE=2000
+export SAVEHIST=$HISTSIZE
+setopt hist_ignore_all_dups
 # don't keep history for commands starting with a space
 export HISTCONTROL=ignorespace
+setopt hist_ignore_space
+
 export EDITOR='vim -u ~/.vimrc.light'
 
 stty -ixon
