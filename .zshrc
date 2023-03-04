@@ -150,6 +150,11 @@ bindkey -e
 # this command excludes `|' and `&' from this behavior.
 export ZLE_SPACE_SUFFIX_CHARS=$'&|'
 
+# make forward-kill-word/backward-kill-word stop
+# at '/', '[', '-', and so on ...
+# original value: $WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
+export WORDCHARS='_'
+
 # Cheatsheet for caret symbols
 # ^: ctrl
 # ^[: alt
