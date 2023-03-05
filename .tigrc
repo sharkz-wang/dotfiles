@@ -102,3 +102,15 @@ color help-action		144	default
 #   LINE(PALETTE_4, "", COLOR_DEFAULT, COLOR_DEFAULT, 0), \
 #   LINE(PALETTE_5, "", COLOR_WHITE, COLOR_DEFAULT, 0), \
 #   LINE(PALETTE_6, "", COLOR_RED, )
+
+bind main R !git rebase --interactive
+bind generic g move-first-line
+bind generic G move-last-line
+bind generic <Ctrl-F> move-page-down
+bind generic <Ctrl-B> move-page-up
+bind diff j scroll-line-down
+bind diff k scroll-line-up
+bind generic <Ctrl-C> refresh
+
+bind main P ?git push origin %(commit):%(branch)
+
