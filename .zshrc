@@ -21,6 +21,16 @@ zinit load urbainvaes/fzf-marks
 # `zsh-syntax-highlighting' should be the last imported one
 zinit load zsh-users/zsh-syntax-highlighting
 
+# enable auto completion functions
+autoload -Uz compinit && compinit
+# enable completion settings ...
+#     - case-insensitive
+#     - substring
+zstyle ':completion:*' matcher-list 'r:|?=**' \
+                                    'm:{a-z}={A-Za-z}'
+#  tab-completion: sort filename by modification date
+zstyle ':completion:*' file-sort modification
+
 unsetopt AUTO_NAME_DIRS
 autoload -U zmv
 
@@ -79,6 +89,8 @@ export HISTFILE="${HOME}/.history"
 export HISTSIZE=2000
 export SAVEHIST=$HISTSIZE
 setopt hist_ignore_all_dups
+# make history accessible in other tmux tab immediately
+setopt share_history
 # don't keep history for commands starting with a space
 export HISTCONTROL=ignorespace
 setopt hist_ignore_space
@@ -93,12 +105,11 @@ alias e='emacs -nw'
 alias vim='TERM=screen-256color vim -p'
 alias v='vim'
 alias irssi='TERM=screen irssi'
-alias tig='TERM=screen-256color tig'
-alias ftig='TERM=screen-256color TIGRC_USER=${HOME}/.tigrc.light tig'
 alias mutt='TERM=screen-256color mutt'
 
 # tig: faster loading covers more use cases
-alias tig='TIGRC_USER=${HOME}/.tigrc.light tig'
+alias  tig='TERM=screen-256color TIGRC_USER=${HOME}/.tigrc.light tig'
+alias ttig='TERM=screen-256color tiig'
 
 # ls -p: `/' postfix for for directories
 alias ls='\ls -p --color=auto'
@@ -130,6 +141,12 @@ alias gdb='gdb --quiet'
 
 # suppress the annoying confirm prompt on exit
 alias ipython='ipython --no-confirm-exit'
+
+# Git aliases
+alias  gs='git status'
+alias gst='gs'
+alias  gb='git branch'
+alias gbr='git branch --remote'
 
 # Zsh
 
