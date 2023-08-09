@@ -47,6 +47,8 @@ Plugin 'michaeljsmith/vim-indent-object'
 
 Plugin 'tpope/vim-fugitive'
 
+Plugin 'preservim/vim-markdown'
+
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/neosnippet'
