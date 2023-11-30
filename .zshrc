@@ -109,7 +109,7 @@ alias mutt='TERM=screen-256color mutt'
 
 # tig: faster loading covers more use cases
 alias  tig='TERM=screen-256color TIGRC_USER=${HOME}/.tigrc.light tig'
-alias ttig='TERM=screen-256color tiig'
+alias ttig='TERM=screen-256color \tig'
 
 # ls -p: `/' postfix for for directories
 alias ls='\ls -p --color=auto'
