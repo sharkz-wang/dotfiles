@@ -146,3 +146,71 @@ execute-named-cmd-menu() {
 	zle ${CMD}
 }
 zle -N execute-named-cmd-menu
+
+function run-it-commands() {
+	CMD=$(ls --color=auto ${HOME}/script | fzf --exact --no-mouse --height 50% --query='it- ')
+	BUFFER=${CMD}
+	zle accept-line
+}
+zle -N run-it-commands
+
+function edit-dotfile() {
+	DOTFILE=$(find ${HOME}/script/ ${HOME}/.dotfiles ${HOME}/.config ${HOME}/.config/btop -maxdepth 1 -mindepth 1 -not -path '*/\.git*' | fzf --exact --no-mouse --height 50%)
+
+	if [ -z ${DOTFILE} ]; then
+		zle accept-line
+		return 0
+	fi
+
+	BUFFER="vim ${DOTFILE}"
+	zle accept-line
+}
+zle -N edit-dotfile
+
+function jump-to-nnn-bookmark() {
+	# TODO: remove hard-coded path
+	DEST=$(ls --color=auto ${HOME}/.config/nnn/bookmarks/ | fzf --exact --no-mouse --height 20%)
+
+	if [ -z ${DEST} ]; then
+		zle accept-line
+		return 0
+	fi
+
+	DEST=${HOME}/.config/nnn/bookmarks/${DEST}
+
+	BUFFER="cd `realpath ${DEST}`"
+	zle accept-line
+}
+zle -N jump-to-nnn-bookmark
+
+function keybinding-leader-key() {
+
+	if [[ -n $BUFFER ]]; then
+		BUFFER=${LBUFFER}'\'${RBUFFER}
+		return 0
+	fi
+
+	read -k 1 NEXT_CHAR
+
+	if [ ${NEXT_CHAR} = '\' ]; then
+		BUFFER=${LBUFFER}'\'${RBUFFER}
+	elif [ ${NEXT_CHAR} = 'r' ]; then
+		run-it-commands
+	elif [ ${NEXT_CHAR} = 'e' ]; then
+		edit-dotfile
+	elif [ ${NEXT_CHAR} = 's' ]; then
+		BUFFER='nnn -n'
+		zle accept-line
+	elif [ ${NEXT_CHAR} = 'z' ]; then
+		BUFFER='it-perf-monitor'
+		zle accept-line
+	elif [ ${NEXT_CHAR} = 'w' ]; then
+		jump-to-nnn-bookmark
+	elif [ ${NEXT_CHAR} = 'g' ]; then
+		BUFFER="tig"
+		zle accept-line
+	fi
+}
+zle -N keybinding-leader-key
+bindkey '\' keybinding-leader-key
+bindkey '`' keybinding-leader-key
