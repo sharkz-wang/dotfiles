@@ -1,12 +1,10 @@
-#!/bin/bash
 
 function __install () {
-	echo installing $1 ...
+	echo Installing $1 ...
 	test -h ${HOME}/$1 || ln -s ${PWD}/$1 ${HOME}/$1
-}
 
-rm -rf ${HOME}/.termux
-__install .termux
+	test "$?" != '0' && (echo 'installation failed, aborting ...'; exit -1)
+}
 
 __install .zshrc
 __install .zshrc.cust
@@ -30,6 +28,8 @@ __install .dircolors
 
 __install .bashrc
 
+__install script
+
 __install .vimrc
 __install .vimrc.light
 
@@ -48,3 +48,7 @@ __install .tigrc.light
 
 __install .gitconfig
 __install .gitignore_global
+
+echo 'Installation done, exit ...'
+
+exit 0
