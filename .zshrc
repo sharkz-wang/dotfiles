@@ -24,12 +24,15 @@ zinit load zsh-users/zsh-syntax-highlighting
 # enable auto completion functions
 autoload -Uz compinit && compinit
 # enable completion settings ...
-#     - case-insensitive
 #     - substring
+#     - case-insensitive
 zstyle ':completion:*' matcher-list 'r:|?=**' \
                                     'm:{a-z}={A-Za-z}'
 #  tab-completion: sort filename by modification date
 zstyle ':completion:*' file-sort modification
+
+zstyle ':completion:*' completer \
+	_approximate _canonical_paths _cmdambivalent _cmdstring _correct _precommand
 
 unsetopt AUTO_NAME_DIRS
 autoload -U zmv
