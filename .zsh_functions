@@ -1,4 +1,18 @@
 
+# boilerplate function
+# function test-func() {
+# 	if [[ $#BUFFER == 0 ]]; then
+# 		echo -e "hello\r"
+# 		BUFFER='hello'
+# 		zle accept-line
+# 	else
+# 		BUFFER=${LBUFFER}"'"${RBUFFER}
+# 		zle forward-char
+# 	fi
+# }
+# zle -N test-func
+# bindkey "'" test-func
+
 # minimal hello world c program for busy people
 hello_in_c() {
 	echo '#include <stdio.h>'
