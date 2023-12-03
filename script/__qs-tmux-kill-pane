@@ -1,0 +1,24 @@
+#!/bin/bash
+
+SESSION_WINDOW_CNT=$(tmux display-message -p \#{session_windows})
+WINDOW_PANE_CNT=$(tmux display-message -p    \#{window_panes})
+LAST_WINDOW_IDX=$(tmux display-message -p    \#{last_window_index})
+CURR_WINDOW_IDX=$(tmux display-message -p    \#{window_index})
+
+if [ ${WINDOW_PANE_CNT} -gt 1 ]; then
+        tmux kill-pane
+elif [ ${WINDOW_PANE_CNT} -eq 1 ]; then
+    if [ ${SESSION_WINDOW_CNT} -eq 1 ]; then
+        tmux new-window -a
+        kill-window -t 0
+    elif [ ${CURR_WINDOW_IDX} -eq ${LAST_WINDOW_IDX} ]; then
+	tmux kill-pane
+	tmux select-window -t :=0
+	tmux select-window -t -1
+    else
+	tmux kill-pane
+	tmux select-window -t :=${CURR_WINDOW_IDX}
+    fi
+fi
+
+exit 0
