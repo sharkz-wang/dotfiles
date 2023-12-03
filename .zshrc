@@ -99,6 +99,8 @@ setopt share_history
 # don't keep history for commands starting with a space
 export HISTCONTROL=ignorespace
 setopt hist_ignore_space
+# don't overwrite history file
+setopt appendhistory
 
 export EDITOR='vim -u ~/.vimrc.light'
 
