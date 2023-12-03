@@ -35,7 +35,7 @@ zle -N backward-kill-arg
 function expand-or-complete-or-list-files() {
 	if [[ $#BUFFER == 0 ]]; then
 		echo -e "\r"
-		ls --color -C --width=${COLUMNS} -p | tr -d '\n'
+		ls --color -C --width=${COLUMNS} -p
 		zle accept-line
 	else
 		zle expand-or-complete
