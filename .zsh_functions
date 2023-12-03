@@ -228,3 +228,8 @@ function keybinding-leader-key() {
 zle -N keybinding-leader-key
 bindkey '\' keybinding-leader-key
 bindkey '`' keybinding-leader-key
+
+function e() {
+    emacsclient -n $1
+    tmux select-window -t :=0
+}

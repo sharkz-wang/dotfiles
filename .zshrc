@@ -107,7 +107,6 @@ export EDITOR='vim -u ~/.vimrc.light'
 stty -ixon
 unset IGNOREEOF
 
-alias e='emacs -nw'
 # always open multiple files with tabs
 alias vim='TERM=screen-256color vim -p'
 alias v='vim'
