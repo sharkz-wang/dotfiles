@@ -10,7 +10,7 @@ if [ ${WINDOW_PANE_CNT} -gt 1 ]; then
 elif [ ${WINDOW_PANE_CNT} -eq 1 ]; then
     if [ ${SESSION_WINDOW_CNT} -eq 1 ]; then
         tmux new-window -a
-        kill-window -t 0
+        tmux kill-window -t :=0
     elif [ ${CURR_WINDOW_IDX} -eq ${LAST_WINDOW_IDX} ]; then
 	tmux kill-pane
 	tmux select-window -t :=0
