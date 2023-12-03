@@ -1,0 +1,6 @@
+#!/bin/bash
+
+tmux split-window -P -F '#{pane_pid}' -h -l 90 btop -p 2
+tmux split-window -P -F '#{pane_pid}' -t 1 -v -l 40% btop -p 3
+
+tmux select-pane -t 0

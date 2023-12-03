@@ -1,0 +1,3 @@
+#!/bin/bash
+
+brew uninstall --verbose $@ && brew autoremove

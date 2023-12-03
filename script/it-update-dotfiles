@@ -1,0 +1,27 @@
+#!/bin/bash
+
+ORIG_PWD=$(pwd)
+
+tmux set remain-on-exit on
+
+echo ''
+echo 'Starting to update dotfiles ...'
+echo ''
+
+cd ${HOME}/.dotfiles
+git fetch && git rebase
+
+./install.sh
+
+test "$?" != '0' && tmux split-window -h -l 60%
+
+echo ''
+echo 'Starting to update emacs.d ...'
+echo ''
+
+cd ${HOME}/.emacs.d
+git fetch && git rebase
+
+./script/upgrade_packages.sh
+
+test "$?" != '0' && tmux split-window -h -l 60%

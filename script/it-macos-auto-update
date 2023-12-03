@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# create new session if not inside tmux
+[ -z "${TMUX}" ] && PID_MAIN=$(tmux new-session -F '#{pane_pid}' -A bash -c "$0 $@") || PID_MAIN=$(ps -p $$ -o ppid | tail -n 1)
+[ -z "${TMUX}" ] && exit 0
+
+tmux set remain-on-exit on
+
+# XXX: min width needed by btop is 80
+PID_MONITOR_1=$(tmux split-window -P -F '#{pane_pid}' -h -l 90 btop -p 2)
+PID_MONITOR_2=$(tmux split-window -P -F '#{pane_pid}' -t 1 -v -l 40% btop -p 3)
+
+tmux select-pane -t 0
+
+echo 'Starting update ...'
+time brew update
+
+echo
+echo
+
+echo 'Starting upgrade ...'
+time brew upgrade
+
+kill ${PID_MONITOR_1}
+kill ${PID_MONITOR_2}
+
+kill -9 ${PID_MAIN}
