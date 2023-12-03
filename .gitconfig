@@ -15,3 +15,5 @@
 	autostash = true
 [core]
 	excludesfile = ~/.gitignore_global
+[rerere]
+	enabled = true
