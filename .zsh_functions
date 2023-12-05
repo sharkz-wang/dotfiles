@@ -183,7 +183,7 @@ zle -N edit-dotfile
 
 function jump-to-nnn-bookmark() {
 	# TODO: remove hard-coded path
-	DEST=$(ls --all --color=auto ${HOME}/.config/nnn/bookmarks/ | fzf --exact --no-mouse --height 20%)
+	DEST=$(ls --color=auto ${HOME}/.config/nnn/bookmarks/ | fzf --exact --no-mouse --height 20%)
 
 	if [ -z ${DEST} ]; then
 		zle accept-line
