@@ -28,7 +28,7 @@ __install .dircolors
 
 __install .bashrc
 
-__install script
+__install .script
 
 __install .vimrc
 __install .vimrc.light

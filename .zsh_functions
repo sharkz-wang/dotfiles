@@ -162,14 +162,14 @@ execute-named-cmd-menu() {
 zle -N execute-named-cmd-menu
 
 function run-it-commands() {
-	CMD=$(ls --color=auto ${HOME}/script | fzf --exact --no-mouse --height 50% --query='it- ')
+	CMD=$(ls --color=auto ${HOME}/.script | fzf --exact --no-mouse --height 50% --query='it- ')
 	BUFFER=${CMD}
 	zle accept-line
 }
 zle -N run-it-commands
 
 function edit-dotfile() {
-	DOTFILE=$(find ${HOME}/script/ ${HOME}/.dotfiles ${HOME}/.config ${HOME}/.config/btop -maxdepth 1 -mindepth 1 -not -path '*/\.git*' | fzf --exact --no-mouse --height 50%)
+	DOTFILE=$(find ${HOME}/.script/ ${HOME}/.dotfiles ${HOME}/.config ${HOME}/.config/btop -maxdepth 1 -mindepth 1 -not -path '*/\.git*' | fzf --exact --no-mouse --height 50%)
 
 	if [ -z ${DOTFILE} ]; then
 		zle accept-line
