@@ -22,6 +22,6 @@ echo ''
 cd ${HOME}/.emacs.d
 git fetch && git rebase
 
-./script/upgrade_packages.sh
+# ./script/upgrade_packages.sh
 
 test "$?" != '0' && tmux split-window -h -l 60%
