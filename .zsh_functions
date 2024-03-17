@@ -223,6 +223,10 @@ function keybinding-leader-key() {
 	elif [ ${NEXT_CHAR} = 'g' ]; then
 		BUFFER="tig"
 		zle accept-line
+	elif [ ${NEXT_CHAR} = 'p' ]; then
+		fzf-file-widget
+	elif [ ${NEXT_CHAR} = 'c' ]; then
+		fzf-cd-widget
 	fi
 }
 zle -N keybinding-leader-key

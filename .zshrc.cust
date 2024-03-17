@@ -1,1 +1,3 @@
 # boilerplate file for custom settings
+
+export PRIV_DATA_ROOT="${HOME}/documents"

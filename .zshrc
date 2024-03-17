@@ -210,24 +210,15 @@ bindkey '^[^h' backward-kill-word
 bindkey '^G' quit-history-search
 
 # FZF
+eval "$(fzf --zsh)"
+
 export FZF_DEFAULT_OPTS='--no-sort --reverse --exact'
-
-export FZF_ALT_C_COMMAND="command find -L ${FZF_BOOKMARK}            \
-			  \\( -maxdepth 3 -path '*/\\.*' \\) -prune  \
-			  -o -type d -print 2> /dev/null | sed 1d"
-
-export FZF_CTRL_T_COMMAND="command find -L ${FZF_BOOKMARK}           \
-			   \\( -maxdepth 3 -path '*/\\.*' \\) -prune \
-			   -o -type f -print                         \
-			   -o -type d -print                         \
-			   -o -type l -print 2> /dev/null | sed 1d"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# move away fzf's keybinding
-bindkey '^[^R' fzf-history-widget
-bindkey '^[P'  fzf-file-widget
-bindkey '^[^P' fzf-cd-widget
+# fzf-history-widget
+export FZF_CTRL_R_OPTS=' --no-sort --reverse --exact'
+# fzf-file-widget
+export FZF_CTRL_T_COMMAND="tree --filelimit=10 -if  ${PRIV_DATA_ROOT}"
+# fzf-cd-widget
+export FZF_ALT_C_COMMAND=" tree --filelimit=10 -dif ${PRIV_DATA_ROOT}"
 
 # overwrite ctrl-r/s with more generic history search functions
 # XXX: don't move this before loading `.fzf.zsh', as it overwrite
