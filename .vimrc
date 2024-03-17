@@ -1,3 +1,8 @@
+
+" Make it more handy when accidentally fired vim
+nnoremap <C-s> :w<cr>
+nnoremap <C-q> :q<cr>
+
 " Fetch vundle repo into .vim if it hasn't been installed yet
 let first_time_install = 0
 let vundle_readme = expand('~/.vim/bundle/vundle/README.md')
@@ -193,9 +198,6 @@ map cn <esc>:cn<cr>
 map cp <esc>:cp<cr>
 
 map <expr> tb ':tabe %<cr>:cal cursor('.line(".").', '.col(".").')<cr>'
-
-nnoremap <C-s> :w<cr>
-nnoremap <C-q> :q<cr>
 
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
