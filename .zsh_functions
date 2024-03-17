@@ -215,6 +215,8 @@ function keybinding-leader-key() {
 		#      next to the cursor, let's move it by one char
 		zle forward-char
 	elif [ ${NEXT_CHAR} = 'r' ]; then
+		fzf-history-widget
+	elif [ ${NEXT_CHAR} = 'x' ]; then
 		run-it-commands
 	elif [ ${NEXT_CHAR} = 'e' ]; then
 		edit-dotfile
