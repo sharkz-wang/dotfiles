@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sudo echo
 clear
 
 # Check arch linux news before updating
@@ -8,7 +9,7 @@ clear
 # echo 'Listed above was the last system update date'
 # read -p 'press any key to check arch linux news'
 # lynx -cmd_script=search_news_list.lynx https://archlinux.org/news/
-# newsboat --url-file=${HOME}/.newsboat/urls --refresh-on-start
+newsboat --url-file=${HOME}/.newsboat/urls --refresh-on-start
 
 sudo reflector --verbose --country Taiwan  \
 			   --age 12 --protocol https   \
