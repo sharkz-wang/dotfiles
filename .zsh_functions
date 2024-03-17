@@ -201,6 +201,9 @@ function keybinding-leader-key() {
 
 	if [[ -n $BUFFER ]]; then
 		BUFFER=${LBUFFER}'\'${RBUFFER}
+		# XXX: now the backslash will be on the right side
+		#      next to the cursor, let's move it by one char
+		zle forward-char
 		return 0
 	fi
 
@@ -208,6 +211,9 @@ function keybinding-leader-key() {
 
 	if [ ${NEXT_CHAR} = '\' ]; then
 		BUFFER=${LBUFFER}'\'${RBUFFER}
+		# XXX: now the backslash will be on the right side
+		#      next to the cursor, let's move it by one char
+		zle forward-char
 	elif [ ${NEXT_CHAR} = 'r' ]; then
 		run-it-commands
 	elif [ ${NEXT_CHAR} = 'e' ]; then
