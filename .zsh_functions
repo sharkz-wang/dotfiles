@@ -241,6 +241,17 @@ zle -N keybinding-leader-key
 bindkey '\' keybinding-leader-key
 bindkey '`' keybinding-leader-key
 
+function tmux-select-and-paste-pwd() {
+    SELECTED_PWD=$(tmux list-panes -a -F'#{session_name}:#{window_index}.#{pane_index}'   | \
+		       xargs -I{} tmux display-message -p -F "#{pane_current_path}" -t {} | \
+		       sort | uniq | fzf --exact --height 10%)
+    BUFFER=${BUFFER}${SELECTED_PWD}
+
+    zle forward-char -n $(($(echo ${SELECTED_PWD} | wc -m) - 1))
+}
+zle -N tmux-select-and-paste-pwd
+bindkey '^[^p' tmux-select-and-paste-pwd
+
 function e() {
     emacsclient -n $1
     tmux select-window -t :=0
