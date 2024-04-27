@@ -256,3 +256,16 @@ function e() {
     emacsclient -n $1
     tmux select-window -t :=0
 }
+
+function kill-word-whole() {
+    # kill right hand side of cursor,
+    # be careful of overkilling next argument
+    # note: ${RBUFFER:0:1} = first char of string
+    test "${RBUFFER:0:1}" != ' ' && zle kill-word
+    # kill left hand side of cursor,
+    # be careful of overkilling previous argument
+    # note: ${LBUFFER: -1} = last char of string
+    test "${LBUFFER: -1}" != ' ' && zle backward-kill-word
+}
+zle -N kill-word-whole
+bindkey '^[d' kill-word-whole
