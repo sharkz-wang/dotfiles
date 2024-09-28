@@ -9,6 +9,8 @@ set main-view	 = line-number:yes,interval=5                 \
 				   commit-title:yes,graph=no,refs,overflow=no
 set main-options = -n 50 # Show up to 1k commits
 
+set mouse = false
+
 # general
 color   default                 15      235
 color   cursor                  15      241
