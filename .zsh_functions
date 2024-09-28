@@ -230,6 +230,8 @@ function keybinding-leader-key() {
 		fzf-history-widget
 	elif [ ${NEXT_CHAR} = 'x' ]; then
 		run-it-commands
+	elif [ ${NEXT_CHAR} = 'v' ]; then
+		_plchdr=$(tmux copy-mode)
 	elif [ ${NEXT_CHAR} = 'e' ]; then
 		edit-dotfile
 	elif [ ${NEXT_CHAR} = 's' ]; then
@@ -269,8 +271,8 @@ zle -N tmux-select-and-paste-pwd
 bindkey '^[^p' tmux-select-and-paste-pwd
 
 function e() {
-    emacsclient -n $1
     tmux select-window -t :=0
+    emacsclient -n $1
 }
 
 function kill-word-whole() {
