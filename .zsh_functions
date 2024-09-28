@@ -168,6 +168,18 @@ function run-it-commands() {
 }
 zle -N run-it-commands
 
+function find-and-edit-file() {
+	BUFFER="vim $(fd | fzf --exact --no-mouse --height 50%)"
+	zle accept-line
+}
+zle -N find-and-edit-file
+
+function find-and-edit-file-in-emacs() {
+	BUFFER="e $(fd | fzf --exact --no-mouse --height 50%)"
+	zle accept-line
+}
+zle -N find-and-edit-file
+
 function edit-dotfile() {
 	DOTFILE=$(find ${HOME}/.script/ ${HOME}/.dotfiles ${HOME}/.config ${HOME}/.config/btop -maxdepth 1 -mindepth 1 -not -path '*/\.git*' | fzf --exact --no-mouse --height 50%)
 
@@ -223,6 +235,10 @@ function keybinding-leader-key() {
 	elif [ ${NEXT_CHAR} = 's' ]; then
 		BUFFER='nnn -n'
 		zle accept-line
+	elif [ ${NEXT_CHAR} = 'f' ]; then
+		find-and-edit-file
+	elif [ ${NEXT_CHAR} = 'F' ]; then
+		find-and-edit-file-in-emacs
 	elif [ ${NEXT_CHAR} = 'z' ]; then
 		BUFFER='it-perf-monitor'
 		zle accept-line
