@@ -4,6 +4,8 @@ set -g prefix C-t
 set -g repeat-time 500
 set -g display-time 5000
 
+set -g mouse off
+
 # History limit
 set -g history-limit 32768
 
