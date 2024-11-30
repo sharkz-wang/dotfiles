@@ -287,3 +287,7 @@ function kill-word-whole() {
 }
 zle -N kill-word-whole
 bindkey '^[d' kill-word-whole
+
+function vif {
+	vim $(fzf --exact --no-mouse --height 50%)
+}
