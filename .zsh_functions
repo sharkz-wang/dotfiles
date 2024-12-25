@@ -293,5 +293,9 @@ zle -N kill-word-whole
 bindkey '^[d' kill-word-whole
 
 function vif {
-	vim $(fzf --exact --no-mouse --height 50%)
+	vim "$(fzf --exact --no-mouse --height 50%)"
+}
+
+function cdf {
+	cd "$(fzf --walker=dir --exact --no-mouse --height 50%)"
 }
