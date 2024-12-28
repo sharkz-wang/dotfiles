@@ -1,3 +1,4 @@
+#!/usr/bin/zsh
 
 function __install () {
 	echo Installing $1 ...
