@@ -202,8 +202,6 @@ bindkey "^u" backward-kill-line
 bindkey '^I' expand-or-complete-or-list-files
 # bind to ctrl + backslash
 bindkey '^\\' dir-go-up-one-level
-# bind to shift + tab
-bindkey '^[[Z' completion-from-tmux-buffer
 # bind to meta + x
 bindkey '^[x' execute-named-cmd-menu
 
@@ -227,6 +225,9 @@ export FZF_CTRL_R_OPTS=' --no-sort --reverse --exact'
 export FZF_CTRL_T_COMMAND="tree --filelimit=7 -if  ${PRIV_DATA_ROOT}"
 # fzf-cd-widget
 export FZF_ALT_C_COMMAND=" tree --filelimit=7 -dif ${PRIV_DATA_ROOT}"
+
+# alt+p to paste fzf'd path
+bindkey '^[p' fzf-file-widget
 
 # overwrite ctrl-r/s with more generic history search functions
 # XXX: don't move this before loading `.fzf.zsh', as it overwrite

@@ -152,7 +152,8 @@ completion-from-tmux-buffer() {
 	INSERT_ITEM=$(echo ${INSERT_ITEM2} | sed -E "s/[[:space:]]+/\n/g" | fzf --exact --query=${INSERT_ITEM1} --height 10%)
 	BUFFER=${LBUFFER}${INSERT_ITEM}
 }
-zle -N completion-from-tmux-buffer
+# XXX: temporarily disable this feature (in trade of inline completion for pasting file path)
+# zle -N completion-from-tmux-buffer
 
 # zsh equivalence of emacs' m-x
 execute-named-cmd-menu() {
@@ -262,6 +263,17 @@ function keybinding-leader-key() {
 zle -N keybinding-leader-key
 bindkey '\' keybinding-leader-key
 bindkey '`' keybinding-leader-key
+
+function inline-complete-path() {
+    local WORDCHARS='~!#$%^&*(){}[]<>?.+;-_/\|=@`'
+    zle backward-kill-word
+
+    TARGET_PATH="$(tree --filelimit=7 -if ${CUTBUFFER} | fzf --exact --no-mouse --height 50%)"
+    LBUFFER=${LBUFFER}${TARGET_PATH}
+}
+zle -N inline-complete-path
+# bind to shift + tab
+bindkey '^[[Z' inline-complete-path
 
 function tmux-select-and-paste-pwd() {
     SELECTED_PWD=$(tmux list-panes -a -F'#{session_name}:#{window_index}.#{pane_index}'   | \
