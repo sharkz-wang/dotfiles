@@ -224,9 +224,9 @@ export FZF_DEFAULT_OPTS='--no-sort --reverse --exact'
 # fzf-history-widget
 export FZF_CTRL_R_OPTS=' --no-sort --reverse --exact'
 # fzf-file-widget
-export FZF_CTRL_T_COMMAND="tree --filelimit=10 -if  ${PRIV_DATA_ROOT}"
+export FZF_CTRL_T_COMMAND="tree --filelimit=7 -if  ${PRIV_DATA_ROOT}"
 # fzf-cd-widget
-export FZF_ALT_C_COMMAND=" tree --filelimit=10 -dif ${PRIV_DATA_ROOT}"
+export FZF_ALT_C_COMMAND=" tree --filelimit=7 -dif ${PRIV_DATA_ROOT}"
 
 # overwrite ctrl-r/s with more generic history search functions
 # XXX: don't move this before loading `.fzf.zsh', as it overwrite
