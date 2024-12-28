@@ -6,6 +6,8 @@
 # 5) Download fzf from https://github.com/junegunn/fzf-bin/releases to ${PATH}
 # 6) git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
+# TODO: replace regular vimrc with light vimrc
+
 export PATH="${HOME}/.script:${PATH}"
 
 # hook for per-node customization
