@@ -37,6 +37,8 @@ zstyle ':completion:*' completer \
 	_approximate _canonical_paths _cmdambivalent _cmdstring _correct _precommand
 
 unsetopt AUTO_NAME_DIRS
+# stop exanding those `foo' to fucking annoying `~foo'
+unsetopt cdable_vars
 autoload -U zmv
 
 ###################
