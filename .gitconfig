@@ -17,3 +17,6 @@
 	excludesfile = ~/.gitignore_global
 [rerere]
 	enabled = true
+[user]
+	name = Example Username
+	email = example@example.com
