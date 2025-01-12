@@ -182,7 +182,7 @@ function find-and-edit-file-in-emacs() {
 zle -N find-and-edit-file
 
 function edit-dotfile() {
-	DOTFILE=$(find ${HOME}/.script/ ${HOME}/.dotfiles ${HOME}/.config ${HOME}/.config/btop -maxdepth 1 -mindepth 1 -not -path '*/\.git*' | sort -n | fzf --exact --no-mouse --height 50%)
+	DOTFILE=$(cat <(find ${HOME}/.dotfiles -not -path '*/\.git*') <(find ${HOME}/.script/ ${HOME}/.config ${HOME}/.config/btop -maxdepth 1 -mindepth 1 -not -path '*/\.git*') | sort -n | fzf --exact --no-mouse --height 50%)
 
 	if [ -z ${DOTFILE} ]; then
 		zle accept-line
