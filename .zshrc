@@ -143,7 +143,7 @@ alias scp='rsync -avhz'
 
 alias builddb='ctags -R && cscope -Rkbq && (find . -name "*.h" -exec echo "-include {}" \; > .clang_complete)'
 
-alias df='\df -h'
+alias df='\df -h --print-type'
 alias today='date +%Y%m%d'
 
 alias beep='/bin/echo -e "\a"'
