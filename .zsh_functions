@@ -170,7 +170,7 @@ function run-it-commands() {
 zle -N run-it-commands
 
 function find-and-edit-file() {
-	BUFFER="vim $(fd | fzf --exact --no-mouse --height 50%)"
+	BUFFER="editor $(fd | fzf --exact --no-mouse --height 50%)"
 	zle accept-line
 }
 zle -N find-and-edit-file
@@ -189,7 +189,7 @@ function edit-dotfile() {
 		return 0
 	fi
 
-	BUFFER="vim ${DOTFILE}"
+	BUFFER="editor ${DOTFILE}"
 	zle accept-line
 }
 zle -N edit-dotfile
@@ -286,11 +286,6 @@ function tmux-select-and-paste-pwd() {
 zle -N tmux-select-and-paste-pwd
 bindkey '^[^p' tmux-select-and-paste-pwd
 
-function e() {
-    tmux select-window -t :=0
-    emacsclient -n $1
-}
-
 function kill-word-whole() {
     # kill right hand side of cursor,
     # be careful of overkilling next argument
@@ -310,4 +305,6 @@ function vif {
 
 function cdf {
 	cd "$(fzf --walker=dir --exact --no-mouse --height 50%)"
+function editor {
+	emacsclient --suppress-output -nw $@ || vim $@
 }

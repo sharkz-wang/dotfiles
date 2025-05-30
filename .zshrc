@@ -114,6 +114,7 @@ unset IGNOREEOF
 # always open multiple files with tabs
 alias vim='TERM=screen-256color vim -p'
 alias v='vim'
+alias e='editor'
 alias vimdiff='TERM=screen-256color vimdiff -u ~/.vimrc.light'
 alias irssi='TERM=screen irssi'
 alias mutt='TERM=screen-256color mutt'
