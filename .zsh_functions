@@ -145,11 +145,11 @@ zle -N backward
 
 # auto-completion from tmux buffer
 completion-from-tmux-buffer() {
-	INSERT_ITEM=$(tmux capture-pane -S - \; show-buffer \; delete-buffer 2>/dev/null | fzf --exact --print-query --height 10%)
+	INSERT_ITEM=$(tmux capture-pane -S - \; show-buffer \; delete-buffer 2>/dev/null | fzf --cycle --exact --print-query --height 10%)
 	# first line is query string
 	INSERT_ITEM1=$(echo ${INSERT_ITEM} | head -n 1)
 	INSERT_ITEM2=$(echo ${INSERT_ITEM} | tail -n +2)
-	INSERT_ITEM=$(echo ${INSERT_ITEM2} | sed -E "s/[[:space:]]+/\n/g" | fzf --exact --query=${INSERT_ITEM1} --height 10%)
+	INSERT_ITEM=$(echo ${INSERT_ITEM2} | sed -E "s/[[:space:]]+/\n/g" | fzf --cycle --exact --query=${INSERT_ITEM1} --height 10%)
 	BUFFER=${LBUFFER}${INSERT_ITEM}
 }
 # XXX: temporarily disable this feature (in trade of inline completion for pasting file path)
@@ -157,32 +157,32 @@ completion-from-tmux-buffer() {
 
 # zsh equivalence of emacs' m-x
 execute-named-cmd-menu() {
-	CMD=$(zle -l -a | ag -v '^\.' | fzf --exact --query=${INSERT_ITEM1} --height 10%)
+	CMD=$(zle -l -a | ag -v '^\.' | fzf --cycle --exact --query=${INSERT_ITEM1} --height 10%)
 	zle ${CMD}
 }
 zle -N execute-named-cmd-menu
 
 function run-it-commands() {
-	CMD=$(ls --color=auto ${HOME}/.script | fzf --exact --no-mouse --height 50% --query='it- ')
+	CMD=$(ls --color=auto ${HOME}/.script | fzf --cycle --exact --no-mouse --height 50% --query='it- ')
 	BUFFER=${CMD}
 	zle accept-line
 }
 zle -N run-it-commands
 
 function find-and-edit-file() {
-	BUFFER="editor $(fd | fzf --exact --no-mouse --height 50%)"
+	BUFFER="editor $(fd | fzf --cycle --exact --no-mouse --height 50%)"
 	zle accept-line
 }
 zle -N find-and-edit-file
 
 function find-and-edit-file-in-emacs() {
-	BUFFER="e $(fd | fzf --exact --no-mouse --height 50%)"
+	BUFFER="e $(fd | fzf --cycle --exact --no-mouse --height 50%)"
 	zle accept-line
 }
 zle -N find-and-edit-file
 
 function edit-dotfile() {
-	DOTFILE=$(cat <(find ${HOME}/.dotfiles -not -path '*/\.git*') <(find ${HOME}/.script/ ${HOME}/.config ${HOME}/.config/btop -maxdepth 1 -mindepth 1 -not -path '*/\.git*') | sort -n | fzf --exact --no-mouse --height 50%)
+	DOTFILE=$(cat <(find ${HOME}/.dotfiles -not -path '*/\.git*') <(find ${HOME}/.script/ ${HOME}/.config ${HOME}/.config/btop -maxdepth 1 -mindepth 1 -not -path '*/\.git*') | sort -n | fzf --cycle --exact --no-mouse --height 50%)
 
 	if [ -z ${DOTFILE} ]; then
 		zle accept-line
@@ -196,7 +196,7 @@ zle -N edit-dotfile
 
 function jump-to-nnn-bookmark() {
 	# TODO: remove hard-coded path
-	DEST=$(ls -1 --color=auto ${HOME}/.config/nnn/bookmarks/ | sort -n -r | fzf --exact --no-mouse --height 20%)
+	DEST=$(ls -1 --color=auto ${HOME}/.config/nnn/bookmarks/ | sort -n -r | fzf --cycle --exact --no-mouse --height 20%)
 
 	if [ -z ${DEST} ]; then
 		zle accept-line
@@ -268,7 +268,7 @@ function inline-complete-path() {
     local WORDCHARS='~!#$%^&*(){}[]<>?.+;-_/\|=@`'
     zle backward-kill-word
 
-    TARGET_PATH="$(tree --filelimit=7 -if ${CUTBUFFER} | fzf --exact --no-mouse --height 50%)"
+    TARGET_PATH="$(tree --filelimit=7 -if ${CUTBUFFER} | fzf --cycle --exact --no-mouse --height 50%)"
     LBUFFER=${LBUFFER}${TARGET_PATH}
 }
 zle -N inline-complete-path
@@ -278,7 +278,7 @@ bindkey '^[[Z' inline-complete-path
 function tmux-select-and-paste-pwd() {
     SELECTED_PWD=$(tmux list-panes -a -F'#{session_name}:#{window_index}.#{pane_index}'   | \
 		       xargs -I{} tmux display-message -p -F "#{pane_current_path}" -t {} | \
-		       sort | uniq | fzf --exact --height 10%)
+		       sort | uniq | fzf --cycle --exact --height 10%)
     BUFFER=${BUFFER}${SELECTED_PWD}
 
     zle forward-char -n $(($(echo ${SELECTED_PWD} | wc -m) - 1))
@@ -304,7 +304,7 @@ function vif {
 }
 
 function cdf {
-	cd "$(fzf --walker=dir --exact --no-mouse --height 50%)"
+	cd "$(fzf --cycle --walker=dir --exact --no-mouse --height 50%)"
 function editor {
 	emacsclient --suppress-output -nw $@ || vim $@
 }

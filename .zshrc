@@ -221,9 +221,9 @@ bindkey '^G' quit-history-search
 # FZF
 eval "$(fzf --zsh)"
 
-export FZF_DEFAULT_OPTS='--no-sort --reverse --exact'
+export FZF_DEFAULT_OPTS='--cycle --no-sort --reverse --exact'
 # fzf-history-widget
-export FZF_CTRL_R_OPTS=' --no-sort --reverse --exact'
+export FZF_CTRL_R_OPTS='--cycle --no-sort --reverse --exact'
 # fzf-file-widget
 export FZF_CTRL_T_COMMAND="tree --filelimit=7 -if  ${PRIV_DATA_ROOT}"
 # fzf-cd-widget
