@@ -208,10 +208,15 @@ bindkey '^\\' dir-go-up-one-level
 # bind to meta + x
 bindkey '^[x' execute-named-cmd-menu
 
-# bind to ctrl + F
+# bind to ctrl + f
 bindkey '^F' forward
-# bind to ctrl + B
+# bind to ctrl + b
 bindkey '^B' backward
+
+# bind to alt + f
+bindkey '^[f' my-forward-word
+# bind to alt + b
+bindkey '^[b' my-backward-word
 
 bindkey '^W'   backward-kill-arg
 bindkey '^[^h' backward-kill-word

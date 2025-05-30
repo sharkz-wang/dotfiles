@@ -258,6 +258,12 @@ function keybinding-leader-key() {
 		fzf-file-widget
 	elif [ ${NEXT_CHAR} = 'c' ]; then
 		fzf-cd-widget
+	elif [ ${NEXT_CHAR} = '1' ]; then
+		BUFFER='editor ~/.zshrc'
+		zle accept-line
+	elif [ ${NEXT_CHAR} = '2' ]; then
+		BUFFER='editor ~/.zsh_functions'
+		zle accept-line
 	fi
 }
 zle -N keybinding-leader-key
@@ -299,12 +305,41 @@ function kill-word-whole() {
 zle -N kill-word-whole
 bindkey '^[d' kill-word-whole
 
-function vif {
-	vim "$(fzf --exact --no-mouse --height 50%)"
+function qs-vif {
+	zle accept-line
+	FNAME="$(fd | fzf --cycle --exact --no-mouse --height 50%)"
+	BUFFER="editor '${FNAME}'"
+	zle accept-line
 }
+zle -N qs-vif
 
 function cdf {
 	cd "$(fzf --cycle --walker=dir --exact --no-mouse --height 50%)"
+}
+function qs-cdf {
+	zle accept-line
+	FNAME="$(fd --type d | fzf --cycle --walker=dir --exact --no-mouse --height 50%)"
+	BUFFER="cd '${FNAME}'"
+	zle accept-line
+}
+zle -N qs-cdf
+
+function my-backward-word {
+	__ORIG_WORDCHARS=${WORDCHARS}
+	export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
+	zle backward-word
+	export WORDCHARS=${__ORIG_WORDCHARS}
+}
+zle -N my-backward-word
+
+function my-forward-word {
+	__orig_wordchars=${wordchars}
+	export wordchars='*?_-.[]~=/&;!#$%^(){}<>'
+	zle forward-word
+	export wordchars=${__orig_wordchars}
+}
+zle -N my-forward-word
+
 function editor {
 	emacsclient --suppress-output -nw $@ || vim $@
 }
