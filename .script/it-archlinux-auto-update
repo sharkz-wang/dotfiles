@@ -18,3 +18,5 @@ sudo reflector --verbose --country Taiwan  \
 time sudo pacman -Syu --noconfirm --verbose
 paccache --remove \
          --cachedir /var/cache/pacman/pkg --keep 1
+
+time paru -Syu --noconfirm --verbose
