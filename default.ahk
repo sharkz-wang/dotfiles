@@ -73,9 +73,13 @@ DetectHiddenWindows true
 ^+Backspace::SetInputLang(0x0404), Send("^+{7}")
 ^+Enter::SetInputLang(0x0404), Send("^+{8}")
 
+!+h::Run(A_ComSpec " /c task calendar && pause")
+!+j::Run(A_ComSpec " /c it-open-url-bookmark.cmd")
+!+w::Run(A_ComSpec ' /c buku -w "gvim -f"')
+
 toggle_app(title_regex, app_cmd) {
 	if WinActive(title_regex) {
-		Send("!{Esc}")
+		WinMinimize
 	} else if WinExist(title_regex) {
 		WinActivate(title_regex)
 	} else {
